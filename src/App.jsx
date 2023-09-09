@@ -1,21 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 
-import './App.css';
 import { Container, Typography, Paper, Box } from '@mui/material';
 import level_up from './assets/level-up.gif';
-import UsersTable from './Basic-Table2';
+import UsersTable from './users-table';
+import Navbar from './navbar';
 
-// ==============================================
-
-const Header = () => {
-  return (
-    <header>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/about">About</NavLink>
-    </header>
-  );
-};
 
 // ==============================================
 
@@ -34,16 +24,14 @@ const HomePage = () => {
 
   return (
     <>
-      <Header />
+      <Navbar />
 
-      <Container sx={{ bgcolor: 'deepskyblue'}}>
+      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
-        <Link to="/">About</Link>
-
         <Typography variant="h1"
-          sx={{ my: 4, textAlign: 'center', color: 'primary.main' }}
-          >
-          Level Up
+          sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
+        >
+          Users
         </Typography>
 
         <UsersTable { ...{users} }/>
@@ -69,20 +57,18 @@ const AboutPage = () => {
 
   return (
     <>
-      <Header />
+      <Navbar />
 
-      <Container sx={{ bgcolor: 'deepskyblue'}}>
+      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
-        <Link to="/">Home</Link>
-
         <Typography variant="h1"
-          sx={{ my: 4, textAlign: 'center', color: 'primary.main' }}
+          sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
           >
           Level Up
         </Typography>
 
-        <Box>
-          <img src={level_up} alt="level up" />
+        <Box sx={{textAlign: 'center'}}>
+          <img src={level_up} alt="level up" style={{ maxWidth: '100%', height: 'auto'}} />
         </Box>
 
       </Container>
