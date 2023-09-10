@@ -6,31 +6,46 @@ import level_up from './assets/level-up.gif';
 import UsersTable from './users-table';
 import Navbar from './navbar';
 
+import { apiUrl } from './util/url';
+import { http } from './util/http';
 
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 // ==============================================
 
 const HomePage = () => {
 
   const [users, setUsers] = useState([]);
 
-  
+  // ============================================
 
-  const apiUrl = (str) => {
-    const API_URL = import.meta.env.VITE_API_URL;
-    const endpoint = `${API_URL}/api/${str}`;
-    console.log('endpoint: ', endpoint, '\ttypeof endpoint: ', typeof endpoint);
-    return endpoint;
+  const getUsers = async () => {
+    const URL = apiUrl('users');
+    const data = await http({ url: URL });
+    // console.log('data: ', data);
+    setUsers(data);
   };
 
+  // ============================================
+
+  const deleteUser = async (id) => {
+    // const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
+    const endpoint = `users/${id}`;
+    const URL = apiUrl(endpoint);
+    const data = await http({ url: URL, method: 'DELETE' });
+    // console.log('data: ', data);
+    getUsers();
+  };
+
+  // ============================================
+
   useEffect(() => {
-    (async function() { 
-      // const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
-      const resp = await fetch(apiUrl('users'));
-      const data = await resp.json();
-      console.log('data: ', data);
-      setUsers(data);
-    })();
+    getUsers();
   }, []);
+
+  // ============================================
 
   return (
     <>
@@ -44,13 +59,17 @@ const HomePage = () => {
           Users
         </Typography>
 
-        <UsersTable { ...{users} }/>
+        <UsersTable { ...{users, deleteUser} }/>
 
       </Container>
     </>
   );
 };
 
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 // ==============================================
 
 const AboutPage = () => {
@@ -76,6 +95,10 @@ const AboutPage = () => {
   );
 };
 
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 // ==============================================
 
 export default function App() {
