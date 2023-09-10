@@ -13,9 +13,19 @@ const HomePage = () => {
 
   const [users, setUsers] = useState([]);
 
+  
+
+  const apiUrl = (str) => {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const endpoint = `${API_URL}/api/${str}`;
+    console.log('endpoint: ', endpoint, '\ttypeof endpoint: ', typeof endpoint);
+    return endpoint;
+  };
+
   useEffect(() => {
     (async function() { 
-      const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
+      // const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
+      const resp = await fetch(apiUrl('users'));
       const data = await resp.json();
       console.log('data: ', data);
       setUsers(data);
@@ -44,16 +54,6 @@ const HomePage = () => {
 // ==============================================
 
 const AboutPage = () => {
-
-  const [] = useState();
-
-  useEffect(() => {
-    (async function() { 
-      const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
-      const data = await resp.json();
-      console.log('data: ', data);
-    })();
-  }, []);
 
   return (
     <>
