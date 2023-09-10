@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 export default function BasicTable({ users }) {
   return (
@@ -16,7 +17,7 @@ export default function BasicTable({ users }) {
             <TableCell align="right">Email</TableCell>
             <TableCell align="right">Is Admin</TableCell>
             <TableCell align="right">Password&nbsp;(hashed)</TableCell>
-            <TableCell align="right">Actions</TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -28,7 +29,10 @@ export default function BasicTable({ users }) {
               <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">{String(row.is_admin)}</TableCell>
               <TableCell align="right">{row.password}</TableCell>
-              <TableCell align="right">TODO</TableCell>
+              <TableCell align="right">
+                <Button variant="outlined" color="success" sx={{ mr: 1 }}>Edit</Button>
+                <Button variant="outlined" color="error">Delete</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
