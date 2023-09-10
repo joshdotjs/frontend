@@ -5,6 +5,7 @@ import { Container, Typography, Paper, Box } from '@mui/material';
 import level_up from './assets/level-up.gif';
 import UsersTable from './users-table';
 import Navbar from './navbar';
+import { SnackbarProvider } from 'notistack';
 
 import { apiUrl } from './util/url';
 import { http } from './util/http';
@@ -15,56 +16,7 @@ import { http } from './util/http';
 // ==============================================
 // ==============================================
 
-const HomePage = () => {
-
-  const [users, setUsers] = useState([]);
-
-  // ============================================
-
-  const getUsers = async () => {
-    const URL = apiUrl('users');
-    const data = await http({ url: URL });
-    // console.log('data: ', data);
-    setUsers(data);
-  };
-
-  // ============================================
-
-  const deleteUser = async (id) => {
-    // const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
-    const endpoint = `users/${id}`;
-    const URL = apiUrl(endpoint);
-    const data = await http({ url: URL, method: 'DELETE' });
-    // console.log('data: ', data);
-    getUsers();
-  };
-
-  // ============================================
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  // ============================================
-
-  return (
-    <>
-      <Navbar />
-
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
-        
-        <Typography variant="h1"
-          sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
-        >
-          Users
-        </Typography>
-
-        <UsersTable { ...{users, deleteUser} }/>
-
-      </Container>
-    </>
-  );
-};
+import HomePage from './Page-Home';
 
 // ==============================================
 // ==============================================
@@ -102,13 +54,14 @@ const AboutPage = () => {
 // ==============================================
 
 export default function App() {
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
-    </BrowserRouter>
+    <SnackbarProvider maxSnack={3}>
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </BrowserRouter>
+    </SnackbarProvider>
   );
 }
