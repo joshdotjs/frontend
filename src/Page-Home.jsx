@@ -29,11 +29,19 @@ export default function HomePage () {
   // ============================================
 
   const deleteUser = async (id) => {
+    notify({message: `deleting user ${id}...`, variant: 'warning', duration: 2000})();
     const endpoint = `users/${id}`;
     const URL = apiUrl(endpoint);
     const data = await http({ url: URL, method: 'DELETE' });
-    // console.log('data: ', data);
+    notify({message: `deleted user ${id}...`, variant: 'success'})();
+    console.log('data: ', data);
     getUsers();
+  };
+
+  // ============================================
+
+  const editUser = (id) => {
+    notify({message: `editing user ${id}...`, variant: 'info'})();
   };
 
   // ============================================
@@ -51,6 +59,7 @@ export default function HomePage () {
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
         <Button onClick={notify({message: 'success message!', variant: 'success'})}>Show success snackbar</Button>
+        <Button onClick={notify({message: `deleting user ${1}...`, variant: 'info'})}>Deleting user...</Button>
 
         <Typography variant="h1"
           sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
@@ -58,7 +67,7 @@ export default function HomePage () {
           Users
         </Typography>
 
-        <UsersTable { ...{users, deleteUser} }/>
+        <UsersTable { ...{users, editUser, deleteUser} }/>
 
       </Container>
     </>

@@ -4,9 +4,9 @@ const useNotification = () => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const notify = ({ message, variant }) => () => {
+  const notify = ({ message, variant, duration }) => () => {
     // variant: 'default' | 'error' | 'success' | 'warning' | 'info'
-    enqueueSnackbar(message, { variant });
+    enqueueSnackbar(message, { variant, autoHideDuration: duration });
   };
 
   return [ notify ];
