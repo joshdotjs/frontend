@@ -58,9 +58,6 @@ export default function HomePage () {
 
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
-        <Button onClick={notify({message: 'success message!', variant: 'success'})}>Show success snackbar</Button>
-        <Button onClick={notify({message: `deleting user ${1}...`, variant: 'info'})}>Deleting user...</Button>
-
         <Typography variant="h1"
           sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
         >
