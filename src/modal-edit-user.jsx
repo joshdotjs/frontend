@@ -16,10 +16,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 export default function FormDialog({ user, editUser }) {
   const [open, setOpen] = React.useState(false);
 
+  const [email, setEmail] = React.useState(user.email);
+  React.useEffect(() => {
+    console.log('email: ', email);
+  }, [email]);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(true);
   const handleSubmit = () => {
-    editUser(user.id);
+    editUser({ id: user.id, updated_user: { 
+      email,
+      password: user.password, // currently just set password to the same value (does not hash in backend update function yet)
+      is_admin: user.is_admin, // currently just set is_admin to the same value
+    } });
     setOpen(false);
   };
 
@@ -40,6 +49,8 @@ export default function FormDialog({ user, editUser }) {
             type="email"
             fullWidth
             variant="standard"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </DialogContent>
         <DialogActions>

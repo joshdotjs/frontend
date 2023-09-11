@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
-
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
-import UsersTable from './users-table';
+import UsersTable from './table-users';
 import Navbar from './navbar';
 
 import { apiUrl } from './util/url';
 import { http } from './util/http';
 
-import { useSnackbar } from 'notistack';
 import { useNotification } from './hooks/use-notification';
+
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 
 export default function HomePage () {
 
@@ -33,15 +36,26 @@ export default function HomePage () {
     const endpoint = `users/${id}`;
     const URL = apiUrl(endpoint);
     const data = await http({ url: URL, method: 'DELETE' });
-    notify({message: `deleted user ${id}...`, variant: 'success'})();
+    notify({message: `successfully deleted user ${id}! 🙂`, variant: 'success'})();
     console.log('data: ', data);
     getUsers();
   };
 
   // ============================================
 
-  const editUser = (id) => {
-    notify({message: `editing user ${id}...`, variant: 'info'})();
+  const editUser = async ({ id, updated_user }) => {
+    notify({message: `updating user ${id}...`, variant: 'info'})();
+    const endpoint = `users/${id}`;
+    const URL = apiUrl(endpoint);
+    const data = await http({ url: URL, method: 'PUT', body: { 
+      id: +id,
+      email: updated_user.email,
+      password: updated_user.password,
+      is_admin: updated_user.is_admin,
+    } });
+    notify({message: `successfully updated user ${id}! 🙂`, variant: 'success'})();
+    console.log('data: ', data);
+    getUsers();
   };
 
   // ============================================

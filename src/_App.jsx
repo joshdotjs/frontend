@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 
-import HomePage from './Page-Home';
-import AboutPage from './Page-About';
+import HomePage from './_Page-Home';
+import AboutPage from './_Page-About';
 
 // ==============================================
 // ==============================================
