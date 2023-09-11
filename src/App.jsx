@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 
-import { Container, Typography, Paper, Box } from '@mui/material';
+import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 import level_up from './assets/level-up.gif';
 import UsersTable from './users-table';
 import Navbar from './navbar';
@@ -10,13 +10,35 @@ import { SnackbarProvider } from 'notistack';
 import { apiUrl } from './util/url';
 import { http } from './util/http';
 
+import HomePage from './Page-Home';
+
+import { useSnackbar } from 'notistack';
+
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
 
-import HomePage from './Page-Home';
+const Notification = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = () => {
+    enqueueSnackbar('I love snacks.');
+  };
+
+  const handleClickVariant = (variant) => () => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar('This is a success message!', { variant });
+  };
+
+  return (
+    <>
+      <Button onClick={handleClick}>Show snackbar</Button>
+      <Button onClick={handleClickVariant('success')}>Show success snackbar</Button>
+    </>
+  );
+}
 
 // ==============================================
 // ==============================================
@@ -58,7 +80,7 @@ export default function App() {
     <SnackbarProvider maxSnack={3}>
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/"      element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
         </Routes>
       </BrowserRouter>

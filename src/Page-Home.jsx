@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 
-import { Container, Typography, Paper, Box } from '@mui/material';
-import level_up from './assets/level-up.gif';
+import { Container, Typography, Paper, Box, Button } from '@mui/material';
 import UsersTable from './users-table';
 import Navbar from './navbar';
 
 import { apiUrl } from './util/url';
 import { http } from './util/http';
-import Notification from './notification';
+
+import { useSnackbar } from 'notistack';
+import { useNotification } from './hooks/use-notification';
 
 export default function HomePage () {
 
   const [users, setUsers] = useState([]);
+
+  const [notify] = useNotification();
 
   // ============================================
 
@@ -26,7 +29,6 @@ export default function HomePage () {
   // ============================================
 
   const deleteUser = async (id) => {
-    // const resp = await fetch('https://postgresql-project-fd4ec6c9caab.herokuapp.com/api/users');
     const endpoint = `users/${id}`;
     const URL = apiUrl(endpoint);
     const data = await http({ url: URL, method: 'DELETE' });
@@ -46,10 +48,10 @@ export default function HomePage () {
     <>
       <Navbar />
 
-      {/* <Notification /> */}
-
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
+        <Button onClick={notify({message: 'success message!', variant: 'success'})}>Show success snackbar</Button>
+
         <Typography variant="h1"
           sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
         >
@@ -57,35 +59,6 @@ export default function HomePage () {
         </Typography>
 
         <UsersTable { ...{users, deleteUser} }/>
-
-      </Container>
-    </>
-  );
-};
-
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-
-const AboutPage = () => {
-
-  return (
-    <>
-      <Navbar />
-
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
-        
-        <Typography variant="h1"
-          sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
-          >
-          Level Up
-        </Typography>
-
-        <Box sx={{textAlign: 'center'}}>
-          <img src={level_up} alt="level up" style={{ maxWidth: '100%', height: 'auto'}} />
-        </Box>
 
       </Container>
     </>
