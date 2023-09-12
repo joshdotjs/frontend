@@ -43,7 +43,8 @@ export default function ValidationTextFields({ createUser }) {
       <div style={{ 
         // border: 'solid black 1px', 
         width: 'fit-content', 
-        margin: '0 auto'}}
+        // margin: '0 auto'
+      }}
       >
 
         {/* = = = = = = = = = = = = = = = = = = = = = = */}
