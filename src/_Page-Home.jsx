@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
+
 import UsersTable from './table-users';
 import Navbar from './navbar';
+import Input from './input';
 
-import { apiUrl } from './util/url';
 import { http } from './util/http';
+import { apiUrl } from './util/url';
+import { sortDataById } from './util/sort';
 
 import { useNotification } from './hooks/use-notification';
 
@@ -25,8 +28,9 @@ export default function HomePage () {
   const getUsers = async () => {
     const URL = apiUrl('users');
     const data = await http({ url: URL });
+    const sorted_data = sortDataById(data);
     // console.log('data: ', data);
-    setUsers(data);
+    setUsers(sorted_data);
   };
 
   // ============================================
@@ -77,6 +81,10 @@ export default function HomePage () {
         >
           Users
         </Typography>
+
+        <Paper elevation={3} sx={{ p: 4, mb: 4, textAlign: 'center' }}>
+          <Input />
+        </Paper>
 
         <UsersTable { ...{users, editUser, deleteUser} }/>
 
