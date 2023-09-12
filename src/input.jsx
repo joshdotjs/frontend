@@ -22,6 +22,15 @@ const FC = ({ children }) => (
 // ==============================================
 
 export default function ValidationTextFields() {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  React.useEffect(() => console.log('email: ', email), [email]);
+  React.useEffect(() => console.log('password: ', password), [password]);
+  
+  // ============================================
+
   return (
     <Box
       component="form"
@@ -31,7 +40,7 @@ export default function ValidationTextFields() {
       
       <div style={{ border: 'solid black 1px', width: 'fit-content', margin: '0 auto'}}>
 
-        {/* =========================================  */}
+        {/* = = = = = = = = = = = = = = = = = = = = = = */}
 
         <div>
           <FC>
@@ -41,15 +50,20 @@ export default function ValidationTextFields() {
               label="Email"
               // defaultValue="Hello World"
               // helperText="Incorrect entry."
+              onChange={e => setEmail(e.target.value)}
+              value={email}
             />
           </FC>
 
           <FC>
-            <Password />
+            <Password 
+              onChange={e => setPassword(e.target.value)}
+              value={password}
+            />
           </FC>
         </div>
 
-        {/* =========================================  */}
+        {/* = = = = = = = = = = = = = = = = = = = = = = */}
 
         <div>
           <FC>
@@ -64,7 +78,7 @@ export default function ValidationTextFields() {
         </div>
       
 
-        {/* =========================================  */}
+        {/* = = = = = = = = = = = = = = = = = = = = = = */}
 
       </div>
 

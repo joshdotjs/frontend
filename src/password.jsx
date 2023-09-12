@@ -4,12 +4,11 @@ import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // export default function InputAdornments() {
-export default function Password() {
+export default function Password({ onChange, value }) {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -37,6 +36,8 @@ export default function Password() {
           </InputAdornment>
         }
         label="Password"
+        onChange={onChange}
+        value={value}
       />
     </>
   );
