@@ -19,7 +19,7 @@ export default function Password() {
   };
 
   return (
-    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+    <>
       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
       <OutlinedInput
         id="outlined-adornment-password"
@@ -38,6 +38,6 @@ export default function Password() {
         }
         label="Password"
       />
-    </FormControl>
+    </>
   );
 }

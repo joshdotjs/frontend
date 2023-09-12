@@ -82,7 +82,7 @@ export default function HomePage () {
           Users
         </Typography>
 
-        <Paper elevation={3} sx={{ p: 4, mb: 4, textAlign: 'center' }}>
+        <Paper elevation={3} sx={{ p: 4, mb: 4}}>
           <Input />
         </Paper>
 
