@@ -21,24 +21,30 @@ const FC = ({ children }) => (
 
 // ==============================================
 
-export default function ValidationTextFields() {
+export default function ValidationTextFields({ createUser }) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [is_admin, setIsAdmin] = React.useState(false);
 
   React.useEffect(() => console.log('email: ', email), [email]);
   React.useEffect(() => console.log('password: ', password), [password]);
+  React.useEffect(() => console.log('is_admin: ', is_admin), [is_admin]);
   
   // ============================================
 
   return (
     <Box
       component="form"
-      noValidate
+      // noValidate
       autoComplete="off"
     >
       
-      <div style={{ border: 'solid black 1px', width: 'fit-content', margin: '0 auto'}}>
+      <div style={{ 
+        // border: 'solid black 1px', 
+        width: 'fit-content', 
+        margin: '0 auto'}}
+      >
 
         {/* = = = = = = = = = = = = = = = = = = = = = = */}
 
@@ -68,12 +74,16 @@ export default function ValidationTextFields() {
         <div>
           <FC>
             <FormControlLabel control={
-              <Checkbox defaultChecked />
+              <Checkbox checked={is_admin} onChange={e => setIsAdmin(e.target.checked)} />
             } label="Admin?" />
           </FC>
 
           <FC>
-            <Button variant="contained">Create</Button>
+            <Button 
+              variant="contained" 
+              onClick={() => createUser({ email, password, is_admin })}
+              disabled={!(email && password)}
+            >Create New User</Button>
           </FC>
         </div>
       

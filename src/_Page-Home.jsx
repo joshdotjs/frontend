@@ -3,7 +3,7 @@ import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
 import UsersTable from './table-users';
 import Navbar from './navbar';
-import Input from './input';
+import CreateUserForm from './form-create-user';
 
 import { http } from './util/http';
 import { apiUrl } from './util/url';
@@ -64,6 +64,21 @@ export default function HomePage () {
 
   // ============================================
 
+  const createUser = async (user) => {
+    notify({message: 'creating new user...', variant: 'info'})();
+    const URL = apiUrl('users');
+    const data = await http({ url: URL, method: 'POST', body: { 
+      email: user.email,
+      password: user.password,
+      is_admin: user.is_admin,
+    } });
+    notify({message: 'successfully created new user! 🙂', variant: 'success'})();
+    console.log('data: ', data);
+    getUsers();
+  };
+
+  // ============================================
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -83,10 +98,10 @@ export default function HomePage () {
         </Typography>
 
         <Paper elevation={3} sx={{ p: 4, mb: 4}}>
-          <Input />
+          <CreateUserForm { ...{ createUser}} />
         </Paper>
 
-        <UsersTable { ...{users, editUser, deleteUser} }/>
+        <UsersTable { ...{ users, editUser, deleteUser } }/>
 
       </Container>
     </>
