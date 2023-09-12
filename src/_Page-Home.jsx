@@ -91,15 +91,21 @@ export default function HomePage () {
 
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
-        <Typography variant="h1"
+        <Typography variant="h2"
           sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
         >
-          Users
+          Create a new user:
         </Typography>
 
         <Paper elevation={3} sx={{ p: 4, mb: 4}}>
           <CreateUserForm { ...{ createUser}} />
         </Paper>
+
+        <Typography variant="h2"
+          sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}
+        >
+          Current users:
+        </Typography>
 
         <UsersTable { ...{ users, editUser, deleteUser } }/>
 
