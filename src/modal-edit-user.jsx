@@ -22,7 +22,7 @@ export default function FormDialog({ user, editUser }) {
   }, [email]);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const handleSubmit = () => {
     editUser({ id: user.id, updated_user: { 
       email,
