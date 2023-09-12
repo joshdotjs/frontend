@@ -5,7 +5,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Password from './password';
+import Password from './input-password';
 import Button from '@mui/material/Button';
 
 // ==============================================

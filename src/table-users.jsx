@@ -9,9 +9,9 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import EditUserModal from './modal-edit-user';
 
-export default function BasicTable({ users, editUser, deleteUser }) {
+export default function BasicTable({ users, editUser, deleteUser, sx }) {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ ...sx, /* more styles... */  }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>

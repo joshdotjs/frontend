@@ -107,7 +107,7 @@ export default function HomePage () {
           Current users:
         </Typography>
 
-        <UsersTable { ...{ users, editUser, deleteUser } }/>
+        <UsersTable { ...{ users, editUser, deleteUser } } sx={{ mb: 4 }}/>
 
       </Container>
     </>
