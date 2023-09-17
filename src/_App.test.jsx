@@ -119,7 +119,6 @@ describe('<App />', () => {
     // submit form
     fireEvent.click(button);
 
-
     const users_table_rows = await screen.findAllByTestId(/users-table-row-/i);
     // console.log('users_table_rows.length: ', users_table_rows.length);
     expect(users_table_rows.length).toBe(1);
