@@ -24,8 +24,9 @@ export default function BasicTable({ users, editUser, deleteUser, sx }) {
         <TableBody>
           {users.map((user) => (
             <TableRow
-              key={user.email}
+              key={`${user.id}-${user.email}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              data-testid={`users-table-row-${user.id}`}
             >
               <TableCell align="right">{user.email}</TableCell>
               <TableCell align="right">{String(user.is_admin)}</TableCell>

@@ -21,15 +21,15 @@ const FC = ({ children }) => (
 
 // ==============================================
 
-export default function ValidationTextFields({ createUser }) {
+export default function CreateUserForm({ createUser }) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [is_admin, setIsAdmin] = React.useState(false);
 
-  React.useEffect(() => console.log('email: ', email), [email]);
-  React.useEffect(() => console.log('password: ', password), [password]);
-  React.useEffect(() => console.log('is_admin: ', is_admin), [is_admin]);
+  // React.useEffect(() => console.log('email: ', email), [email]);
+  // React.useEffect(() => console.log('password: ', password), [password]);
+  // React.useEffect(() => console.log('is_admin: ', is_admin), [is_admin]);
   
   // ============================================
 
@@ -59,6 +59,7 @@ export default function ValidationTextFields({ createUser }) {
               // helperText="Incorrect entry."
               onChange={e => setEmail(e.target.value)}
               value={email}
+              placeholder='email'
             />
           </FC>
 
@@ -82,8 +83,15 @@ export default function ValidationTextFields({ createUser }) {
           <FC>
             <Button 
               variant="contained" 
-              onClick={() => createUser({ email, password, is_admin })}
-              disabled={!(email && password)}
+              onClick={() => {
+                createUser({ email, password, is_admin });
+                setEmail('');
+                setPassword('');
+                setIsAdmin(false);
+              }}
+              // disabled={!(email && password)}
+              type="button"
+              name="create-user-button"
             >Create New User</Button>
           </FC>
         </div>

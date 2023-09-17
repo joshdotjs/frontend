@@ -13,6 +13,9 @@ export default defineConfig({
     setupFiles: './src/test/setup.js',
     // you might want to disable it, if you don't have tests that rely on CSS
     // since parsing CSS is slow
-    // css: true,
+    css: true,
+
+    // Update the includeSource config for Vitest to grab the files under src/:
+    includeSource: ['src/**/*.{js,ts}'], // In Source Testing: https://vitest.dev/guide/in-source.html
   },
 })

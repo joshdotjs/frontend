@@ -23,6 +23,7 @@ export default function Password({ onChange, value }) {
       <OutlinedInput
         id="outlined-adornment-password"
         type={showPassword ? 'text' : 'password'}
+        placeholder='password'
         endAdornment={
           <InputAdornment position="end">
             <IconButton
