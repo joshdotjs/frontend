@@ -17,9 +17,6 @@ export default function FormDialog({ user, editUser }) {
   const [open, setOpen] = React.useState(false);
 
   const [email, setEmail] = React.useState(user.email);
-  React.useEffect(() => {
-    console.log('email: ', email);
-  }, [email]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
