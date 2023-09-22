@@ -48,7 +48,7 @@ export default function ProductCard({ product }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
+        title={product.title}
         subheader="September 14, 2016"
       />
       <CardMedia
@@ -59,9 +59,7 @@ export default function ProductCard({ product }) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+          { product.description }
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

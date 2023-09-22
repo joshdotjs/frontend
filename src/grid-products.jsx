@@ -3,7 +3,8 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
-import ProductCard from './card-product';
+// import ProductCard from './card-product';
+import ProductCard from './card-product-2';
 
 // ==============================================
 // ==============================================
