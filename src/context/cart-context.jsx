@@ -32,6 +32,13 @@ const CartContext = createContext({
 
   // ============================================
 
+  const [open, setOpen] = useState(false);
+
+  const openCart = () => setOpen(true);
+  const closeCart = () => setOpen(false);
+
+  // ============================================
+
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
@@ -82,6 +89,9 @@ const CartContext = createContext({
     // Step 3:
     setCart(new_cart);
     setCartLS(new_cart);
+
+    // Step 4: open cart
+    openCart();
   };
 
   // ============================================
@@ -89,6 +99,9 @@ const CartContext = createContext({
   const context = {
     cart,
     addToCart,
+    open,
+    closeCart,
+    openCart,
   };
 
   // ============================================

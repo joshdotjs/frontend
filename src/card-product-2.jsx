@@ -14,6 +14,29 @@ import { CartContext } from './context/cart-context';
 // ==============================================
 // ==============================================
 
+const Clamp = ({ children, lines }) => (
+  <Typography variant="body1" color="text.secondary"
+    sx={{ // clamp text to 3 lines
+      display: 'block',
+      display: '-webkit-box',
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden',
+      lineHeight: '1.2em',  // Line height
+      maxHeight: '3.6em',   // Max height = lineHeight * number of lines
+      WebkitLineClamp: lines, // Number of lines to display
+      textOverflow: 'ellipsis',
+    }}
+  >
+    { children }
+  </Typography>
+);
+
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
 export default function ProductCard({ product }) {
 
   // ============================================
@@ -32,13 +55,15 @@ export default function ProductCard({ product }) {
         image={ product?.image_url ?? '/food.jpg' }
       />
       <CardContent>
+        
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          { product.title }
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+
+        <Clamp lines={3}>
+          { product.description }
+        </Clamp>
+
       </CardContent>
       <CardActions>
         <Button size="small" variant='outlined' color='info'>Learn More</Button>
