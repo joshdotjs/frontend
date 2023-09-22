@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
 import Navbar from './navbar';
+import Navbar2 from './navbar-2';
 import ProductsGrid from './grid-products';
 import CartDrawer from './drawer-cart';
 
@@ -49,6 +50,7 @@ export default function HomePage () {
   return (
     <>
       <Navbar />
+      <Navbar2 />
 
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         

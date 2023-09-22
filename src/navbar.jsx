@@ -45,6 +45,7 @@ export default function Navbar() {
           </Typography>
 
 
+
           <Tooltip title="Account settings">
             <IconButton
               onClick={handleClick}
@@ -58,7 +59,14 @@ export default function Navbar() {
               <img src={favicon} height="32" />
             </IconButton>
           </Tooltip>
+
+
+
+          
         </Box>
+
+        {/* =========================================== */}
+
         <Menu
           anchorEl={anchorEl}
           id="account-menu"
