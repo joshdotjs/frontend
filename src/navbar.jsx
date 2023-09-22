@@ -31,12 +31,17 @@ export default function Navbar() {
     <header>
       <Container sx={{ border: 'solid white 1px', py: '1rem' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+
           <Typography sx={{ minWidth: 100 }}>
             <NavLink to="/" style={{ color: 'white' }}>Home</NavLink>
           </Typography>
 
           <Typography sx={{ minWidth: 100 }}>
             <NavLink to="/about" style={{ color: 'white' }}>About</NavLink>
+          </Typography>
+
+          <Typography sx={{ minWidth: 100 }}>
+            <NavLink to="/store" style={{ color: 'white' }}>Store</NavLink>
           </Typography>
 
 
