@@ -36,9 +36,6 @@ export default function ProductsGrid({ products }) {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
 
-
-        
-
         { products.map((product) => {
           return (
             <React.Fragment key={product.uuid}>
