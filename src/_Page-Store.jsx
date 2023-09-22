@@ -50,7 +50,7 @@ export default function HomePage () {
   return (
     <>
       <Navbar />
-      <Navbar2 />
+      {/* <Navbar2 /> */}
 
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
