@@ -6,7 +6,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { CartContext } from './context/cart-context';
+
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
 export default function ProductCard({ product }) {
+
+  // ============================================
+
+  const cart_ctx = React.useContext(CartContext);
+
+  // ============================================
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -27,7 +42,10 @@ export default function ProductCard({ product }) {
       </CardContent>
       <CardActions>
         <Button size="small" variant='outlined' color='info'>Learn More</Button>
-        <Button size="small" variant='contained' color='info'>Add to Cart</Button>
+        <Button size="small" variant='contained' color='info' onClick={() => {
+          console.log('addToCart()');
+          cart_ctx.addToCart(product);
+        }}>Add to Cart</Button>
       </CardActions>
     </Card>
   );
