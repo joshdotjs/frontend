@@ -96,12 +96,20 @@ const CartContext = createContext({
 
   // ============================================
 
+  const emptyCart = () => {
+    setCart([]);
+    setCartLS([]);
+  };
+
+  // ============================================
+
   const context = {
     cart,
     addToCart,
     open,
     closeCart,
     openCart,
+    emptyCart,
   };
 
   // ============================================

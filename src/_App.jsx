@@ -20,8 +20,8 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/store" element={<StorePage />} />
-            <Route path="/"      element={<HomePage />} />
+            <Route path="/"      element={<StorePage />} />
+            <Route path="/users" element={<HomePage />} />
           </Routes>
         </BrowserRouter>
       </CartContextProvider>

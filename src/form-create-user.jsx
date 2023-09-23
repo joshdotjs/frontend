@@ -92,6 +92,7 @@ export default function CreateUserForm({ createUser }) {
               // disabled={!(email && password)}
               type="button"
               name="create-user-button"
+              id="create-user-button"
             >Create New User</Button>
           </FC>
         </div>

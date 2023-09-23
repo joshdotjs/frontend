@@ -21,7 +21,7 @@ export default function Password({ onChange, value }) {
     <>
       <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
       <OutlinedInput
-        id="outlined-adornment-password"
+        id="password-text-field"
         type={showPassword ? 'text' : 'password'}
         placeholder='password'
         endAdornment={

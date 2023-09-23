@@ -23,27 +23,65 @@ export default function CartDrawer() {
 
   // ============================================
 
-  const { cart, open, openCart, closeCart } = React.useContext(CartContext);
+  const { 
+    cart, open, 
+    openCart, closeCart, emptyCart 
+  } = React.useContext(CartContext);
 
   // ============================================
 
   return (
     <>
-      <Button onClick={() => openCart()}>RIGHT</Button>
       <Drawer
+        id="cart-drawer"
         anchor={'right'}
         open={open}
         onClose={() => closeCart()}
       >
-        { cart.map(({ product, qty }) => {
-          return (
-            <div key={product.uuid}>
-              {qty}
-              {' '}
-              {product.title}
-            </div>
-          );
-        })}
+        <div style={{ 
+          minWidth: '150px', 
+          padding: '2rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          // background: 'red',
+          height: '100%',
+        }}>
+
+          <div>
+            { cart.map(({ product, qty }) => {
+              return (
+                <div key={product.uuid}>
+                  {qty}
+                  {' '}
+                  {product.title}
+                </div>
+              );
+            })}
+          </div>
+
+
+          <div style={{ display: 'flex', flexDirection: 'column'}}>
+            <Button
+              id="empty-cart-button"
+              variant="outlined"
+              color='info'
+              onClick={() => emptyCart()}
+              sx={{  mb: '1rem' }}
+            >
+              Empty Cart
+            </Button>
+            <Button
+              id="close-cart-button"
+              variant="contained"
+              color='info'
+              onClick={() => closeCart()
+            }>
+              Close Cart
+            </Button>
+          </div>
+        </div>
       </Drawer>
     </>
   );

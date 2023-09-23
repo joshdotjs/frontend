@@ -33,7 +33,7 @@ export default function Navbar() {
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
 
           <Typography sx={{ minWidth: 100 }}>
-            <NavLink to="/" style={{ color: 'white' }}>Home</NavLink>
+            <NavLink to="/" style={{ color: 'white' }}>Products</NavLink>
           </Typography>
 
           <Typography sx={{ minWidth: 100 }}>
@@ -41,7 +41,11 @@ export default function Navbar() {
           </Typography>
 
           <Typography sx={{ minWidth: 100 }}>
-            <NavLink to="/store" style={{ color: 'white' }}>Store</NavLink>
+            <NavLink 
+              id="navlink-users"
+              to="/users" 
+              style={{ color: 'white' }}
+            >Users</NavLink>
           </Typography>
 
 

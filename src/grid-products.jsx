@@ -34,9 +34,9 @@ export default function ProductsGrid({ products }) {
   // ============================================
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      JOSH
-      <Grid container spacing={2}>
+    <Box sx={{ flexGrow: 1, mt: 4 }}>
+      
+      <Grid container spacing={2} sx={{ mx: 'auto', width: 'fit-content', justifyContent: 'center', gap: '1rem' }}>
 
         { products.map((product) => {
           return (

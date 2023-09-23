@@ -46,7 +46,7 @@ export default function ProductCard({ product }) {
   // ============================================
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} id={ `product-card-${product.id}` }>
       <CardMedia
         component="img"
         alt="green iguana"
