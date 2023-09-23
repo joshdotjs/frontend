@@ -35,7 +35,7 @@ export default function HomePage () {
       notify({message: 'Error getting users...', variant: 'error', duration: 2000})();
       return;
     }
-    // console.log('data: ', data);
+    console.log('data: ', data);
     setProducts(data);
   };
 
