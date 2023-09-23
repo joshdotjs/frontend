@@ -31,6 +31,7 @@ export default function Navbar() {
     <header>
       <Container sx={{ border: 'solid white 1px', py: '1rem' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+
           <Typography sx={{ minWidth: 100 }}>
             <NavLink to="/" style={{ color: 'white' }}>Home</NavLink>
           </Typography>
@@ -38,6 +39,11 @@ export default function Navbar() {
           <Typography sx={{ minWidth: 100 }}>
             <NavLink to="/about" style={{ color: 'white' }}>About</NavLink>
           </Typography>
+
+          <Typography sx={{ minWidth: 100 }}>
+            <NavLink to="/store" style={{ color: 'white' }}>Store</NavLink>
+          </Typography>
+
 
 
           <Tooltip title="Account settings">
@@ -53,7 +59,14 @@ export default function Navbar() {
               <img src={favicon} height="32" />
             </IconButton>
           </Tooltip>
+
+
+
+          
         </Box>
+
+        {/* =========================================== */}
+
         <Menu
           anchorEl={anchorEl}
           id="account-menu"
