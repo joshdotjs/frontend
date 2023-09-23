@@ -17,7 +17,7 @@ import { CartContext } from './context/cart-context';
 const Clamp = ({ children, lines }) => (
   <Typography variant="body1" color="text.secondary"
     sx={{ // clamp text to 3 lines
-      display: 'block',
+      // display: 'block',
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
       overflow: 'hidden',
