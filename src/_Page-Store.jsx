@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
-
 import Layout from './_layout';
 import ProductsGrid from './grid-products';
 import CartDrawer from './drawer-cart';
@@ -18,7 +17,7 @@ import { useNotification } from './hooks/use-notification';
 // ==============================================
 
 
-export default function HomePage () {
+export default function StorePage () {
 
   const [products, setProducts] = useState([]);
 
