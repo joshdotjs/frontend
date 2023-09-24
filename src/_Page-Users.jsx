@@ -120,8 +120,6 @@ export default function HomePage () {
 
   return (
     <>
-      <Navbar />
-
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
         <Typography variant="h2"

@@ -16,7 +16,23 @@ import { useNotification } from './hooks/use-notification';
 // ==============================================
 // ==============================================
 // ==============================================
+
+const Layout = ({ children }) => {
+  return (
+    <>
+      <Navbar />
+      <Navbar2 />
+
+      { children }
+    </>
+  );
+};
+
 // ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
 
 export default function HomePage () {
 
@@ -48,9 +64,7 @@ export default function HomePage () {
   // ============================================
 
   return (
-    <>
-      <Navbar />
-      <Navbar2 />
+    <Layout>
 
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
@@ -59,6 +73,6 @@ export default function HomePage () {
         <ProductsGrid { ...{ products } } />
 
       </Container>
-    </>
+    </Layout>
   );
 };

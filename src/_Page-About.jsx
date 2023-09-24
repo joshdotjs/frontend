@@ -1,6 +1,5 @@
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 import level_up from './assets/level-up.gif';
-import Navbar from './navbar';
 
 // ==============================================
 // ==============================================
@@ -12,8 +11,6 @@ export default function AboutPage () {
 
   return (
     <>
-      <Navbar />
-
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
         <Typography variant="h1"

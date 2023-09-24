@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 
-import HomePage from './_Page-Home';
+import UsersPage from './_Page-Users';
 import AboutPage from './_Page-About';
 import StorePage from './_Page-Store';
 
@@ -18,10 +18,11 @@ export default function App() {
     <SnackbarProvider maxSnack={3}>
       <CartContextProvider>
         <BrowserRouter>
+        
           <Routes>
             <Route path="/about" element={<AboutPage />} />
             <Route path="/"      element={<StorePage />} />
-            <Route path="/users" element={<HomePage />} />
+            <Route path="/users" element={<UsersPage />} />
           </Routes>
         </BrowserRouter>
       </CartContextProvider>

@@ -13,6 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
+import { NavLink } from 'react-router-dom';
+import favicon from '/favicon.svg';
+
 import { CartContext } from './context/cart-context';
 
 // ==============================================
@@ -20,13 +23,17 @@ import { CartContext } from './context/cart-context';
 // ==============================================
 // ==============================================
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [
+  { title: 'Products', route: '/' }, 
+  { title: 'About', route: '/about' },
+  { title: 'Users', route: '/users' },
+];
 
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
+
 
 const Navlinks = () => {
 
@@ -73,8 +80,10 @@ const Navlinks = () => {
           }}
         >
           {pages.map((page) => (
-            <MenuItem key={page} onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">{page}</Typography>
+            <MenuItem key={ page.title } onClick={handleCloseNavMenu}>
+              <Typography textAlign="center">
+                <NavLink to={ page.route }>{ page.title }</NavLink>
+              </Typography>
             </MenuItem>
           ))}
         </Menu>
@@ -101,11 +110,11 @@ const Navlinks = () => {
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
         {pages.map((page) => (
           <Button
-            key={page}
+            key={ page.title }
             onClick={handleCloseNavMenu}
             sx={{ my: 2, color: 'white', display: 'block' }}
           >
-            {page}
+            <NavLink to={ page.route }>{ page.title }</NavLink>
           </Button>
         ))}
       </Box>
@@ -151,35 +160,7 @@ export default function ResponsiveAppBar() {
 
           <Navlinks />
 
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+
 
 
           <Box sx={{ flexGrow: 0 }}>
