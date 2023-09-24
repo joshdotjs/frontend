@@ -18,10 +18,9 @@ export default function App() {
     <SnackbarProvider maxSnack={3}>
       <CartContextProvider>
         <BrowserRouter>
-        
           <Routes>
-            <Route path="/about" element={<AboutPage />} />
             <Route path="/"      element={<StorePage />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/users" element={<UsersPage />} />
           </Routes>
         </BrowserRouter>

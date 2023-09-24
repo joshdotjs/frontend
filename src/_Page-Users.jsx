@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
+import Layout from './_layout';
 import UsersTable from './table-users';
 import Navbar from './navbar';
 import CreateUserForm from './form-create-user';
@@ -13,7 +14,6 @@ import { sortDataById } from './util/sort';
 import { useNotification } from './hooks/use-notification';
 
 
-// ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
@@ -119,7 +119,7 @@ export default function HomePage () {
   // ============================================
 
   return (
-    <>
+    <Layout>
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
         <Typography variant="h2"
@@ -143,6 +143,6 @@ export default function HomePage () {
         <UsersTable { ...{ users, editUser, deleteUser } } sx={{ mb: 4 }}/>
 
       </Container>
-    </>
+    </Layout>
   );
 };

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
-import Navbar from './navbar';
-import Navbar2 from './navbar-2';
+
+import Layout from './_layout';
 import ProductsGrid from './grid-products';
 import CartDrawer from './drawer-cart';
 
@@ -11,22 +11,6 @@ import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 
 import { useNotification } from './hooks/use-notification';
-
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-
-const Layout = ({ children }) => {
-  return (
-    <>
-      <Navbar />
-      <Navbar2 />
-
-      { children }
-    </>
-  );
-};
 
 // ==============================================
 // ==============================================

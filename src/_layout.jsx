@@ -1,12 +1,15 @@
-// import Navbar from './navbar';
-// import Navbar2 from './navbar-2';
+import Navbar from './navbar';
+import Navbar2 from './navbar-2';
 
-export default function Layout() {
+const Layout = ({ children }) => {
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Navbar2 /> */}
+      <Navbar />
+      <Navbar2 />
 
+      { children }
     </>
   );
-}
+};
+
+export default Layout;
