@@ -2,16 +2,17 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
+// utils:
+import { http } from './util/http';
+import { apiUrl } from './util/url';
+import { asynch } from './util/async';
+
+// context:
 import { CartContext } from './context/cart-context';
+
+// hooks:
+import { useNotification } from './hooks/use-notification';
 
 // ==============================================
 // ==============================================
@@ -21,12 +22,35 @@ import { CartContext } from './context/cart-context';
 
 export default function CartDrawer() {
 
+  const [notify] = useNotification();
+
   // ============================================
 
   const { 
     cart, open, 
-    openCart, closeCart, emptyCart 
+    openCart, closeCart, emptyCart
   } = React.useContext(CartContext);
+
+  // ============================================
+
+  const checkout = () => {
+    notify({message: 'sending cart to checkout...', variant: 'info', duration: 2000})();
+
+    console.clear();
+    console.log('sending to checkout...');
+    console.log('cart: ', cart);
+
+    const to_send = {
+      user_id: 1,
+      order_items: cart,
+    };
+    console.log('to_send: ', to_send);
+
+    setTimeout(
+      notify({message: 'checkout under construction...', variant: 'error', duration: 3000}), 
+      1e3
+    );
+  };
 
   // ============================================
 
@@ -63,23 +87,36 @@ export default function CartDrawer() {
 
 
           <div style={{ display: 'flex', flexDirection: 'column'}}>
+            
             <Button
               id="empty-cart-button"
-              variant="outlined"
+              // variant="outlined"
               color='info'
-              onClick={() => emptyCart()}
               sx={{  mb: '1rem' }}
+              onClick={() => emptyCart()}
             >
               Empty Cart
             </Button>
+
             <Button
               id="close-cart-button"
-              variant="contained"
+              variant="outlined"
               color='info'
+              sx={{  mb: '1rem' }}
               onClick={() => closeCart()
             }>
               Close Cart
             </Button>
+
+            <Button
+              id="checkout-cart-button"
+              variant="contained"
+              color='info'
+              onClick={() => checkout()
+            }>
+              Checkout
+            </Button>
+
           </div>
         </div>
       </Drawer>
