@@ -27,7 +27,7 @@ export default function UserAvatar() {
   };
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', mr: 2 }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}

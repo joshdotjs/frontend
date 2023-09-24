@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -16,6 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link, NavLink } from 'react-router-dom';
 import favicon from '/favicon.svg';
 import NavbarAvatar from './navbar-avatar';
+import CartDrawer from './drawer-cart';
 
 import { CartContext } from './context/cart-context';
 
@@ -119,7 +119,7 @@ const Navlinks = () => {
         ))}
       </Box>
 
-      <NavbarAvatar />
+      
     </>
   );
 };
@@ -141,8 +141,6 @@ export default function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-
 
           <Link to='/'>
             <Box sx={{ display: 'flex' }}>
@@ -172,6 +170,9 @@ export default function ResponsiveAppBar() {
 
           <Navlinks />
 
+
+          <NavbarAvatar />
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="open cart">
               <IconButton 
@@ -186,10 +187,13 @@ export default function ResponsiveAppBar() {
             </Tooltip>
           </Box>
 
+
           
 
         </Toolbar>
       </Container>
+
+      <CartDrawer />
     </AppBar>
   );
 }
