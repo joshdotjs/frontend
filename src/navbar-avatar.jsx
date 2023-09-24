@@ -11,8 +11,6 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
-import favicon from '/favicon.svg';
-
 // ==============================================
 // ==============================================
 // ==============================================
@@ -39,8 +37,7 @@ export default function UserAvatar() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            {/* <Avatar sx={{ width: 32, height: 32 }}>M</Avatar> */}
-            <img src={favicon} height="32" />
+            <Avatar sx={{ width: 32, height: 32 }}>J</Avatar>
           </IconButton>
         </Tooltip>          
       </Box>
