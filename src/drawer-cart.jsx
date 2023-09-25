@@ -12,6 +12,7 @@ import { asynch } from './util/async';
 import { CartContext } from './context/cart-context';
 
 // hooks:
+import { useNavigate } from 'react-router-dom';
 import { useNotification } from './hooks/use-notification';
 
 // ==============================================
@@ -22,7 +23,8 @@ import { useNotification } from './hooks/use-notification';
 
 export default function CartDrawer() {
 
-  const [notify] = useNotification();
+  const navigate = useNavigate();
+  const [ notify ] = useNotification();
 
   // ============================================
 
@@ -65,6 +67,7 @@ export default function CartDrawer() {
     } else {
       notify({message: 'successfully created new order! 🙂', variant: 'success'})();
       console.log('data: ', data);
+      navigate('/orders');
     }
 
 
