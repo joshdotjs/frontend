@@ -33,23 +33,45 @@ export default function CartDrawer() {
 
   // ============================================
 
-  const checkout = () => {
+  const checkout = async () => {
     notify({message: 'sending cart to checkout...', variant: 'info', duration: 2000})();
 
     console.clear();
     console.log('sending to checkout...');
     console.log('cart: ', cart);
 
-    const to_send = {
-      user_id: 1,
-      order_items: cart,
+    const order = { 
+      user_id: 1, 
+      order_items: [
+        { product_id: 1, quantity: 2 },
+        { product_id: 2, quantity: 2 },
+      ] // order_items
     };
-    console.log('to_send: ', to_send);
+    console.log('order: ', order);
 
-    setTimeout(
-      notify({message: 'checkout under construction...', variant: 'error', duration: 3000}), 
-      1e3
-    );
+    const URL = apiUrl('orders');
+    const promise = http({ 
+      url: URL, 
+      method: 'POST', 
+      body: order 
+    });
+
+    const [data, error] = await asynch( promise );
+    if (error) {
+      notify({message: 'Error creating order...', variant: 'error', duration: 4000})();
+      console.log('if(error) in checkout()');
+      console.log(error);
+      return;
+    } else {
+      notify({message: 'successfully created new order! 🙂', variant: 'success'})();
+      console.log('data: ', data);
+    }
+
+
+    // setTimeout(
+    //   notify({message: 'checkout under construction...', variant: 'error', duration: 3000}), 
+    //   1e3
+    // );
   };
 
   // ============================================

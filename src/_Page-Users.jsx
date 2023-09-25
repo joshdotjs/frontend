@@ -99,7 +99,7 @@ export default function HomePage () {
 
     const [data, error] = await asynch( promise );
     if (error) {
-      notify({message: 'Error creating user...', variant: 'error', duration: 5000})();
+      notify({message: 'Error creating user...', variant: 'error', duration: 4000})();
       console.log('if(error) in createUser()');
       console.log(error);
       return;

@@ -8,4 +8,5 @@
 Bugs:
   - navlinks need to be clicked more than once sometimes 
     -- the dropdown is much worse
-  -
+  - Major MUI bug:
+    -- Need to re-install node_modules (!?!?!?!?)
