@@ -36,6 +36,8 @@ export default function CartDrawer() {
   // ============================================
 
   const checkout = async () => {
+
+    closeCart();
     notify({message: 'sending cart to checkout...', variant: 'info', duration: 2000})();
 
     console.clear();
@@ -67,7 +69,9 @@ export default function CartDrawer() {
     } else {
       notify({message: 'successfully created new order! 🙂', variant: 'success'})();
       console.log('data: ', data);
-      navigate('/orders');
+
+      // wait on cart to close before navigating to orders page:
+      setTimeout(() => navigate('/orders'), 250);
     }
 
 
