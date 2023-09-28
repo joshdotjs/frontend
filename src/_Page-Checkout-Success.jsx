@@ -51,6 +51,7 @@ export default function CheckoutSuccessPage () {
     }
 
     console.log('data: ', data);
+    setLineItems(data?.line_items);
   };
 
   // ============================================
@@ -67,7 +68,18 @@ export default function CheckoutSuccessPage () {
         </Typography>
 
         <Box sx={{textAlign: 'center'}}>
-          Order details go here...
+          <ul>
+            { line_items.map((item, index) => {
+              return <li key={`line-item-${item.order_id}-${item.product_id}`}>
+                <Typography variant="h4" sx={{ color: 'primary.main' }}>
+                  { item.product_name }
+                </Typography>
+                <Typography variant="h5" sx={{ color: 'primary.main' }}>
+                  { item.quantity } x ${ item.product_price }
+                </Typography>
+              </li>
+            }) }
+          </ul>
         </Box>
 
       </Container>

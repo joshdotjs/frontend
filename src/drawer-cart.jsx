@@ -44,12 +44,17 @@ export default function CartDrawer() {
     console.log('sending to checkout...');
     console.log('cart: ', cart);
 
+    const order_items = cart.map(({ product, qty }) => {
+      return { product_id: product.id, quantity: qty };
+    });
+
     const order = { 
       user_id: 1, 
-      order_items: [
-        { product_id: 1, quantity: 2 },
-        { product_id: 2, quantity: 2 },
-      ] // order_items
+      // order_items: [
+      //   { product_id: 1, quantity: 2 },
+      //   { product_id: 2, quantity: 2 },
+      // ] // order_items
+      order_items,
     };
     console.log('order: ', order);
 
