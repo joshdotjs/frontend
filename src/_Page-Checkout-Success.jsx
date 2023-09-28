@@ -4,6 +4,12 @@ import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 
 import Layout from './_layout';
 
+// utils:
+import { http } from './util/http';
+import { apiUrl } from './util/url';
+import { asynch } from './util/async';
+// import { sortDataById } from './util/sort';
+
 // ==============================================
 // ==============================================
 // ==============================================
@@ -18,26 +24,33 @@ export default function CheckoutSuccessPage () {
 
   // ============================================
 
-  const [orders, setOrders] = useState([]);
+  const [order, setOrder] = useState({});
+  const [line_items, setLineItems] = useState([]);
 
   // ============================================
 
   useEffect(() => {
-
-    const order_uuid = searchParams.get('order_uuid');
-    console.log('order_uuid: ', order_uuid);
-
-    getOrder();
-
-    // TODO: Change this to get Oders by User-ID
-    // TODO: Add authorization to ensure only logged-in users can see their own orders
-
+    const uuid = searchParams.get('order_uuid');
+    // console.log('order_uuid: ', order_uuid);
+    getOrder(uuid);
   }, []);
 
   // ============================================
 
-  const getOrder = async () => {
+  const getOrder = async (uuid) => {
     console.log('getting order...');
+
+    const endpoint = `orders/${uuid}`;
+    const URL = apiUrl(endpoint);
+    const promise = http({ url: URL });
+    const [data, error] = await asynch( promise );
+    if (error) {
+      console.error(error);
+      notify({message: 'Error getting order by UUID...', variant: 'error', duration: 3000})();
+      return;
+    }
+
+    console.log('data: ', data);
   };
 
   // ============================================
