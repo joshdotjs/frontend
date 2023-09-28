@@ -66,15 +66,17 @@ export default function CartDrawer() {
       console.log('if(error) in checkout()');
       console.log(error);
       return;
-    } else {
-      notify({message: 'successfully created new order! 🙂', variant: 'success'})();
-      console.log('data: ', data);
-
-      // wait on cart to close before navigating to orders page:
-      setTimeout(() => navigate('/orders'), 250);
     }
 
+    notify({message: 'successfully created new order! 🙂', variant: 'success'})();
+    console.log('data: ', data);
 
+    // wait on cart to close before navigating to orders page:
+    // setTimeout(() => navigate('/orders'), 250);
+
+    // redirect to Stripe checkout:
+    window.location.href = data.url;
+    
     // setTimeout(
     //   notify({message: 'checkout under construction...', variant: 'error', duration: 3000}), 
     //   1e3
