@@ -52,7 +52,8 @@ export default function CheckoutSuccessPage () {
     }
 
     console.log('data: ', data);
-    setLineItems(data?.line_items);
+    setLineItems(data?.line_items ?? []);
+    setOrder(data?.order ?? {});
   };
 
   // ============================================
@@ -69,7 +70,14 @@ export default function CheckoutSuccessPage () {
         </Typography>
 
 
-        <OrderProductsTable { ...{ line_items } } />
+        {/* <p>{JSON.stringify(order)}</p> */}
+        {/* <p>ID: {order?.id}</p> */}
+        <p>Order Number: {order?.uuid}</p>
+        <p>Total: ${order?.total / 100}</p>
+        <p>Status: {order?.status}</p>
+        {/* <p>User ID: {order?.user_id}</p> */}
+
+        <OrderProductsTable { ...{ line_items, order } } />
 
       </Container>
     </Layout>

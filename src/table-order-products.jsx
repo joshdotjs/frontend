@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function BasicTable({ line_items }) {
+export default function BasicTable({ line_items, order }) {
   return (
     <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -22,18 +22,27 @@ export default function BasicTable({ line_items }) {
           <TableBody>
             {line_items.map((item) => (
               <TableRow
-                  key={`line-item-${item.order_id}-${item.product_id}`}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {item.product_name}
-                  </TableCell>
-                  <TableCell align="right">${item.product_price / 100}</TableCell>
-                  <TableCell align="right">{item.quantity}</TableCell>
-                  <TableCell align="right">${item.product_price * item.quantity / 100}</TableCell>
-                </TableRow>
-
+                key={`line-item-${item.order_id}-${item.product_id}`}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {item.product_name}
+                </TableCell>
+                <TableCell align="right">${item.product_price / 100}</TableCell>
+                <TableCell align="right">{item.quantity}</TableCell>
+                <TableCell align="right">${item.product_price * item.quantity / 100}</TableCell>
+              </TableRow>
             ))}
+
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row"></TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right">Total: ${order?.total / 100}</TableCell>
+            </TableRow>
+
           </TableBody>
         </Table>
       </TableContainer>
