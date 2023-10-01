@@ -3,6 +3,7 @@ import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
 import Layout from './_layout';
 import ProductsGrid from './grid-products';
+import ProductDetailsModal from './modal-product-details';
 
 import { http } from './util/http';
 import { apiUrl } from './util/url';
@@ -50,6 +51,8 @@ export default function StorePage () {
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
         <ProductsGrid { ...{ products } } />
+
+        <ProductDetailsModal />
 
       </Container>
     </Layout>
