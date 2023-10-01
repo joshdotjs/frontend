@@ -25,10 +25,14 @@ const style = {
 // ==============================================
 // ==============================================
 
-export default function TransitionsModal() {
-  const [open, setOpen] = React.useState(false);
+export default function TransitionsModal({ open, setOpen }) {
+
+  // ============================================
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // ============================================
 
   return (
     <div>
@@ -45,6 +49,7 @@ export default function TransitionsModal() {
             timeout: 500,
           },
         }}
+        sx={{ color: 'black'}}
       >
         <Fade in={open}>
           <Box sx={style}>

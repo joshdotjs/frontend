@@ -22,6 +22,8 @@ export default function StorePage () {
 
   const [notify] = useNotification();
 
+  const [open, setOpen] = useState(false);
+
   // ============================================
 
   const getProducts = async () => {
@@ -52,7 +54,7 @@ export default function StorePage () {
         
         <ProductsGrid { ...{ products } } />
 
-        <ProductDetailsModal />
+        <ProductDetailsModal {... { open, setOpen } } />
 
       </Container>
     </Layout>
