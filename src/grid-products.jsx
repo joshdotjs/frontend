@@ -27,9 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 // ==============================================
 // ==============================================
 
-export default function ProductsGrid({ products }) {
-
-  // ============================================
+export default function ProductsGrid({ products, openModal }) {
 
   // ============================================
 
@@ -43,7 +41,7 @@ export default function ProductsGrid({ products }) {
             <React.Fragment key={product.uuid}>
               <Grid>
                 <Item>
-                  <ProductCard { ...{ product } } />
+                  <ProductCard { ...{ product, openModal } } />
                 </Item>
               </Grid>
             </React.Fragment>

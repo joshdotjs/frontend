@@ -22,7 +22,33 @@ export default function StorePage () {
 
   const [notify] = useNotification();
 
+  // ============================================
+
+  const [product, setProduct] = useState({
+    uuid: '',
+    title: '',
+    description: '',
+    category: '',
+    status: '',
+    published: false,
+    price: 0,
+    units_in_stock: 0,
+    image_url: '',
+    image_alt: '',
+    details_route: '',
+  });
+
   const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+  const openModal = (id) => {
+
+    const product = products.find(product => product.id === id);
+    console.log('product: ', product);
+
+    setProduct(product);
+    setOpen(true);
+  }
+
 
   // ============================================
 
@@ -46,15 +72,16 @@ export default function StorePage () {
   }, []);
 
   // ============================================
+  
 
   return (
     <Layout>
 
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
         
-        <ProductsGrid { ...{ products } } />
+        <ProductsGrid { ...{ products, openModal } } />
 
-        <ProductDetailsModal {... { open, setOpen } } />
+        <ProductDetailsModal {... { open, setOpen, product } } />
 
       </Container>
     </Layout>

@@ -25,7 +25,7 @@ const style = {
 // ==============================================
 // ==============================================
 
-export default function TransitionsModal({ open, setOpen }) {
+export default function TransitionsModal({ open, setOpen, product }) {
 
   // ============================================
 
@@ -54,10 +54,13 @@ export default function TransitionsModal({ open, setOpen }) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
+              {product?.title ?? 'Product Title'}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              {product?.description ?? 'Product Description'}
+            </Typography>
+            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+              ${product?.price / 100 ?? 'Product Price'}
             </Typography>
           </Box>
         </Fade>

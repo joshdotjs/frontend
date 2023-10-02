@@ -37,7 +37,7 @@ const Clamp = ({ children, lines }) => (
 // ==============================================
 // ==============================================
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, openModal }) {
 
   // ============================================
 
@@ -66,8 +66,14 @@ export default function ProductCard({ product }) {
 
       </CardContent>
       <CardActions>
-        <Button size="small" variant='outlined' color='info'>Learn More</Button>
-        <Button size="small" variant='contained' color='info' onClick={() => {
+        <Button size="small" variant='outlined' color='info'
+          onClick={() => {
+          console.log('learnMore()');
+          openModal(product.id);
+        }}
+        >Learn More</Button>
+        <Button size="small" variant='contained' color='info' 
+          onClick={() => {
           console.log('addToCart()');
           cart_ctx.addToCart(product);
         }}>Add to Cart</Button>
