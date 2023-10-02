@@ -6,6 +6,8 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { CartContext } from './context/cart-context';
+
 // ==============================================
 
 const style = {
@@ -31,6 +33,10 @@ export default function TransitionsModal({ open, setOpen, product }) {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // ============================================
+
+  const cart_ctx = React.useContext(CartContext);
 
   // ============================================
 
@@ -62,6 +68,13 @@ export default function TransitionsModal({ open, setOpen, product }) {
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               ${product?.price / 100 ?? 'Product Price'}
             </Typography>
+
+            <Button size="small" variant='contained' color='info' 
+              onClick={() => {
+              console.log('addToCart()');
+              cart_ctx.addToCart(product);
+              handleClose();
+            }}>Add to Cart</Button>
           </Box>
         </Fade>
       </Modal>
