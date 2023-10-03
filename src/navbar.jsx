@@ -28,6 +28,7 @@ const pages = [
   { title: 'Products', route: '/' }, 
   { title: 'About', route: '/about' },
   { title: 'Users', route: '/users' },
+  { title: 'Orders', route: '/admin/orders' },
 ];
 
 // ==============================================
@@ -88,7 +89,9 @@ const Navlinks = () => {
           ))}
         </Menu>
       </Box>
+
       {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+
       {/* <Typography
         variant="h5"
         noWrap
@@ -107,6 +110,7 @@ const Navlinks = () => {
       >
         LOGO
       </Typography> */}
+
       <Box sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: { xs: 'flex', md: 'none' }, }}>
         <img src={favicon} height="32" />
       </Box>
@@ -123,7 +127,6 @@ const Navlinks = () => {
         ))}
       </Box>
 
-      
     </>
   );
 };
