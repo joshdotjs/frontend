@@ -6,6 +6,7 @@ import AboutPage  from './_Page-About';
 import StorePage  from './_Page-Store';
 import AdminOrdersPage from './_Page-_Admin-Orders';
 import CheckoutSuccessPage from './_Page-Checkout-Success';
+import AuthLoginPage from './_Page-_Auth-Login';
 
 import CartContextProvider from './context/cart-context';
 
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/about"            element={<AboutPage  />} />
             <Route path="/users"            element={<UsersPage  />} />
             <Route path="/admin/orders"     element={<AdminOrdersPage  />} />
+            <Route path="/auth/login"       element={<AuthLoginPage  />} />
           </Routes>
         </BrowserRouter>
       </CartContextProvider>

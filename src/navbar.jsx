@@ -29,6 +29,7 @@ const pages = [
   { title: 'About', route: '/about' },
   { title: 'Users', route: '/users' },
   { title: 'Orders', route: '/admin/orders' },
+  { title: 'Login', route: '/auth/login' },
 ];
 
 // ==============================================
