@@ -14,7 +14,7 @@ import { useNotification } from './hooks/use-notification';
 // ==============================================
 // ==============================================
 
-export default function AdminPage () {
+export default function AdminOrdersPage () {
 
   // ============================================
 
