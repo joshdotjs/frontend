@@ -1,13 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 
+// comps:
 import Layout from './_layout';
 
+// utils:
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 
+// hooks:
 import { useNotification } from './hooks/use-notification';
+
+// context:
+import AuthContext from './context/auth-context';
 
 // ==============================================
 // ==============================================
@@ -23,6 +29,20 @@ export default function AdminOrdersPage () {
   const [notify] = useNotification();
 
   // ============================================
+
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
+  // TODO: Send token in header for auth
 
   const getOrders = async () => {
     const URL = apiUrl('orders');

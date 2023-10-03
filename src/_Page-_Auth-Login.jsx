@@ -1,14 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 
+// comps:
 import Layout from './_layout';
 import AuthLoginForm from './form-auth-login';
 
+// utils:
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 
+// hoods:
 import { useNotification } from './hooks/use-notification';
+
+// context:
+import AuthContext from './context/auth-context';
 
 // ==============================================
 // ==============================================
@@ -22,6 +28,8 @@ export default function AuthLoginPage () {
   // const [orders, setOrders] = useState([]);
 
   const [notify] = useNotification();
+
+  const { login } = useContext(AuthContext);
 
   // ============================================
 
@@ -44,14 +52,20 @@ export default function AuthLoginPage () {
       notify({message: 'successfully logged user in! 🙂', variant: 'success'})();
       console.log('data: ', data);
 
-      // TODO: set auth context
-      // TODO: set auth context
-      // TODO: set auth context
-      // TODO: set auth context
-      // TODO: set auth context
-      // TODO: set auth context
-      // TODO: set auth context
-      // TODO: set auth context
+      const { user, token } = data;
+
+
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      // HERE
+      login({ user, token });
     }
 
   };

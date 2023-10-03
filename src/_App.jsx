@@ -9,6 +9,7 @@ import CheckoutSuccessPage from './_Page-Checkout-Success';
 import AuthLoginPage from './_Page-_Auth-Login';
 
 import CartContextProvider from './context/cart-context';
+import AuthContextProvider from './context/auth-context';
 
 // ==============================================
 // ==============================================

@@ -1,7 +1,7 @@
 import { useState, createContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
-import { getLS, setLS, removeLS } from 'util/local-storage';
+import { getLS, setLS, removeLS } from '../util/local-storage';
 
 // ==============================================
 
@@ -21,7 +21,7 @@ function AuthContextProvider ({ children, restrict }) {
 
   // --------------------------------------------
 
-  const router = useRouter();
+  // const router = useRouter();
 
   // --------------------------------------------
 
@@ -71,10 +71,17 @@ function AuthContextProvider ({ children, restrict }) {
     setLoggedIn(true);
     setLS('logged_in', true);
 
-    if (user?.is_admin)
-      router.push('/admin');
-    else
-      router.push('/user');
+    // TODO: Redirect
+    // TODO: Redirect
+    // TODO: Redirect
+    // TODO: Redirect
+    // TODO: Redirect
+    // TODO: Redirect
+
+    // if (user?.is_admin)
+    //   router.push('/admin');
+    // else
+    //   router.push('/user');
   };
 
   // --------------------------------------------
