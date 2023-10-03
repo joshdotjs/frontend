@@ -18,6 +18,8 @@ import { useNotification } from './hooks/use-notification';
 
 export default function StorePage () {
 
+  // ============================================
+
   const [products, setProducts] = useState([]);
 
   const [notify] = useNotification();
@@ -55,14 +57,14 @@ export default function StorePage () {
   const getProducts = async () => {
     const URL = apiUrl('products');
     const promise = http({ url: URL });
-    const [data, error] = await asynch( promise );
+    const [products, error] = await asynch( promise );
     if (error) {
       console.error(error);
       notify({message: 'Error getting users...', variant: 'error', duration: 2000})();
       return;
     }
-    console.log('data: ', data);
-    setProducts(data);
+    console.log('products: ', products);
+    setProducts(products);
   };
 
   // ============================================
