@@ -23,8 +23,8 @@ const FC = ({ children }) => (
 
 export default function AuthLoginForm({ loginFn }) {
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState('josh@josh.com');
+  const [password, setPassword] = React.useState('josh');
   
   // React.useEffect(() => console.log('email: ', email), [email]);
   // React.useEffect(() => console.log('password: ', password), [password]);

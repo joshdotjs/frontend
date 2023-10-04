@@ -13,7 +13,7 @@ import { asynch } from './util/async';
 import { useNotification } from './hooks/use-notification';
 
 // context:
-import AuthContext from './context/auth-context';
+import { AuthContext } from './context/auth-context';
 
 // ==============================================
 // ==============================================

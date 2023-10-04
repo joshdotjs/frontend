@@ -14,7 +14,7 @@ import { asynch } from './util/async';
 import { useNotification } from './hooks/use-notification';
 
 // context:
-import AuthContext from './context/auth-context';
+import { AuthContext } from './context/auth-context';
 
 // ==============================================
 // ==============================================
@@ -29,7 +29,7 @@ export default function AuthLoginPage () {
 
   const [notify] = useNotification();
 
-  const { login } = useContext(AuthContext);
+  const { logIn } = useContext(AuthContext);
 
   // ============================================
 
@@ -53,19 +53,9 @@ export default function AuthLoginPage () {
       console.log('data: ', data);
 
       const { user, token } = data;
+      console.log('user: ', user);
 
-
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      // HERE
-      login({ user, token });
+      logIn({ user, token });
     }
 
   };

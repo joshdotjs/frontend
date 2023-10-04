@@ -32,35 +32,35 @@ function AuthContextProvider ({ children, restrict }) {
   // --------------------------------------------
 
   // -Load data from LS on page load
-  useEffect(() => {
-    const logged_in = getLS('logged_in');
-    if (logged_in) {
-      setLoggedIn(logged_in);
-      setToken(getLS('token'));
-      setUser(getLS('user'));
-    }
+  // useEffect(() => {
+  //   const logged_in = getLS('logged_in');
+  //   if (logged_in) {
+  //     setLoggedIn(logged_in);
+  //     setToken(getLS('token'));
+  //     setUser(getLS('user'));
+  //   }
 
-    if (restrict) {
-      const user = getLS('user');
-      console.log('user?.is_admin: ', user?.is_admin);
+  //   if (restrict) {
+  //     const user = getLS('user');
+  //     console.log('user?.is_admin: ', user?.is_admin);
 
-      if (restrict === 'admin' && user?.is_admin !== true) { 
-        router.replace('/auth/login');
-      }
-      if (restrict === 'user' && !user) { 
-        router.replace('/auth/login'); 
-      }
-    }
+  //     if (restrict === 'admin' && user?.is_admin !== true) { 
+  //       router.replace('/auth/login');
+  //     }
+  //     if (restrict === 'user' && !user) { 
+  //       router.replace('/auth/login'); 
+  //     }
+  //   }
 
-  }, []);
+  // }, []);
 
   // --------------------------------------------
 
   const logIn = ({token, user}) => {
 
     console.log('logging user in (auth-ctx)');
-    console.log('user: ', user);
-    console.log('token: ', token);
+    // console.log('user: ', user);
+    // console.log('token: ', token);
 
     setToken(token);
     setLS('token', token);
@@ -96,7 +96,7 @@ function AuthContextProvider ({ children, restrict }) {
     setLoggedIn(false);
     removeLS('logged_in');
 
-    router.replace('/');
+    // router.replace('/');
   };
   
   // --------------------------------------------
@@ -121,5 +121,5 @@ function AuthContextProvider ({ children, restrict }) {
 
 // ==============================================
 
-export default AuthContext;
-export { AuthContextProvider };
+export { AuthContext };
+export default AuthContextProvider;
