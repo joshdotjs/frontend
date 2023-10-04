@@ -21,7 +21,7 @@ const AuthContext = createContext({
 
 // ==============================================
 
-function AuthContextProvider ({ children, restrict }) {
+function AuthContextProvider ({ children }) {
 
   // --------------------------------------------
 
@@ -45,18 +45,6 @@ function AuthContextProvider ({ children, restrict }) {
   //     setUser(getLS('user'));
   //   }
 
-  //   if (restrict) {
-  //     const user = getLS('user');
-  //     console.log('user?.is_admin: ', user?.is_admin);
-
-  //     if (restrict === 'admin' && user?.is_admin !== true) { 
-  //       router.replace('/auth/login');
-  //     }
-  //     if (restrict === 'user' && !user) { 
-  //       router.replace('/auth/login'); 
-  //     }
-  //   }
-
   // }, []);
 
   // --------------------------------------------
@@ -75,13 +63,6 @@ function AuthContextProvider ({ children, restrict }) {
 
     setLoggedIn(true);
     setLS('logged_in', true);
-
-    // TODO: Redirect
-    // TODO: Redirect
-    // TODO: Redirect
-    // TODO: Redirect
-    // TODO: Redirect
-    // TODO: Redirect
 
     if (user?.is_admin)
       navigate('/admin/orders')

@@ -28,6 +28,9 @@ export default function AdminOrdersPage () {
 
   const [notify] = useNotification();
 
+  const { token } = useContext(AuthContext);
+  console.log('token: ', token);
+
   // ============================================
 
   // TODO: Send token in header for auth
