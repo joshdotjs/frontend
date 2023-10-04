@@ -1,7 +1,11 @@
 import { useState, createContext, useEffect } from 'react';
 // import { useRouter } from 'next/router';
 
+// utils:
 import { getLS, setLS, removeLS } from '../util/local-storage';
+
+// hooks:
+import { useNavigate } from 'react-router-dom';
 
 // ==============================================
 
@@ -22,6 +26,7 @@ function AuthContextProvider ({ children, restrict }) {
   // --------------------------------------------
 
   // const router = useRouter();
+  const navigate = useNavigate();
 
   // --------------------------------------------
 
@@ -78,8 +83,8 @@ function AuthContextProvider ({ children, restrict }) {
     // TODO: Redirect
     // TODO: Redirect
 
-    // if (user?.is_admin)
-    //   router.push('/admin');
+    if (user?.is_admin)
+      navigate('/admin/orders')
     // else
     //   router.push('/user');
   };

@@ -12,7 +12,7 @@ import { asynch } from './util/async';
 import { CartContext } from './context/cart-context';
 
 // hooks:
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useNotification } from './hooks/use-notification';
 
 // ==============================================
@@ -23,7 +23,7 @@ import { useNotification } from './hooks/use-notification';
 
 export default function CartDrawer() {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [ notify ] = useNotification();
 
   // ============================================
