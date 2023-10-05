@@ -44,9 +44,9 @@ const CartContext = createContext({
   useEffect(() => {
     getCart();
   }, []);
-  useEffect(() => {
-    console.log('cart: ', cart);
-  }, [cart]);
+  // useEffect(() => {
+  //   console.log('cart: ', cart);
+  // }, [cart]);
 
   // ============================================
 

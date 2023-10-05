@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Fragment } from 'react';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 
 // comps:
 import Layout from './_layout';
+import OrderProductsTable from './table-order-products';
 
 // utils:
 import { http } from './util/http';
@@ -25,11 +26,9 @@ export default function AdminOrdersPage () {
   // ============================================
 
   const [orders, setOrders] = useState([]);
+  const [ordersProducts, setOrdersProducts] = useState([]);
 
   const [notify] = useNotification();
-
-  const { token } = useContext(AuthContext);
-  console.log('token: ', token);
 
   // ============================================
 
@@ -48,8 +47,7 @@ export default function AdminOrdersPage () {
   // TODO: Send token in header for auth
 
   const getOrders = async () => {
-    const URL = apiUrl('orders');
-    const promise = http({ url: URL });
+    const promise = http({ url: apiUrl('orders') });
     const [orders, error] = await asynch( promise );
     if (error) {
       console.error(error);
@@ -75,6 +73,21 @@ export default function AdminOrdersPage () {
         <Box sx={{textAlign: 'center'}}>
           Admin Orders
         </Box>
+
+        {
+          orders.map(({order, line_items}) => {
+            return (
+              // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
+              <Fragment key={order.uuid}>
+                <p>Order Number: {order?.uuid}</p>
+                <p>Total: ${order?.total / 100}</p>
+                <p>Status: {order?.status}</p>
+
+                <OrderProductsTable { ...{ line_items, order } } />
+              </Fragment>
+            );
+          })
+        }
 
       </Container>
     </Layout>

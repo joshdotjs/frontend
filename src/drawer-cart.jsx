@@ -41,8 +41,8 @@ export default function CartDrawer() {
     notify({message: 'sending cart to checkout...', variant: 'info', duration: 2000})();
 
     console.clear();
-    console.log('sending to checkout...');
-    console.log('cart: ', cart);
+    // console.log('sending to checkout...');
+    // console.log('cart: ', cart);
 
     const order_items = cart.map(({ product, qty }) => {
       return { product_id: product.id, quantity: qty };

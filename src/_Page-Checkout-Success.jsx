@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 
 import Layout from './_layout';
-import OrderProductsTable from './table-order-products'
+import OrderProductsTable from './table-order-products';
 
 // utils:
 import { http } from './util/http';
