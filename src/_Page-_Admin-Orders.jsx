@@ -16,7 +16,7 @@ import OrdersDate from './date-orders';
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
-import { int2status } from './util/status';
+import { int2status, statusInt2Color } from './util/status';
 
 // hooks:
 import { useNotification } from './hooks/use-notification';
@@ -157,45 +157,34 @@ export default function AdminOrdersPage () {
           </Box>
         </Box>
 
-        <Stack spacing={1} alignItems="center">
-          <Stack direction="row" spacing={1}>
-            <Chip label="primary" color="primary" />
-            <Chip label="success" color="success" />
-          </Stack>
-          <Stack direction="row" spacing={1}>
-            <Chip label="primary" color="primary" variant="outlined" />
-            <Chip label="success" color="success" variant="outlined" />
-          </Stack>
-        </Stack>
-
-
-        
-
         {
           orders.map(({order, line_items}) => {
-
-            console.log(JSON.stringify(order));
 
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
                 
-
-                  <Box>
-
-                    <Typography sx={{ color: 'black' }}>Status: </Typography>
-                    <Chip label={int2status(order?.status)} color="primary" />
-                  </Box>
+                <Box>
+                  <Typography sx={{ color: 'black' }}>Status: </Typography>
+                  <Chip label={int2status(order?.status)} color={statusInt2Color(order?.status)} />
+                </Box>
                 
                 <Typography sx={{ color: 'black' }}>Order Number: {order?.uuid}</Typography>
                 <Typography sx={{ color: 'black' }}>Total: ${order?.total / 100}</Typography>
                 <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography>
+
+                <Stack direction="row" spacing={1}>
+                  <Button variant="outlined" color="info">Ready</Button>
+                  <Button variant="outlined" color="success">Done</Button>
+                </Stack>
+
                 <Box>
                   <Typography variant='span' sx={{ color: 'black', mr: '1rem', fontWeight: '700' }}>{dayjs(order.created_at).format('h:mm A')}</Typography>
                   <Typography variant='span' sx={{ color: 'black' }}>({dayjs(order.created_at).format('ss[s.]')})</Typography>
                 </Box>
 
                 <OrderProductsTable { ...{ line_items, order } } />
+
               </Fragment>
             );
           })
