@@ -1,3 +1,11 @@
+const statuses = [
+  'Pending',
+  'Preparing',
+  'Ready',
+  'Done',
+  'Error',
+];
+
 // ==============================================
 
 const int2status = (int) => {
@@ -14,4 +22,4 @@ const statusInt2Color = (int) => {
 
 // ==============================================
 
-export { int2status, statusInt2Color };
+export { statuses, int2status, statusInt2Color };

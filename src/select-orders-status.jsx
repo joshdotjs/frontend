@@ -1,3 +1,4 @@
+// libs:
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,22 +8,15 @@ import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 
-// ==============================================
-
-const names = [
-  'Pending',
-  'Preparing',
-  'Ready',
-  'Done',
-  'Error',
-];
+// utils:
+import { statuses, int2status } from './util/status';
 
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
 
-export default function MultipleSelectCheckmarks() {
+export default function MultipleSelectCheckmarks({ status, update}) {
   const [personName, setPersonName] = React.useState(['Preparing', 'Ready']);
 
   const handleChange = (event) => {
@@ -49,7 +43,7 @@ export default function MultipleSelectCheckmarks() {
           input={<OutlinedInput label="Status" />}
           renderValue={(selected) => selected.join(', ')}
         >
-          {names.map((name) => (
+          {statuses.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={personName.indexOf(name) > -1} />
               <ListItemText primary={name} />

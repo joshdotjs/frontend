@@ -50,6 +50,11 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
+  // load page with all orders from today:
+  useEffect(() => { updateAndFilter()({}); }, []);
+
+  // ============================================
+
   // function to filter orders by hitting API
   //  -we want to call this function every time the time or date changes
   //  -we want to avoid any unnecessary useEffect() calls
@@ -57,9 +62,11 @@ export default function AdminOrdersPage () {
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
-  const updateDateTime = (which) => async (new_date_time, new_status) => {
+  const updateAndFilter = (which) => async ({ new_date_time, new_status=null}) => {
+    // NOTE: To invoke with zero-args:  updateAndFilter()({});
+    
     console.clear();
-    console.log('updateDateTime() - which: ', which);
+    console.log('updateAndFilter() - which: ', which);
 
     // step 1: generate the time ranges to be sent to backend
     let date_time_lo;
@@ -94,24 +101,6 @@ export default function AdminOrdersPage () {
     if (which === 'date')    setDate(new_date_time);
     if (which === 'status')  setStatus([...new_status]);
   };
-
-  // ============================================
-
-  // const updateStatus = async (new_status) => {
-  //   console.clear();
-    
-  //    // step 1: update status (only for statys sekect UI)
-  //   setStatus([...status]);
-
-  //   // step 2: generate the time ranges to be sent to backend
-  //   const date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
-  //   const date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
-
-  //   // step 3: send to backend / update orders UI with filtered orders
-  //   console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
-  //   await getFilteredOrders({ date_time_lo, date_time_hi, status: new_status });
-  // };
-
   // ============================================
 
   const getFilteredOrders = async ({ date_time_lo, date_time_hi, status }) => {
@@ -136,11 +125,6 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
-  // load page with all orders from today:
-  useEffect(() => { updateDateTime('INIT')(); }, []);
-
-  // ============================================
-
   const updateStatus = async ({ id, status }) => {
     const promise = http({ 
       url: apiUrl('orders/update-status'),
@@ -154,7 +138,7 @@ export default function AdminOrdersPage () {
       return;
     }
 
-    updateDateTime('INIT')();
+    updateAndFilter()({});
   };
 
   // ============================================
@@ -171,12 +155,12 @@ export default function AdminOrdersPage () {
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-          <OrdersDate date={date} update={updateDateTime('date')} />
+          <OrdersDate date={date} update={updateAndFilter('date')} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
-            <OrdersTime time={time_lo} update={updateDateTime('time-lo')} />
+            <OrdersTime time={time_lo} update={updateAndFilter('time-lo')} />
             <Typography sx={{ color: 'black' }}> to </Typography>
-            <OrdersTime time={time_hi} update={updateDateTime('time-hi')} />
+            <OrdersTime time={time_hi} update={updateAndFilter('time-hi')} />
           </Box>
         </Box>
 
