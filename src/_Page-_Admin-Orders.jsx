@@ -75,7 +75,7 @@ export default function AdminOrdersPage () {
   //  -we want to call this function every time that the time or date changes
   //  -we want to avoid any unnecessary useEffect() calls
   //  -KISS: first evaluate which time is later and use that as the ending time.
-  const updateOrders = (which) => (new_date_time) => {
+  const updateOrders = (which) => async (new_date_time) => {
     console.clear();
     console.log('updateOrders() - which: ', which);
 
@@ -100,12 +100,17 @@ export default function AdminOrdersPage () {
       date_time_lo = `${formatDate(new_date_time)} ${formatTime(time_lo)}`;
       date_time_hi = `${formatDate(new_date_time)} ${formatTime(time_hi)}`;
     };
+    if (which === 'init') {
+      date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
+    }
 
 
     // step 3: send to backend
     console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
     console.log('date_time_lo: ', date_time_lo);
     console.log('date_time_hi: ', date_time_hi);
+    await getFilteredOrders({ date_time_lo, date_time_hi });
 
     // step 4: update orders UI
   };
@@ -144,9 +149,16 @@ export default function AdminOrdersPage () {
   // TODO: Send token in header for auth
   // TODO: Send token in header for auth
 
-  const getOrders = async () => {
-    const promise = http({ url: apiUrl('orders') });
+  const getFilteredOrders = async ({ date_time_lo, date_time_hi }) => {
+    const promise = http({ 
+      url: apiUrl('orders/get-filtered'),
+      method: 'POST',
+      body: { date_time_lo, date_time_hi }
+     });
     const [orders, error] = await asynch( promise );
+    console.log('orders: ', orders);
+
+
     if (error) {
       console.error(error);
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
@@ -158,9 +170,8 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
-  useEffect(() => {
-    getOrders();
-  }, []);
+  // load page with all orders from today:
+  useEffect(() => { updateOrders('init')(); }, []);
 
   // ============================================
 
@@ -180,6 +191,9 @@ export default function AdminOrdersPage () {
 
         {
           orders.map(({order, line_items}) => {
+
+            console.log(JSON.stringify(order));
+
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
