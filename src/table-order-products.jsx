@@ -9,8 +9,8 @@ import Paper from '@mui/material/Paper';
 
 export default function BasicTable({ line_items, order }) {
   return (
-    <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper} >
+        <Table sx={{ minWidth: 650 }} aria-label="simple table" >
           <TableHead>
             <TableRow>
               <TableCell>Product</TableCell>

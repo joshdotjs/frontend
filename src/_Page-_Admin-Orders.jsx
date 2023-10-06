@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 // comps:
 import Layout from './_layout';
 import OrderProductsTable from './table-order-products';
-import OrdersStatusDropdown from './dropdown-orders-status';
+import OrdersStatusSelect from './select-orders-status';
 import OrdersTime from './time-orders';
 import OrdersDate from './date-orders';
 
@@ -19,7 +19,7 @@ import { asynch } from './util/async';
 import { useNotification } from './hooks/use-notification';
 
 // context:
-import { AuthContext } from './context/auth-context';
+// import { AuthContext } from './context/auth-context';
 
 // ==============================================
 // ==============================================
@@ -35,50 +35,30 @@ export default function AdminOrdersPage () {
 
   const [notify] = useNotification();
 
-  // Step 1: Iniitalize here with dayJS format (allows for easy initalization)
+  // Step 1: Iniitalize date/time's with dayJS format (allows for easy initalization)
   // Step 2: Update in time / date comps with dayJS format
-  // Step 3: Send to server in format desired for the util function
-  // NOTE: Cleaner way would be to use dayJS to format() before sending to server
-  //       into desired form by SQL (since this will be standard form
-  //    -That will allow us to remove the backend util time/date formating function entirely!)
-
-  // const date = dayjs();
-  // // console.log('dayjs(): ', date);
-  // console.log('dayjs().format(): ', date.format());
-  // console.log('dayjs().subtract(1, "hour").format(): ', date.subtract(1, 'hour').format());
+  // Step 3: Send to server in SQL format
 
   const formatDate = (date_time) => date_time.format('YYYY-MM-DD');
   const formatTime = (date_time) => date_time.format('HH:mm:ssZ');
   
-  const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));
-  // useEffect(() => {
-  //   // console.log("time_lo.format(): ", time_lo.format());
-  //   console.log("time_lo.format('HH:mm:ssZ'): ", formatTime(time_lo));  // 19:39:27-05:00
-  // }, [time_lo]);
-   
+  const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
-  // useEffect(() => {
-  //   // console.log("time_hi.format(): ", time_hi.format());
-  //   console.log("time_hi.format('HH:mm:ssZ'): ", formatTime(time_hi));  // 19:39:27-05:00
-  // }, [time_hi]);
-
   const [date, setDate] = useState(dayjs());
-  // useEffect(() => {
-  //   // console.log("date.format(): ", date.format());
-  //   console.log("date.format('YYYY-MM-DD'): ", formatDate(date));  // 2023-10-04
-  // }, [date]);  
+  const [status, setStatus] = useState([1, 2]);
 
-  
-
+  // ============================================
 
   // function to filter orders by hitting API
-  //  -we want to call this function every time that the time or date changes
+  //  -we want to call this function every time the time or date changes
   //  -we want to avoid any unnecessary useEffect() calls
-  //  -KISS: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   const updateOrders = (which) => async (new_date_time) => {
     console.clear();
     console.log('updateOrders() - which: ', which);
-
 
     // step 1: update state (only for time / date UI)
     if (which === 'time-lo') setTimeLo(new_date_time);
@@ -105,49 +85,14 @@ export default function AdminOrdersPage () {
       date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
     }
 
-
-    // step 3: send to backend
+    // step 3: send to backend / update orders UI with filtered orders
     console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
     console.log('date_time_lo: ', date_time_lo);
     console.log('date_time_hi: ', date_time_hi);
     await getFilteredOrders({ date_time_lo, date_time_hi });
-
-    // step 4: update orders UI
   };
 
-  // NOTE: We want to initalize these to today and time from midnight last night to right nows time (so all orders for today)
-  //       -And initialize to open orders
-
-  // 2023-10-04 19:39:27.707315-05
-  //  -> ISO 8601 date-time format with timezone offset and fractional seconds
-  //  -> https://www.postgresql.org/docs/current/datatype-datetime.html
-
-
-  // const [time_lo, setTimeLo] = useState({ hour: 0, minute: 0, second: 0 });
-  // const [time_hi, setTimeHi] = useState({ hour: 23, minute: 59, second: 59 });
-
-  // const [date, setDate] = useState({ year: 2023, month: 0, day: 1 });
-
-  // useEffect(() => { console.log('time_lo: ', time_lo); }, [time_lo]);
-  // useEffect(() => { console.log('time_hi: ', time_hi); }, [time_hi]);
-  // useEffect(() => { console.log('date_lo: ', date_lo); }, [date_lo]);
-  // useEffect(() => { console.log('date_hi: ', date_hi); }, [date_hi]);
-
   // ============================================
-
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
-  // TODO: Send token in header for auth
 
   const getFilteredOrders = async ({ date_time_lo, date_time_hi }) => {
     const promise = http({ 
@@ -157,7 +102,6 @@ export default function AdminOrdersPage () {
      });
     const [orders, error] = await asynch( promise );
     console.log('orders: ', orders);
-
 
     if (error) {
       console.error(error);
@@ -183,7 +127,7 @@ export default function AdminOrdersPage () {
           Admin Orders
         </Box>
 
-        <OrdersStatusDropdown />
+        <OrdersStatusSelect />
 
         <OrdersTime />
 
@@ -197,9 +141,11 @@ export default function AdminOrdersPage () {
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
-                <p>Order Number: {order?.uuid}</p>
-                <p>Total: ${order?.total / 100}</p>
-                <p>Status: {order?.status}</p>
+                <Typography sx={{ color: 'black' }}>Order Number: {order?.uuid}</Typography>
+                <Typography sx={{ color: 'black' }}>Total: ${order?.total / 100}</Typography>
+                <Typography sx={{ color: 'black' }}>Status: {order?.status}</Typography>
+                <Typography sx={{ color: 'black' }}>Time: TODO</Typography>
+                <Typography sx={{ color: 'black' }}>Date: TODO</Typography>
 
                 <OrderProductsTable { ...{ line_items, order } } />
               </Fragment>

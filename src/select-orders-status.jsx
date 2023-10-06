@@ -9,19 +9,6 @@ import Checkbox from '@mui/material/Checkbox';
 
 // ==============================================
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-// ==============================================
-
 const names = [
   'Pending',
   'Processing',
@@ -51,17 +38,15 @@ export default function MultipleSelectCheckmarks() {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: 'white' }}>Status</InputLabel>
+        <InputLabel id="orders-status-multiple-checkbox-label">Status</InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
+          labelId="orders-status-multiple-checkbox-label"
+          id="orders-status-multiple-checkbox"
           multiple
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
+          input={<OutlinedInput label="Status" />}
           renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-          sx={{ color: 'white' }}
         >
           {names.map((name) => (
             <MenuItem key={name} value={name}>
