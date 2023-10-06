@@ -53,15 +53,52 @@ export default function AdminOrdersPage () {
   // -load page with all orders from today
   // -set up polling to update orders every 30 seconds
   useEffect(() => { 
-    updateAndFilter()({}); 
+    updateAndFilter({ which: 'init' }); 
 
     setInterval(() => {
       // every 30 seconds update the time-hi to the current time
-      updateAndFilter('time-hi')({ new_date_time: dayjs() });
-    }, 60e3);
+      updateAndFilter({ which: 'time-hi', new_date_time: dayjs() });
+    }, 15e3);
   }, []);
 
   // ============================================
+
+
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // -It appears as when the updateAndFIlter() function is run it is using the old state values
+  // -TODO: Try to just use the classical useEffect() pattern.
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+
+
+
 
   // function to filter orders by hitting API
   //  -we want to call this function every time the time or date changes
@@ -70,8 +107,7 @@ export default function AdminOrdersPage () {
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
-  const updateAndFilter = (which) => async ({ new_date_time=null, new_status=null}) => {
-    // NOTE: To invoke with zero-args:  updateAndFilter()({});
+  const updateAndFilter = async ({ which=null, new_date_time=null, new_status=null}) => {
 
     console.clear();
     console.log('updateAndFilter() - which: ', which);
@@ -160,16 +196,16 @@ export default function AdminOrdersPage () {
           Admin Orders
         </Box>
 
-        <OrdersStatusSelect status={status} update={updateAndFilter('status')} />
+        <OrdersStatusSelect status={status} update={updateAndFilter} />
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-          <OrdersDate date={date} update={updateAndFilter('date')} />
+          <OrdersDate date={date} update={updateAndFilter} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
-            <OrdersTime time={time_lo} update={updateAndFilter('time-lo')} />
+            <OrdersTime time={time_lo} update={updateAndFilter} which='time-lo' />
             <Typography sx={{ color: 'black' }}> to </Typography>
-            <OrdersTime time={time_hi} update={updateAndFilter('time-hi')} />
+            <OrdersTime time={time_hi} update={updateAndFilter} which='time-hi' />
           </Box>
         </Box>
 
