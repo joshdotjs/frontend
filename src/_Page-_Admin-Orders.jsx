@@ -57,16 +57,11 @@ export default function AdminOrdersPage () {
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
-  const updateDateTime = (which) => async (new_date_time) => {
+  const updateDateTime = (which) => async (new_date_time, new_status) => {
     console.clear();
     console.log('updateDateTime() - which: ', which);
 
-    // step 1: update state (only for time / date UI)
-    if (which === 'time-lo') setTimeLo(new_date_time);
-    if (which === 'time-hi') setTimeHi(new_date_time);
-    if (which === 'date')    setDate(new_date_time);
-
-    // step 2: generate the time ranges to be sent to backend
+    // step 1: generate the time ranges to be sent to backend
     let date_time_lo;
     let date_time_hi;
     if (which === 'time-lo') {
@@ -83,11 +78,21 @@ export default function AdminOrdersPage () {
       date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
     }
 
-    // step 3: send to backend / update orders UI with filtered orders
+    // step 2: send to backend / update orders UI with filtered orders
     console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
     console.log('date_time_lo: ', date_time_lo);
     console.log('date_time_hi: ', date_time_hi);
-    await getFilteredOrders({ date_time_lo, date_time_hi, status });
+    await getFilteredOrders({ 
+      date_time_lo, 
+      date_time_hi, 
+      status: new_status ?? [...status], // if we are updating status then use the new status array, otherwise use the old status array
+    });
+
+    // step 3: update state (only for time / date UI)
+    if (which === 'time-lo') setTimeLo(new_date_time);
+    if (which === 'time-hi') setTimeHi(new_date_time);
+    if (which === 'date')    setDate(new_date_time);
+    if (which === 'status')  setStatus([...new_status]);
   };
 
   // ============================================
@@ -132,7 +137,7 @@ export default function AdminOrdersPage () {
   // ============================================
 
   // load page with all orders from today:
-  useEffect(() => { updateDateTime('init')(); }, []);
+  useEffect(() => { updateDateTime('INIT')(); }, []);
 
   // ============================================
 
@@ -142,14 +147,14 @@ export default function AdminOrdersPage () {
       method: 'POST',
       body: { id, status }
      });
-    const [orders, error] = await asynch( promise );
-    console.log('orders: ', orders);
-
+    const [data, error] = await asynch( promise );
     if (error) {
       console.error(error);
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
       return;
     }
+
+    updateDateTime('INIT')();
   };
 
   // ============================================
