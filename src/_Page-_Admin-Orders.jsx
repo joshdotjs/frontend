@@ -1,5 +1,7 @@
+// libs:
 import { useState, useEffect, useContext, Fragment } from 'react';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
+import dayjs from 'dayjs';
 
 // comps:
 import Layout from './_layout';
@@ -31,16 +33,79 @@ export default function AdminOrdersPage () {
   const [orders, setOrders] = useState([]);
   const [ordersProducts, setOrdersProducts] = useState([]);
 
-
-  // WAIT: If you initialize these with the dayjs format, then it is much easier to set the current date / time
-
-  const [time_lo, setTimeLo] = useState({ hours: 0, minutes: 0, seconds: 0 });
-  const [time_hi, setTimeHi] = useState({ hours: 23, minutes: 59, seconds: 59 });
-
-  const [date_lo, setDateLo] = useState({ year: 2023, month: 0, day: 1 });
-  const [date_hi, setDateHi] = useState({ year: 2023, month: 0, day: 1 });
-
   const [notify] = useNotification();
+
+  // Step 1: Iniitalize here with dayJS format (allows for easy initalization)
+  // Step 2: Update in time / date comps with dayJS format
+  // Step 3: Send to server in format desired for the util function
+  // NOTE: Cleaner way would be to use dayJS to format() before sending to server
+  //       into desired form by SQL (since this will be standard form
+  //    -That will allow us to remove the backend util time/date formating function entirely!)
+
+  // const date = dayjs();
+  // // console.log('dayjs(): ', date);
+  // console.log('dayjs().format(): ', date.format());
+  // console.log('dayjs().subtract(1, "hour").format(): ', date.subtract(1, 'hour').format());
+
+  const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));
+  useEffect(() => {
+    // console.log("time_lo.format(): ", time_lo.format());
+    console.log("time_lo.format('HH:mm:ssZ'): ", time_lo.format('HH:mm:ssZ'));  // 19:39:27-05:00
+  }, [time_lo]);
+   
+  const [time_hi, setTimeHi] = useState(dayjs());
+  useEffect(() => {
+    // console.log("time_hi.format(): ", time_hi.format());
+    console.log("time_hi.format('HH:mm:ssZ'): ", time_hi.format('HH:mm:ssZ'));  // 19:39:27-05:00
+  }, [time_hi]);
+
+  const [date, setDate] = useState(dayjs());
+  useEffect(() => {
+    // console.log("date.format(): ", date.format());
+    console.log("date.format('YYYY-MM-DD'): ", date.format('YYYY-MM-DD'));  // 2023-10-04
+  }, [date]);  
+
+  
+
+
+  // function to filter orders by hitting API
+  //  -we want to call this function every time that the time or date changes
+  //  -we want to avoid any unnecessary useEffect() calls
+  //  -KISS: first evaluate which time is later and use that as the ending time.
+  const updateOrders = (which) => (new_date_time) => {
+    console.clear();
+    console.log('updateOrders() - which: ', which);
+
+
+    // step 1: update state (only for time / date UI)
+    if (which === 'time-lo') setTimeLo(new_date_time);
+    if (which === 'time-hi') setTimeHi(new_date_time);
+    if (which === 'date')    setDate(new_date_time);
+
+    // step 2: generate the time ranges to be sent to backend
+
+    // step 3: send to backend
+
+    // step 4: update orders UI
+  };
+
+  // NOTE: We want to initalize these to today and time from midnight last night to right nows time (so all orders for today)
+  //       -And initialize to open orders
+
+  // 2023-10-04 19:39:27.707315-05
+  //  -> ISO 8601 date-time format with timezone offset and fractional seconds
+  //  -> https://www.postgresql.org/docs/current/datatype-datetime.html
+
+
+  // const [time_lo, setTimeLo] = useState({ hour: 0, minute: 0, second: 0 });
+  // const [time_hi, setTimeHi] = useState({ hour: 23, minute: 59, second: 59 });
+
+  // const [date, setDate] = useState({ year: 2023, month: 0, day: 1 });
+
+  // useEffect(() => { console.log('time_lo: ', time_lo); }, [time_lo]);
+  // useEffect(() => { console.log('time_hi: ', time_hi); }, [time_hi]);
+  // useEffect(() => { console.log('date_lo: ', date_lo); }, [date_lo]);
+  // useEffect(() => { console.log('date_hi: ', date_hi); }, [date_hi]);
 
   // ============================================
 
@@ -66,7 +131,7 @@ export default function AdminOrdersPage () {
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
       return;
     }
-    console.log('orders: ', orders);
+    // console.log('orders: ', orders);
     setOrders(orders);
   };
 
@@ -90,7 +155,7 @@ export default function AdminOrdersPage () {
 
         <OrdersTime />
 
-        <OrdersDate />
+        <OrdersDate date={date} update={updateOrders('date')} />
 
         {
           orders.map(({order, line_items}) => {
