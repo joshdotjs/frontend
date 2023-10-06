@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 
 import UsersPage  from './_Page-Users';
 import AboutPage  from './_Page-About';
@@ -23,6 +25,7 @@ export default function App() {
       <BrowserRouter>
         <AuthContextProvider>
           <CartContextProvider>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Routes>
                 <Route path="/"                 element={<StorePage  />} />
                 <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
@@ -33,6 +36,7 @@ export default function App() {
                 {/* TODO: Protected Route */}
                 <Route path="/admin/orders"     element={<AdminOrdersPage  />} />
               </Routes>
+            </LocalizationProvider>
           </CartContextProvider>
         </AuthContextProvider>
       </BrowserRouter>
