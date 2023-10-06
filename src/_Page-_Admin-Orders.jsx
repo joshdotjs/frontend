@@ -46,12 +46,20 @@ export default function AdminOrdersPage () {
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
-  const [status, setStatus] = useState([2, 3, 4]);
+  const [status, setStatus] = useState([0, 1, 2, 3, 4]);
 
   // ============================================
 
-  // load page with all orders from today:
-  useEffect(() => { updateAndFilter()({}); }, []);
+  // -load page with all orders from today
+  // -set up polling to update orders every 30 seconds
+  useEffect(() => { 
+    updateAndFilter()({}); 
+
+    setInterval(() => {
+      // every 30 seconds update the time-hi to the current time
+      updateAndFilter('time-hi')({ new_date_time: dayjs() });
+    }, 60e3);
+  }, []);
 
   // ============================================
 
@@ -73,7 +81,7 @@ export default function AdminOrdersPage () {
     let date_time_hi;
     if (which === 'time-lo') {
       date_time_lo = `${formatDate(date)} ${formatTime(new_date_time)}`;
-      date_time_hi = `${formatDate(date)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
     } else if (which === 'time-hi') {
       date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
       date_time_hi = `${formatDate(date)} ${formatTime(new_date_time)}`;
@@ -89,6 +97,7 @@ export default function AdminOrdersPage () {
     console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
     console.log('date_time_lo: ', date_time_lo);
     console.log('date_time_hi: ', date_time_hi);
+    console.log('status: ', status);
     await getFilteredOrders({ 
       date_time_lo, 
       date_time_hi, 
