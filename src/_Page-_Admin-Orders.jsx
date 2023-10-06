@@ -1,6 +1,8 @@
 // libs:
 import { useState, useEffect, useContext, Fragment } from 'react';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import dayjs from 'dayjs';
 
 // comps:
@@ -14,6 +16,7 @@ import OrdersDate from './date-orders';
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
+import { int2status } from './util/status';
 
 // hooks:
 import { useNotification } from './hooks/use-notification';
@@ -154,6 +157,17 @@ export default function AdminOrdersPage () {
           </Box>
         </Box>
 
+        <Stack spacing={1} alignItems="center">
+          <Stack direction="row" spacing={1}>
+            <Chip label="primary" color="primary" />
+            <Chip label="success" color="success" />
+          </Stack>
+          <Stack direction="row" spacing={1}>
+            <Chip label="primary" color="primary" variant="outlined" />
+            <Chip label="success" color="success" variant="outlined" />
+          </Stack>
+        </Stack>
+
 
         
 
@@ -165,11 +179,21 @@ export default function AdminOrdersPage () {
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
+                
+
+                  <Box>
+
+                    <Typography sx={{ color: 'black' }}>Status: </Typography>
+                    <Chip label={int2status(order?.status)} color="primary" />
+                  </Box>
+                
                 <Typography sx={{ color: 'black' }}>Order Number: {order?.uuid}</Typography>
                 <Typography sx={{ color: 'black' }}>Total: ${order?.total / 100}</Typography>
-                <Typography sx={{ color: 'black' }}>Status: {order?.status}</Typography>
-                <Typography sx={{ color: 'black' }}>Time: TODO</Typography>
-                <Typography sx={{ color: 'black' }}>Date: TODO</Typography>
+                <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography>
+                <Box>
+                  <Typography variant='span' sx={{ color: 'black', mr: '1rem', fontWeight: '700' }}>{dayjs(order.created_at).format('h:mm A')}</Typography>
+                  <Typography variant='span' sx={{ color: 'black' }}>({dayjs(order.created_at).format('ss[s.]')})</Typography>
+                </Box>
 
                 <OrderProductsTable { ...{ line_items, order } } />
               </Fragment>
