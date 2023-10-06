@@ -11,7 +11,7 @@ import Checkbox from '@mui/material/Checkbox';
 
 const names = [
   'Pending',
-  'Processing',
+  'Preparing',
   'Ready',
   'Done',
   'Error',
@@ -23,12 +23,13 @@ const names = [
 // ==============================================
 
 export default function MultipleSelectCheckmarks() {
-  const [personName, setPersonName] = React.useState(['Processing']);
+  const [personName, setPersonName] = React.useState(['Preparing', 'Ready']);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
+
     setPersonName(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,

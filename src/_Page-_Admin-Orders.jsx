@@ -31,8 +31,6 @@ export default function AdminOrdersPage () {
   // ============================================
 
   const [orders, setOrders] = useState([]);
-  const [ordersProducts, setOrdersProducts] = useState([]);
-
   const [notify] = useNotification();
 
   // Step 1: Iniitalize date/time's with dayJS format (allows for easy initalization)
@@ -56,9 +54,9 @@ export default function AdminOrdersPage () {
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
-  const updateOrders = (which) => async (new_date_time) => {
+  const updateDateTime = (which) => async (new_date_time) => {
     console.clear();
-    console.log('updateOrders() - which: ', which);
+    console.log('updateDateTime() - which: ', which);
 
     // step 1: update state (only for time / date UI)
     if (which === 'time-lo') setTimeLo(new_date_time);
@@ -71,16 +69,13 @@ export default function AdminOrdersPage () {
     if (which === 'time-lo') {
       date_time_lo = `${formatDate(date)} ${formatTime(new_date_time)}`;
       date_time_hi = `${formatDate(date)} ${formatTime(time_lo)}`;
-    };
-    if (which === 'time-hi') {
+    } else if (which === 'time-hi') {
       date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
       date_time_hi = `${formatDate(date)} ${formatTime(new_date_time)}`;
-    };
-    if (which === 'date') {
+    } else if (which === 'date') {
       date_time_lo = `${formatDate(new_date_time)} ${formatTime(time_lo)}`;
       date_time_hi = `${formatDate(new_date_time)} ${formatTime(time_hi)}`;
-    };
-    if (which === 'init') {
+    } else {
       date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
       date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
     }
@@ -89,16 +84,35 @@ export default function AdminOrdersPage () {
     console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
     console.log('date_time_lo: ', date_time_lo);
     console.log('date_time_hi: ', date_time_hi);
-    await getFilteredOrders({ date_time_lo, date_time_hi });
+    await getFilteredOrders({ date_time_lo, date_time_hi, status });
   };
 
   // ============================================
 
-  const getFilteredOrders = async ({ date_time_lo, date_time_hi }) => {
+  // const updateStatus = async (new_status) => {
+  //   console.clear();
+    
+  //    // step 1: update status (only for statys sekect UI)
+  //   setStatus([...status]);
+
+  //   // step 2: generate the time ranges to be sent to backend
+  //   const date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
+  //   const date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
+
+  //   // step 3: send to backend / update orders UI with filtered orders
+  //   console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
+  //   await getFilteredOrders({ date_time_lo, date_time_hi, status: new_status });
+  // };
+
+  // ============================================
+
+  const getFilteredOrders = async ({ date_time_lo, date_time_hi, status }) => {
+
     const promise = http({ 
       url: apiUrl('orders/get-filtered'),
       method: 'POST',
-      body: { date_time_lo, date_time_hi }
+      body: { date_time_lo, date_time_hi, status }
+      // body: { date_time_lo, date_time_hi }
      });
     const [orders, error] = await asynch( promise );
     console.log('orders: ', orders);
@@ -115,7 +129,7 @@ export default function AdminOrdersPage () {
   // ============================================
 
   // load page with all orders from today:
-  useEffect(() => { updateOrders('init')(); }, []);
+  useEffect(() => { updateDateTime('init')(); }, []);
 
   // ============================================
 
@@ -129,9 +143,19 @@ export default function AdminOrdersPage () {
 
         <OrdersStatusSelect />
 
-        <OrdersTime />
 
-        <OrdersDate date={date} update={updateOrders('date')} />
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
+          <OrdersDate date={date} update={updateDateTime('date')} />
+
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
+            <OrdersTime time={time_lo} update={updateDateTime('time-lo')} />
+            <Typography sx={{ color: 'black' }}> to </Typography>
+            <OrdersTime time={time_hi} update={updateDateTime('time-hi')} />
+          </Box>
+        </Box>
+
+
+        
 
         {
           orders.map(({order, line_items}) => {
