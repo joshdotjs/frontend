@@ -46,7 +46,7 @@ export default function AdminOrdersPage () {
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
-  const [status, setStatus] = useState([1, 2]);
+  const [status, setStatus] = useState([0, 1, 2, 3, 4]);
 
   // ============================================
 
@@ -136,6 +136,24 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
+  const updateStatus = async ({ id, status }) => {
+    const promise = http({ 
+      url: apiUrl('orders/update-status'),
+      method: 'POST',
+      body: { id, status }
+     });
+    const [orders, error] = await asynch( promise );
+    console.log('orders: ', orders);
+
+    if (error) {
+      console.error(error);
+      notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
+      return;
+    }
+  };
+
+  // ============================================
+
   return (
     <Layout>
       <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
@@ -174,8 +192,9 @@ export default function AdminOrdersPage () {
                 <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography>
 
                 <Stack direction="row" spacing={1}>
-                  <Button variant="outlined" color="info">Ready</Button>
-                  <Button variant="outlined" color="success">Done</Button>
+                  <Button variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status: 2 })}>Preparing</Button>
+                  <Button variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status: 3 })}>Ready</Button>
+                  <Button variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status: 4 })}>Done</Button>
                 </Stack>
 
                 <Box>
