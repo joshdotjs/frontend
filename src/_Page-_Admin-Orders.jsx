@@ -46,7 +46,7 @@ export default function AdminOrdersPage () {
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
-  const [status, setStatus] = useState([0, 1, 2, 3, 4]);
+  const [status, setStatus] = useState([2, 3, 4]);
 
   // ============================================
 
@@ -62,9 +62,9 @@ export default function AdminOrdersPage () {
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
   //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
-  const updateAndFilter = (which) => async ({ new_date_time, new_status=null}) => {
+  const updateAndFilter = (which) => async ({ new_date_time=null, new_status=null}) => {
     // NOTE: To invoke with zero-args:  updateAndFilter()({});
-    
+
     console.clear();
     console.log('updateAndFilter() - which: ', which);
 
@@ -151,7 +151,7 @@ export default function AdminOrdersPage () {
           Admin Orders
         </Box>
 
-        <OrdersStatusSelect />
+        <OrdersStatusSelect status={status} update={updateAndFilter('status')} />
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
