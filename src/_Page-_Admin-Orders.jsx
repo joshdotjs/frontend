@@ -47,23 +47,26 @@ export default function AdminOrdersPage () {
   // console.log('dayjs().format(): ', date.format());
   // console.log('dayjs().subtract(1, "hour").format(): ', date.subtract(1, 'hour').format());
 
+  const formatDate = (date_time) => date_time.format('YYYY-MM-DD');
+  const formatTime = (date_time) => date_time.format('HH:mm:ssZ');
+  
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));
-  useEffect(() => {
-    // console.log("time_lo.format(): ", time_lo.format());
-    console.log("time_lo.format('HH:mm:ssZ'): ", time_lo.format('HH:mm:ssZ'));  // 19:39:27-05:00
-  }, [time_lo]);
+  // useEffect(() => {
+  //   // console.log("time_lo.format(): ", time_lo.format());
+  //   console.log("time_lo.format('HH:mm:ssZ'): ", formatTime(time_lo));  // 19:39:27-05:00
+  // }, [time_lo]);
    
   const [time_hi, setTimeHi] = useState(dayjs());
-  useEffect(() => {
-    // console.log("time_hi.format(): ", time_hi.format());
-    console.log("time_hi.format('HH:mm:ssZ'): ", time_hi.format('HH:mm:ssZ'));  // 19:39:27-05:00
-  }, [time_hi]);
+  // useEffect(() => {
+  //   // console.log("time_hi.format(): ", time_hi.format());
+  //   console.log("time_hi.format('HH:mm:ssZ'): ", formatTime(time_hi));  // 19:39:27-05:00
+  // }, [time_hi]);
 
   const [date, setDate] = useState(dayjs());
-  useEffect(() => {
-    // console.log("date.format(): ", date.format());
-    console.log("date.format('YYYY-MM-DD'): ", date.format('YYYY-MM-DD'));  // 2023-10-04
-  }, [date]);  
+  // useEffect(() => {
+  //   // console.log("date.format(): ", date.format());
+  //   console.log("date.format('YYYY-MM-DD'): ", formatDate(date));  // 2023-10-04
+  // }, [date]);  
 
   
 
@@ -83,8 +86,26 @@ export default function AdminOrdersPage () {
     if (which === 'date')    setDate(new_date_time);
 
     // step 2: generate the time ranges to be sent to backend
+    let date_time_lo;
+    let date_time_hi;
+    if (which === 'time-lo') {
+      date_time_lo = `${formatDate(date)} ${formatTime(new_date_time)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(time_lo)}`;
+    };
+    if (which === 'time-hi') {
+      date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(new_date_time)}`;
+    };
+    if (which === 'date') {
+      date_time_lo = `${formatDate(new_date_time)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(new_date_time)} ${formatTime(time_hi)}`;
+    };
+
 
     // step 3: send to backend
+    console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
+    console.log('date_time_lo: ', date_time_lo);
+    console.log('date_time_hi: ', date_time_hi);
 
     // step 4: update orders UI
   };
