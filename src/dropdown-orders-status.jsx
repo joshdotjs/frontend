@@ -1,41 +1,67 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
 import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
 
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-export default function BasicSelect() {
-  const [age, setAge] = React.useState(2);
+const names = [
+  'Pending',
+  'Processing',
+  'Ready',
+  'Done',
+  'Error',
+];
+
+export default function MultipleSelectCheckmarks() {
+  const [personName, setPersonName] = React.useState(['Processing']);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
   };
 
   return (
-    <Box sx={{ minWidth: 120, }}>
-      <FormControl variant='filled' fullWidth>
-        <InputLabel id="dropdown-order-status-label" sx={{ color: 'white' }}>Status</InputLabel>
+    <div>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: 'white' }}>Status</InputLabel>
         <Select
-          labelId="dropdown-order-status-label"
-          id="dropdown-order-status"
-          value={age}
-          label="Age"
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={personName}
           onChange={handleChange}
+          input={<OutlinedInput label="Tag" />}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
           sx={{ color: 'white' }}
         >
-          <MenuItem value={1}>Pending</MenuItem>
-          <MenuItem value={2}>Processing</MenuItem>
-          <MenuItem value={3}>Ready</MenuItem>
-          <MenuItem value={4}>Done</MenuItem>
-          <MenuItem value={0}>Error</MenuItem>
+          {names.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={personName.indexOf(name) > -1} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-    </Box>
+    </div>
   );
 }
