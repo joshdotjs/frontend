@@ -69,7 +69,6 @@ export default function CheckoutSuccessPage () {
           Checkout Success!
         </Typography>
 
-
         {/* <p>{JSON.stringify(order)}</p> */}
         {/* <p>ID: {order?.id}</p> */}
         <p>Order Number: {order?.uuid}</p>

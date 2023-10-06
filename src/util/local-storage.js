@@ -51,4 +51,4 @@ const removeLS = (key /*: string */) => localStorage.removeItem(key);
 
 export { 
   getLS, setLS, removeLS,
- };
+};
