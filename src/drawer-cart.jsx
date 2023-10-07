@@ -73,19 +73,26 @@ export default function CartDrawer() {
       return;
     }
 
-    notify({message: 'successfully created new order! 🙂', variant: 'success'})();
+    
     console.log('data: ', data);
+    if (!data?.url) {
+      const message = 'Error sending to stripe - update Stripe API key!';
+      notify({message, variant: 'error', duration: 4000})();
+      console.log(error);
+      console.log(message);
+      return;
+    }
+
+    notify({message: 'created order in PENDING state 🙂', variant: 'info', duration: 3000})();
+    notify({message: 'sending to checkout...', variant: 'warning', duration: 3000 });
 
     // wait on cart to close before navigating to orders page:
     // setTimeout(() => navigate('/orders'), 250);
-
-    // redirect to Stripe checkout:
-    window.location.href = data.url;
     
-    // setTimeout(
-    //   notify({message: 'checkout under construction...', variant: 'error', duration: 3000}), 
-    //   1e3
-    // );
+    setTimeout(() => {
+      // redirect to Stripe checkout:
+      window.location.href = data.url;
+    }, 3e3);
   };
 
   // ============================================

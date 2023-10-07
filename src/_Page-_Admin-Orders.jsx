@@ -55,7 +55,7 @@ export default function AdminOrdersPage () {
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
-  const [status, setStatus] = useState([0, 1, 2, 3, 4]);
+  const [status, setStatus] = useState([1, 2, 3, 4]);
   const [polling, setPolling] = useState(true);
 
   // ============================================
@@ -79,8 +79,8 @@ export default function AdminOrdersPage () {
       setTimeLo(dayjs().startOf('day'));  
       setTimeHi(dayjs());
       setDate(dayjs());
-    }, 5e3);
-    console.log('enablePolling() -- interval_id:  ', interval_id);
+    }, 60e3);
+    // console.log('enablePolling() -- interval_id:  ', interval_id);
   };
 
   // ============================================
@@ -88,7 +88,7 @@ export default function AdminOrdersPage () {
   const disablePolling = () => {
     if (interval_id) {
       clearInterval(interval_id);
-      console.log('DISABLE -- disablePolling() -- interval_id:  ', interval_id);
+      // console.log('DISABLE -- disablePolling() -- interval_id:  ', interval_id);
       interval_id = null;
     }
   };
@@ -104,7 +104,6 @@ export default function AdminOrdersPage () {
       url: apiUrl('orders/get-filtered'),
       method: 'POST',
       body: { date_time_lo, date_time_hi, status }
-      // body: { date_time_lo, date_time_hi }
      });
     const [orders, error] = await asynch( promise );
     console.log('orders: ', orders);
@@ -132,7 +131,6 @@ export default function AdminOrdersPage () {
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
       return;
     }
-
     getFilteredOrders({ date, time_lo, time_hi, status });
   };
 
