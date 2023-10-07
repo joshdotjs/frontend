@@ -23,7 +23,7 @@ export default function MultipleSelectCheckmarks({ status, update }) {
     const value = event.target.value;
     console.log('value: ', value);
     console.log('statuses2Ints(value): ', statuses2ints(value));
-    update({ which: 'status', new_status: statuses2ints(value) });
+    update( statuses2ints(value) );
 
     setPersonName(
       // On autofill we get a stringified value.

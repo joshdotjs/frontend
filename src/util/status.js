@@ -33,9 +33,6 @@ const status2int = (status) => {
 };
 // ==============================================
 
-// HAVE NOT TESTED
-// HAVE NOT TESTED
-// HAVE NOT TESTED
 const ints2statuses = (ints) => {
   // ints: number[]
   // return: string[]
