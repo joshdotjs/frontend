@@ -32,6 +32,11 @@ import { useNotification } from './hooks/use-notification';
 
 let interval_id = null;
 
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
 export default function AdminOrdersPage () {
 
   // ============================================
@@ -52,7 +57,6 @@ export default function AdminOrdersPage () {
   const [date, setDate] = useState(dayjs());
   const [status, setStatus] = useState([0, 1, 2, 3, 4]);
   const [polling, setPolling] = useState(true);
-  const [polling_ids, setPollingIds] = useState([]);
 
   // ============================================
 
@@ -88,12 +92,6 @@ export default function AdminOrdersPage () {
       interval_id = null;
     }
   };
-
-  // ============================================
-
-  // useEffect(() => {
-  //   console.log('polling_ids: ', polling_ids);
-  // }, [polling_ids]);
 
   // ============================================
 
