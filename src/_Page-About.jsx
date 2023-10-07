@@ -3,6 +3,8 @@ import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 import Layout from './_layout';
 import level_up from './assets/level-up.gif';
 
+import Album from './temp/album/Album';
+
 // ==============================================
 // ==============================================
 // ==============================================
@@ -25,6 +27,9 @@ export default function AboutPage () {
         </Box>
 
       </Container>
+
+
+      <Album />
     </Layout>
   );
 };

@@ -119,11 +119,11 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
-  const updateStatus = async ({ id, status }) => {
+  const updateStatus = async ({ id, status_int }) => {
     const promise = http({ 
       url: apiUrl('orders/update-status'),
       method: 'POST',
-      body: { id, status }
+      body: { id, status: status_int }
      });
     const [data, error] = await asynch( promise );
     if (error) {
@@ -177,9 +177,9 @@ export default function AdminOrdersPage () {
                 <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography>
 
                 <Stack direction="row" spacing={1}>
-                  <Button variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status: 2 })}>Preparing</Button>
-                  <Button variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status: 3 })}>Ready</Button>
-                  <Button variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status: 4 })}>Done</Button>
+                  <Button variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status_int: 2 })}>Preparing</Button>
+                  <Button variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status_int: 3 })}>Ready</Button>
+                  <Button variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status_int: 4 })}>Done</Button>
                 </Stack>
 
                 <Box>
