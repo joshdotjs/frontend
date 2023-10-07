@@ -3,18 +3,20 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function CheckboxLabels() {
+export default function CheckboxLabels({ checked, setChecked, enablePolling, disablePolling }) {
 
-  const [checked, setChecked] = React.useState(true);
+  // const [checked, setChecked] = React.useState(true);
 
   const handleChange = (event) => {
-    setChecked(event.target.checked);
+    const check = event.target.checked;
+    if (check) {
+      enablePolling();
+    } else {
+      disablePolling();
+    }
+
+    setChecked(check);
   };
-
-  React.useEffect(() => {
-    console.log('checked: ', checked);
-  }, [checked]);
-
 
   return (
     <FormGroup>

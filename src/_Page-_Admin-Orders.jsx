@@ -30,6 +30,8 @@ import { useNotification } from './hooks/use-notification';
 // ==============================================
 // ==============================================
 
+let interval_id = null;
+
 export default function AdminOrdersPage () {
 
   // ============================================
@@ -49,6 +51,8 @@ export default function AdminOrdersPage () {
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
   const [status, setStatus] = useState([0, 1, 2, 3, 4]);
+  const [polling, setPolling] = useState(true);
+  const [polling_ids, setPollingIds] = useState([]);
 
   // ============================================
 
@@ -56,13 +60,40 @@ export default function AdminOrdersPage () {
   // -set up polling to update orders every 30 seconds
   useEffect(() => { 
     getFilteredOrders({ date, time_lo, time_hi, status }); 
+  }, [date, time_lo, time_hi, status]);
 
-    setInterval(() => {
+  useEffect(() => { enablePolling(); }, []);
+
+  // ============================================
+
+  const enablePolling = () => {
+    disablePolling(); // clear any existing polling
+
+    interval_id = setInterval(() => {
       console.clear();
       console.log('polling for orders... ', dayjs().format('h:mm:ss A'));
+      setTimeLo(dayjs().startOf('day'));  
       setTimeHi(dayjs());
+      setDate(dayjs());
     }, 5e3);
-  }, [date, time_lo, time_hi, status]);
+    console.log('enablePolling() -- interval_id:  ', interval_id);
+  };
+
+  // ============================================
+
+  const disablePolling = () => {
+    if (interval_id) {
+      clearInterval(interval_id);
+      console.log('DISABLE -- disablePolling() -- interval_id:  ', interval_id);
+      interval_id = null;
+    }
+  };
+
+  // ============================================
+
+  // useEffect(() => {
+  //   console.log('polling_ids: ', polling_ids);
+  // }, [polling_ids]);
 
   // ============================================
 
@@ -120,7 +151,7 @@ export default function AdminOrdersPage () {
         <OrdersStatusSelect status={status} update={setStatus} />
 
 
-        <RealTimeCheckbox />
+        <RealTimeCheckbox checked={polling} setChecked={setPolling} { ...{ enablePolling, disablePolling } } />
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
