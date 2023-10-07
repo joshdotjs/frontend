@@ -11,6 +11,7 @@ import OrderProductsTable from './table-order-products';
 import OrdersStatusSelect from './select-orders-status';
 import OrdersTime from './time-orders';
 import OrdersDate from './date-orders';
+import RealTimeCheckbox from './checkbox-orders-real-time';
 
 // utils:
 import { http } from './util/http';
@@ -117,6 +118,9 @@ export default function AdminOrdersPage () {
         </Box>
 
         <OrdersStatusSelect status={status} update={setStatus} />
+
+
+        <RealTimeCheckbox />
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
