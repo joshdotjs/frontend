@@ -20,7 +20,7 @@ export default function ControlledComponent({date, update}) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker value={date} onChange={(newDate) => update({ which: 'date', new_date_time: newDate })} />
+        <DatePicker value={date} onChange={(newDate) => update(newDate)} />
       </DemoContainer>
     </LocalizationProvider>
   );

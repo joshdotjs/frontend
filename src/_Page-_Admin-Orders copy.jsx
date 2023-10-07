@@ -40,9 +40,8 @@ export default function AdminOrdersPage () {
   // Step 2: Update in time / date comps with dayJS format
   // Step 3: Send to server in SQL format
 
-  const formatDate     = (date_time) => date_time.format('YYYY-MM-DD');
-  const formatTime     = (date_time) => date_time.format('HH:mm:ssZ');
-  const formatDateTime = (date, time) => `${formatDate(date)} ${formatTime(time)}`;
+  const formatDate = (date_time) => date_time.format('YYYY-MM-DD');
+  const formatTime = (date_time) => date_time.format('HH:mm:ssZ');
   
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
@@ -54,21 +53,102 @@ export default function AdminOrdersPage () {
   // -load page with all orders from today
   // -set up polling to update orders every 30 seconds
   useEffect(() => { 
-    getFilteredOrders({ date, time_lo, time_hi, status }); 
+    updateAndFilter({ which: 'init' }); 
 
     setInterval(() => {
-      console.clear();
-      console.log('polling for orders... ', dayjs().format('h:mm:ss A'));
-      setTimeHi(dayjs());
-    }, 5e3);
-  }, [date, time_lo, time_hi, status]);
+      // every 30 seconds update the time-hi to the current time
+      updateAndFilter({ which: 'time-hi', new_date_time: dayjs() });
+    }, 60e3);
+  }, []);
 
   // ============================================
 
-  const getFilteredOrders = async ({ date, time_lo, time_hi, status }) => {
 
-    const date_time_lo = formatDateTime(date, time_lo);
-    const date_time_hi = formatDateTime(date, time_hi);
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // BUG:
+  // -It appears as when the updateAndFIlter() function is run it is using the old state values
+  // -TODO: Try to just use the classical useEffect() pattern.
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+  // -Just make sure to only use one level of useEffect
+
+
+
+
+  // function to filter orders by hitting API
+  //  -we want to call this function every time the time or date changes
+  //  -we want to avoid any unnecessary useEffect() calls
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  //  (TODO) -K.I.S.S.: first evaluate which time is later and use that as the ending time.
+  const updateAndFilter = async ({ which=null, new_date_time=null, new_status=null}) => {
+
+    console.clear();
+    console.log('updateAndFilter() - which: ', which);
+
+    // step 1: generate the time ranges to be sent to backend
+    let date_time_lo;
+    let date_time_hi;
+    if (which === 'time-lo') {
+      date_time_lo = `${formatDate(date)} ${formatTime(new_date_time)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
+    } else if (which === 'time-hi') {
+      date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(new_date_time)}`;
+    } else if (which === 'date') {
+      date_time_lo = `${formatDate(new_date_time)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(new_date_time)} ${formatTime(time_hi)}`;
+    } else {
+      date_time_lo = `${formatDate(date)} ${formatTime(time_lo)}`;
+      date_time_hi = `${formatDate(date)} ${formatTime(time_hi)}`;
+    }
+
+    // step 2: send to backend / update orders UI with filtered orders
+    console.warn('ABOUT TO SEND DATA TO BACKEND!!!');
+    console.log('date_time_lo: ', date_time_lo);
+    console.log('date_time_hi: ', date_time_hi);
+    console.log('status: ', status);
+    await getFilteredOrders({ 
+      date_time_lo, 
+      date_time_hi, 
+      status: new_status ?? [...status], // if we are updating status then use the new status array, otherwise use the old status array
+    });
+
+    // step 3: update state (only for time / date UI)
+    if (which === 'time-lo') setTimeLo(new_date_time);
+    if (which === 'time-hi') setTimeHi(new_date_time);
+    if (which === 'date')    setDate(new_date_time);
+    if (which === 'status')  setStatus([...new_status]);
+  };
+  // ============================================
+
+  const getFilteredOrders = async ({ date_time_lo, date_time_hi, status }) => {
 
     const promise = http({ 
       url: apiUrl('orders/get-filtered'),
@@ -103,7 +183,7 @@ export default function AdminOrdersPage () {
       return;
     }
 
-    getFilteredOrders({ date, time_lo, time_hi, status });
+    updateAndFilter()({});
   };
 
   // ============================================
@@ -116,16 +196,16 @@ export default function AdminOrdersPage () {
           Admin Orders
         </Box>
 
-        <OrdersStatusSelect status={status} update={setStatus} />
+        <OrdersStatusSelect status={status} update={updateAndFilter} />
 
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-          <OrdersDate date={date} update={setDate} />
+          <OrdersDate date={date} update={updateAndFilter} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
-            <OrdersTime time={time_lo} update={setTimeLo} />
+            <OrdersTime time={time_lo} update={updateAndFilter} which='time-lo' />
             <Typography sx={{ color: 'black' }}> to </Typography>
-            <OrdersTime time={time_hi} update={setTimeHi} />
+            <OrdersTime time={time_hi} update={updateAndFilter} which='time-hi' />
           </Box>
         </Box>
 
