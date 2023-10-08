@@ -79,7 +79,7 @@ export default function AdminOrdersPage () {
       setTimeLo(dayjs().startOf('day'));  
       setTimeHi(dayjs());
       setDate(dayjs());
-    }, 5e3);
+    }, 30e3);
     // console.log('enablePolling() -- interval_id:  ', interval_id);
   };
 

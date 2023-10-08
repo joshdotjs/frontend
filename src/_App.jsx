@@ -51,7 +51,7 @@ const Pages = () => {
 
   // ============================================
   
-  if ( logged_in ) {
+  if ( !logged_in ) {
     user_routes = <>
       <Route path="/auth/login"       element={<AuthLoginPage  />} />
     </>;
