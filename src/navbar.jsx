@@ -30,11 +30,11 @@ import favicon from '/favicon.svg';
 // ==============================================
 
 const pages = [
-  { title: 'Products', route: '/',               admin: false }, 
-  { title: 'About',    route: '/about',          admin: false },
-  { title: 'Users',    route: '/users',          admin: true },
-  { title: 'Orders',   route: '/admin/orders',   admin: true },
-  { title: 'Login',    route: '/auth/login',     admin: false },
+  { title: 'Products', route: '/',               logged_in: false, admin: false }, 
+  { title: 'About',    route: '/about',          logged_in: false, admin: false },
+  { title: 'Users',    route: '/users',          logged_in: false, admin: true },
+  { title: 'Orders',   route: '/admin/orders',   logged_in: false, admin: true },
+  { title: 'Login',    route: '/auth/login',     logged_in: true, admin: false },
 ];
 
 // ==============================================
@@ -92,6 +92,7 @@ const Navlinks = () => {
         >
           {pages.map((page) => {
             if (page.admin && !is_admin) return null;
+            if (page.logged_in && !logged_in) return null;
 
             return (
               <MenuItem key={ page.title } onClick={handleCloseNavMenu}>
@@ -132,6 +133,7 @@ const Navlinks = () => {
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
         {pages.map((page) => {
           if (page.admin && !is_admin) return null;
+          if (page.logged_in && logged_in) return null;
 
           return (
             <Button
