@@ -62,14 +62,13 @@ const CartContext = createContext({
   // ============================================
 
   const addToCart = (product) => {
-    console.log('cart-context: addToCart()');
+    // console.log('cart-context: addToCart()');
 
     // Step 1:
     const prev_cart = getCartLS();
     // -if cart-ls not set then prev_cart === null  =>  idx===undefined
 
     // Step 2:
-    // const idx = prev_cart?.findIndex(line => line?.variant.id === variant_id);
     const idx = prev_cart?.findIndex(line => line?.product.id === product.id);
     
     let new_cart;
@@ -77,11 +76,8 @@ const CartContext = createContext({
     if (idx === undefined) {
       new_cart = [{ product, qty: 1 }];
     } else if (idx < 0) {
-      // lo('addToCart() - new line item');
       new_cart = [...prev_cart, { product, qty: 1 }]; 
     } else {
-      // ly('addToCart() - updating quantity');
-      // new_cart = [...prev_cart]; // clone local cart state via deep copy.
       new_cart = structuredClone(prev_cart);
       new_cart[idx] = {...prev_cart[idx], qty: prev_cart[idx].qty + 1}; // update specific item's quantity in the cloned cart array.        
     }
@@ -99,6 +95,7 @@ const CartContext = createContext({
   const emptyCart = () => {
     setCart([]);
     setCartLS([]);
+    setTimeout(() => closeCart(), 200);
   };
 
   // ============================================
