@@ -1,4 +1,6 @@
+// libs
 import * as React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,14 +12,17 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
-import { Link, NavLink } from 'react-router-dom';
-import favicon from '/favicon.svg';
+// comps:
 import NavbarAvatar from './navbar-avatar';
 import CartDrawer from './drawer-cart';
 
+// context:
 import { CartContext } from './context/cart-context';
+import { AuthContext } from './context/auth-context';
+
+// img
+import favicon from '/favicon.svg';
 
 // ==============================================
 // ==============================================
@@ -142,6 +147,7 @@ export default function ResponsiveAppBar() {
   // ============================================
 
   const { cart_open, openCart, closeCart } = React.useContext(CartContext);
+  const { logged_in, is_admin, logOut } = React.useContext(AuthContext);
 
   // ============================================
 
@@ -180,7 +186,7 @@ export default function ResponsiveAppBar() {
 
 
           
-          <NavbarAvatar />
+          { logged_in && is_admin && <NavbarAvatar /> }
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="open cart">

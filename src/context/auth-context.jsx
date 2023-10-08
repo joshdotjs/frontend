@@ -33,6 +33,7 @@ function AuthContextProvider ({ children }) {
   const [user, setUser]          = useState({});
   const [token, setToken]        = useState('');
   const [logged_in, setLoggedIn] = useState(false);
+  const [is_admin, setIsAdmin]   = useState(false);
   
   // --------------------------------------------
 
@@ -64,8 +65,12 @@ function AuthContextProvider ({ children }) {
     setLoggedIn(true);
     setLS('logged_in', true);
 
-    if (user?.is_admin)
+    
+    if (user?.is_admin) {
+      setIsAdmin(true);
+      setLS('is_admin', true);
       navigate('/admin/orders')
+    }
     // else
     //   router.push('/user');
   };
@@ -82,6 +87,9 @@ function AuthContextProvider ({ children }) {
     setLoggedIn(false);
     removeLS('logged_in');
 
+    setIsAdmin(false);
+    removeLS('is_admin');
+
     // router.replace('/');
   };
   
@@ -90,6 +98,7 @@ function AuthContextProvider ({ children }) {
   const context = {
     user,
     token,
+    is_admin,
     logged_in,
     logIn,
     logOut,
