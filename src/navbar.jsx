@@ -30,11 +30,11 @@ import favicon from '/favicon.svg';
 // ==============================================
 
 const pages = [
-  { title: 'Products', route: '/' }, 
-  { title: 'About', route: '/about' },
-  { title: 'Users', route: '/users' },
-  { title: 'Orders', route: '/admin/orders' },
-  { title: 'Login', route: '/auth/login' },
+  { title: 'Products', route: '/',               admin: false }, 
+  { title: 'About',    route: '/about',          admin: false },
+  { title: 'Users',    route: '/users',          admin: true },
+  { title: 'Orders',   route: '/admin/orders',   admin: true },
+  { title: 'Login',    route: '/auth/login',     admin: false },
 ];
 
 // ==============================================
@@ -43,6 +43,10 @@ const pages = [
 // ==============================================
 
 const Navlinks = () => {
+
+  // ============================================
+
+  const { logged_in, is_admin } = React.useContext(AuthContext);
 
   // ============================================
 
@@ -86,13 +90,17 @@ const Navlinks = () => {
             display: { xs: 'block', md: 'none' },
           }}
         >
-          {pages.map((page) => (
-            <MenuItem key={ page.title } onClick={handleCloseNavMenu}>
-              <Typography textAlign="center">
-                <NavLink to={ page.route }>{ page.title }</NavLink>
-              </Typography>
-            </MenuItem>
-          ))}
+          {pages.map((page) => {
+            if (page.admin && !is_admin) return null;
+
+            return (
+              <MenuItem key={ page.title } onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">
+                  <NavLink to={ page.route }>{ page.title }</NavLink>
+                </Typography>
+              </MenuItem>
+            );
+          })}
         </Menu>
       </Box>
 
@@ -122,15 +130,19 @@ const Navlinks = () => {
       </Box>
       
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-        {pages.map((page) => (
-          <Button
-            key={ page.title }
-            onClick={handleCloseNavMenu}
-            sx={{ my: 2, color: 'white', display: 'block' }}
-          >
-            <NavLink to={ page.route }>{ page.title }</NavLink>
-          </Button>
-        ))}
+        {pages.map((page) => {
+          if (page.admin && !is_admin) return null;
+
+          return (
+            <Button
+              key={ page.title }
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              <NavLink to={ page.route }>{ page.title }</NavLink>
+            </Button>
+          );
+        })}
       </Box>
 
     </>
@@ -147,7 +159,7 @@ export default function ResponsiveAppBar() {
   // ============================================
 
   const { cart_open, openCart, closeCart } = React.useContext(CartContext);
-  const { logged_in, is_admin, logOut } = React.useContext(AuthContext);
+  const { logged_in, is_admin } = React.useContext(AuthContext);
 
   // ============================================
 
@@ -184,8 +196,6 @@ export default function ResponsiveAppBar() {
 
           <Navlinks />
 
-
-          
           { logged_in && is_admin && <NavbarAvatar /> }
 
           <Box sx={{ flexGrow: 0 }}>
@@ -201,9 +211,6 @@ export default function ResponsiveAppBar() {
               </IconButton>
             </Tooltip>
           </Box>
-
-
-          
 
         </Toolbar>
       </Container>
