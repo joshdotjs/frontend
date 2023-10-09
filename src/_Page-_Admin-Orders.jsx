@@ -200,12 +200,40 @@ export default function AdminOrdersPage () {
 
                 {/* <h1>Time: {timers[idx]}</h1> */}
                 <h1>{Math.floor(timers[idx] / (60))}:{timers[idx] % 60}</h1>
-                {/* NOTE: There is a bug here
-                NOTE: There is a bug here
-                NOTE: There is a bug here
-                NOTE: There is a bug here
-                NOTE: There is a bug here
-                NOTE: There is a bug here */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
+                {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
                 
                 <Box>
                   <Typography sx={{ color: 'black' }}>Status: </Typography>
