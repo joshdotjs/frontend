@@ -21,7 +21,6 @@ import { int2status, statusInt2Color } from './util/status';
 
 // hooks:
 import { useNotification } from './hooks/use-notification';
-import { useTimer } from './hooks/use-timer';
 
 // context:
 // import { AuthContext } from './context/auth-context';
@@ -59,7 +58,31 @@ export default function AdminOrdersPage () {
   const [status, setStatus] = useState([1, 2, 3, 4]);
   const [polling, setPolling] = useState(true);
 
-  const { start, stop } = useTimer();
+  // ============================================
+
+  const [timers, setTimers] = useState([]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setTimers(prev_timers => prev_timers.map((prev_timer) => prev_timer + 1));
+    }, 1e3);
+    return () => clearTimeout(timeout);
+  }, [timers]);
+
+  // ============================================
+
+  const timeDiff = (time) => {
+    // const created_at = dayjs(order.order.created_at);
+    const then = dayjs(time);
+    // console.log('created_at: ', created_at.format());
+    
+    const now = dayjs();
+    // console.log('now: ', now.format());
+
+    const seconds = now.diff(then, 'second');
+    // console.log('seconds: ', seconds);
+    return seconds;
+  };
 
   // ============================================
 
@@ -109,41 +132,20 @@ export default function AdminOrdersPage () {
       body: { date_time_lo, date_time_hi, status }
      });
     const [orders, error] = await asynch( promise );
-    console.log('orders: ', orders);
+    // console.log('orders: ', orders);
 
     if (error) {
       console.error(error);
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
       return;
     }
-    // console.log('orders: ', orders);
 
-    const orders_with_timers = orders.map((order) => {
-
-      // step 1: calculate time since order was created
-      console.log('order.created_at: ', order.created_at);
-
-
-      // const created_at = dayjs(order.created_at);
-      // console.log('created_at: ', created_at.format());
-      // const now = dayjs();
-      // console.log('now: ', now.format());
-      // const duration = now.diff(created_at, 'second');
-      // console.log('duration: ', duration);
-      
-      // step 2: start timer
-
-
-      // step 3: return order with timer
-
-      return {
-        ...order,
-        // timer: start(),
-        timer: 0,
-      }
+    orders.forEach((order) => {
+      setTimers((prev_timers) => [...prev_timers, timeDiff(order.order.created_at)]);
     });
 
-    setOrders(orders_with_timers);
+    // console.log('orders: ', orders);
+    setOrders(orders);
   };
 
   // ============================================
@@ -190,11 +192,20 @@ export default function AdminOrdersPage () {
         </Box>
 
         {
-          orders.map(({order, line_items}) => {
+          orders.map(({order, line_items}, idx) => {
 
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
+
+                {/* <h1>Time: {timers[idx]}</h1> */}
+                <h1>{Math.floor(timers[idx] / (60))}:{timers[idx] % 60}</h1>
+                {/* NOTE: There is a bug here
+                NOTE: There is a bug here
+                NOTE: There is a bug here
+                NOTE: There is a bug here
+                NOTE: There is a bug here
+                NOTE: There is a bug here */}
                 
                 <Box>
                   <Typography sx={{ color: 'black' }}>Status: </Typography>
