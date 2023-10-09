@@ -83,8 +83,8 @@ export default function CartDrawer() {
       return;
     }
 
-    notify({message: 'created order in PENDING state 🙂', variant: 'info', duration: 3000})();
-    notify({message: 'sending to checkout...', variant: 'warning', duration: 3000 });
+    notify({message: 'created order in PENDING state 🙂', variant: 'info', duration: 2000})();
+    notify({message: 'sending to checkout...', variant: 'warning', duration: 4000 });
 
     // wait on cart to close before navigating to orders page:
     // setTimeout(() => navigate('/orders'), 250);
@@ -92,7 +92,7 @@ export default function CartDrawer() {
     setTimeout(() => {
       // redirect to Stripe checkout:
       window.location.href = data.url;
-    }, 3e3);
+    }, 1e3);
   };
 
   // ============================================

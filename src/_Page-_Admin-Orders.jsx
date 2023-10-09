@@ -21,6 +21,7 @@ import { int2status, statusInt2Color } from './util/status';
 
 // hooks:
 import { useNotification } from './hooks/use-notification';
+import { useTimer } from './hooks/use-timer';
 
 // context:
 // import { AuthContext } from './context/auth-context';
@@ -57,6 +58,8 @@ export default function AdminOrdersPage () {
   const [date, setDate] = useState(dayjs());
   const [status, setStatus] = useState([1, 2, 3, 4]);
   const [polling, setPolling] = useState(true);
+
+  const { start, stop } = useTimer();
 
   // ============================================
 
@@ -114,7 +117,33 @@ export default function AdminOrdersPage () {
       return;
     }
     // console.log('orders: ', orders);
-    setOrders(orders);
+
+    const orders_with_timers = orders.map((order) => {
+
+      // step 1: calculate time since order was created
+      console.log('order.created_at: ', order.created_at);
+
+
+      // const created_at = dayjs(order.created_at);
+      // console.log('created_at: ', created_at.format());
+      // const now = dayjs();
+      // console.log('now: ', now.format());
+      // const duration = now.diff(created_at, 'second');
+      // console.log('duration: ', duration);
+      
+      // step 2: start timer
+
+
+      // step 3: return order with timer
+
+      return {
+        ...order,
+        // timer: start(),
+        timer: 0,
+      }
+    });
+
+    setOrders(orders_with_timers);
   };
 
   // ============================================

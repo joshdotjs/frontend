@@ -30,6 +30,16 @@ function AuthContextProvider ({ children }) {
 
   // --------------------------------------------
 
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
+  // TODO: Combine these all into the user object
   const [user, setUser]          = useState({});
   const [token, setToken]        = useState('');
   const [logged_in, setLoggedIn] = useState(false);
@@ -38,15 +48,18 @@ function AuthContextProvider ({ children }) {
   // --------------------------------------------
 
   // -Load data from LS on page load
-  // useEffect(() => {
-  //   const logged_in = getLS('logged_in');
-  //   if (logged_in) {
-  //     setLoggedIn(logged_in);
-  //     setToken(getLS('token'));
-  //     setUser(getLS('user'));
-  //   }
+  useEffect(() => {
+    const logged_in = getLS('logged_in');
+    console.log('logged_in: ', logged_in);
 
-  // }, []);
+    if (logged_in) {
+      setLoggedIn(logged_in);
+      setToken(getLS('token'));
+      setUser(getLS('user'));
+      setIsAdmin(getLS('is_admin'));
+    }
+
+  }, []);
 
   // --------------------------------------------
 
