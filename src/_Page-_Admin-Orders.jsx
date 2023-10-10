@@ -12,6 +12,7 @@ import OrdersStatusSelect from './select-orders-status';
 import OrdersTime from './time-orders';
 import OrdersDate from './date-orders';
 import RealTimeCheckbox from './checkbox-orders-real-time';
+import OrderTimer from './orders-timer';
 
 // utils:
 import { http } from './util/http';
@@ -57,32 +58,6 @@ export default function AdminOrdersPage () {
   const [date, setDate] = useState(dayjs());
   const [status, setStatus] = useState([1, 2, 3, 4]);
   const [polling, setPolling] = useState(true);
-
-  // ============================================
-
-  const [timers, setTimers] = useState([]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setTimers(prev_timers => prev_timers.map((prev_timer) => prev_timer + 1));
-    }, 1e3);
-    return () => clearTimeout(timeout);
-  }, [timers]);
-
-  // ============================================
-
-  const timeDiff = (time) => {
-    // const created_at = dayjs(order.order.created_at);
-    const then = dayjs(time);
-    // console.log('created_at: ', created_at.format());
-    
-    const now = dayjs();
-    // console.log('now: ', now.format());
-
-    const seconds = now.diff(then, 'second');
-    // console.log('seconds: ', seconds);
-    return seconds;
-  };
 
   // ============================================
 
@@ -140,10 +115,6 @@ export default function AdminOrdersPage () {
       return;
     }
 
-    orders.forEach((order) => {
-      setTimers((prev_timers) => [...prev_timers, timeDiff(order.order.created_at)]);
-    });
-
     // console.log('orders: ', orders);
     setOrders(orders);
   };
@@ -177,9 +148,7 @@ export default function AdminOrdersPage () {
 
         <OrdersStatusSelect status={status} update={setStatus} />
 
-
         <RealTimeCheckbox checked={polling} setChecked={setPolling} { ...{ enablePolling, disablePolling } } />
-
 
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
           <OrdersDate date={date} update={setDate} />
@@ -198,8 +167,10 @@ export default function AdminOrdersPage () {
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
 
+
+
                 {/* <h1>Time: {timers[idx]}</h1> */}
-                <h1>{Math.floor(timers[idx] / (60))}:{timers[idx] % 60}</h1>
+                <OrderTimer created_at={order.created_at} />
                 {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
                 {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
                 {/* This does work, but the timers are not tied to each order - so if you change the status, etc. then the timers don't align with the correct orders */}
