@@ -168,10 +168,7 @@ export default function AdminOrdersPage () {
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
 
-
-
-                {/* <h1>Time: {timers[idx]}</h1> */}
-                <OrderTimer created_at={order.created_at} />
+                {/* <OrderTimer created_at={order.created_at} /> */}
                 <AccurateOrderTimer created_at={order.created_at} />
 
                 <Box>

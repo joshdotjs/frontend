@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 
+import { zeroPad } from './util/string';
+
 // ==============================================
 // ==============================================
 // ==============================================
@@ -27,7 +29,7 @@ const timeDiff = (time) => {
 
 const ms2s = (t)  => Math.floor(t / 1000);
 const toMin = (t) => Math.floor( ms2s(t) / 60);
-const toSec = (t) => ms2s(t) % 60;
+const toSec = (t) => zeroPad( ms2s(t) % 60 );
 
 // ==============================================
 
@@ -90,10 +92,9 @@ function PreciseTimer({ created_at }) {
   // ============================================
 
   return (
-    <div>
+    <>
       <h1>{ toMin(elapsedTime) }:{ toSec(elapsedTime) }</h1>
-      <button onClick={stopTimer}>Stop</button>
-    </div>
+    </>
   );
 }
 
