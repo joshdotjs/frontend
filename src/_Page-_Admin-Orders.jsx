@@ -12,8 +12,9 @@ import OrdersStatusSelect from './select-orders-status';
 import OrdersTime from './time-orders';
 import OrdersDate from './date-orders';
 import RealTimeCheckbox from './checkbox-orders-real-time';
-import OrderTimer from './orders-timer';
+// import OrderTimer from './orders-timer';
 import AccurateOrderTimer from './orders-timer-accurate';
+import Accordion from './accordion';
 
 // utils:
 import { http } from './util/http';
@@ -197,6 +198,8 @@ export default function AdminOrdersPage () {
             );
           })
         }
+
+        <Accordion />
 
       </Container>
     </Layout>
