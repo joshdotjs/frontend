@@ -5,7 +5,7 @@ import level_up from './assets/level-up.gif';
 
 // import Album from './temp/album/Album';
 // import SignInSide from './temp/sign-in-side/SignInSide';
-// import Dashboard from './temp/dashboard/Dashboard';
+import Dashboard from './temp/dashboard/Dashboard';
 // import Checkout from './temp/checkout/Checkout';
 
 // ==============================================
@@ -34,7 +34,7 @@ export default function AboutPage () {
 
       {/* <Album /> */}
       {/* <SignInSide /> */}
-      {/* <Dashboard /> */}
+      <Dashboard />
       {/* <Checkout /> */}
     </Layout>
   );
