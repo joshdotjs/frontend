@@ -6,16 +6,14 @@ import Stack from '@mui/material/Stack';
 import dayjs from 'dayjs';
 
 // comps:
-import Layout from './_layout';
 import OrderProductsTable from './table-order-products';
 import AccurateOrderTimer from './orders-timer-accurate';
-import Accordion from './accordion';
 
 // utils:
-import { http } from './util/http';
-import { apiUrl } from './util/url';
-import { asynch } from './util/async';
-import { int2status, statusInt2Color } from './util/status';
+// import { http } from './util/http';
+// import { apiUrl } from './util/url';
+// import { asynch } from './util/async';
+// import { int2status, statusInt2Color } from './util/status';
 
 // hooks:
 import { useNotification } from './hooks/use-notification';
@@ -36,10 +34,10 @@ export default function OrderCard ({ order, line_items, updateStatus }) {
     <>
       <AccurateOrderTimer created_at={order.created_at} />
 
-      <Box>
+      {/* <Box>
         <Typography sx={{ color: 'black' }}>Status: </Typography>
         <Chip label={int2status(order?.status)} color={statusInt2Color(order?.status)} />
-      </Box>
+      </Box> */}
       
       <Typography sx={{ color: 'black' }}>Order Number: {order?.uuid}</Typography>
       <Typography sx={{ color: 'black' }}>Total: ${order?.total / 100}</Typography>
