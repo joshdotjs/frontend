@@ -39,7 +39,8 @@ const Pages = () => {
 
   if ( is_admin ) {
     admin_routes = <>
-      <Route path="/admin/orders"     element={<AdminOrdersPage  />} />
+      {/* <Route path="/admin/orders"     element={<AdminOrdersPage  />} /> */}
+      <Route path="/"     element={<AdminOrdersPage  />} />
       <Route path="/users"            element={<UsersPage  />} />
     </>;
   } else {
@@ -65,7 +66,8 @@ const Pages = () => {
 
   return (
     <Routes>
-      <Route path="/"                 element={<StorePage  />} />
+      {/* <Route path="/"                 element={<StorePage  />} /> */}
+      <Route path="/store"                 element={<StorePage  />} />
       { user_routes }      
       { admin_routes }
       <Route path="/about"            element={<AboutPage  />} />

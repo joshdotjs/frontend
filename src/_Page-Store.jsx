@@ -51,7 +51,6 @@ export default function StorePage () {
     setOpen(true);
   }
 
-
   // ============================================
 
   const getProducts = async () => {
