@@ -8,12 +8,8 @@ import dayjs from 'dayjs';
 // comps:
 import Layout from './_layout';
 import OrderProductsTable from './table-order-products';
-import OrdersStatusSelect from './select-orders-status';
-import OrdersTime from './time-orders';
-import OrdersDate from './date-orders';
-import RealTimeCheckbox from './checkbox-orders-real-time';
-import OrderTimer from './orders-timer';
 import AccurateOrderTimer from './orders-timer-accurate';
+import Accordion from './accordion';
 
 // utils:
 import { http } from './util/http';
@@ -26,13 +22,6 @@ import { useNotification } from './hooks/use-notification';
 
 // context:
 // import { AuthContext } from './context/auth-context';
-
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-
-let interval_id = null;
 
 // ==============================================
 // ==============================================

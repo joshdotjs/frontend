@@ -14,7 +14,8 @@ import OrdersDate from './date-orders';
 import RealTimeCheckbox from './checkbox-orders-real-time';
 import OrderTimer from './orders-timer';
 import AccurateOrderTimer from './orders-timer-accurate';
-import OrderCard from './card-order';
+// import Accordion from './accordion';
+import OrderAccordion from './accordion-order';
 
 // utils:
 import { http } from './util/http';
@@ -167,9 +168,9 @@ export default function AdminOrdersPage () {
 
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
-              <Fragment key={order.uuid}>
-                <OrderCard { ...{ order, line_items, updateStatus } } />
-              </Fragment>
+              <div key={order.uuid}>
+                <OrderAccordion { ...{ order, line_items, updateStatus } }  />
+              </div>
             );
           })
         }

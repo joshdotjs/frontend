@@ -5,19 +5,15 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-<<<<<<< HEAD
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
 
 export default function BasicAccordion() {
-
+  
   // ============================================
-
-=======
-export default function BasicAccordion() {
->>>>>>> 583b78bef77751b5ab7250f644247d42fc2c0a7f
+  
   return (
     <div>
       <Accordion>
