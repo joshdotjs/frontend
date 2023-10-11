@@ -78,7 +78,7 @@ export default function StorePage () {
   return (
     <Layout>
 
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}> 
+      <Container sx={{ border: 'solid white 1px', borderTop: 'none' }}> 
         <ProductsGrid { ...{ products, openModal } } />
       </Container>
 

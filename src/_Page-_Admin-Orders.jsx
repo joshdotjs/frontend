@@ -143,12 +143,8 @@ export default function AdminOrdersPage () {
 
   return (
     <Layout>
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
+      <Container sx={{ border: 'solid white 1px', borderTop: 'none', p: 4 }}>
         
-        <Box sx={{textAlign: 'center'}}>
-          Admin Orders
-        </Box>
-
         <OrdersStatusSelect status={status} update={setStatus} />
 
         <RealTimeCheckbox checked={polling} setChecked={setPolling} { ...{ enablePolling, disablePolling } } />

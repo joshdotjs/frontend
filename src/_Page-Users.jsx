@@ -121,7 +121,7 @@ export default function HomePage () {
 
   return (
     <Layout>
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
+      <Container sx={{ border: 'solid white 1px', borderTop: 'none' }}>
         
         <Typography variant="h2"
           sx={{ pt: 4, mb: 4, textAlign: 'center', color: 'primary.main' }}

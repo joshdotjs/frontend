@@ -2,6 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
+import { styled  } from '@mui/system';
+import CardMedia from '@mui/material/CardMedia';
 
 // utils:
 import { http } from './util/http';
@@ -97,6 +99,16 @@ export default function CartDrawer() {
 
   // ============================================
 
+  const LineItem = styled('div')(({ theme }) => ({
+    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.primary.main,
+    // padding: theme.spacing(1),
+    // borderRadius: theme.shape.borderRadius,
+    marginBottom: theme.spacing(4),
+  }));
+
+  // ============================================
+
   return (
     <>
       <Drawer
@@ -107,7 +119,8 @@ export default function CartDrawer() {
       >
         <div style={{ 
           minWidth: '150px', 
-          padding: '2rem',
+          paddingTop: '2rem',
+          paddingBottom: '2rem',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -119,11 +132,18 @@ export default function CartDrawer() {
           <div>
             { cart.map(({ product, qty }) => {
               return (
-                <div key={product.uuid}>
-                  {qty}
-                  {' '}
-                  {product.title}
-                </div>
+                <LineItem key={product.uuid}>
+                  <CardMedia
+                    component="img"
+                    alt={product?.image_alt}
+                    height="140"
+                    // image="/static/images/cards/contemplative-reptile.jpg"
+                    image={ product?.image_url ?? '/food.jpg' }
+                  />
+
+                  <p>{product.title}</p>
+                  <span>QTY: {qty}</span>
+                </LineItem>
               );
             })}
           </div>

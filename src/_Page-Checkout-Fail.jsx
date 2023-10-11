@@ -14,7 +14,7 @@ export default function CheckoutFailPage () {
 
   return (
     <Layout>
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', minHeight: '94vh'}}>
+      <Container sx={{ border: 'solid white 1px', borderTop: 'none' }}>
         
         <Typography variant="h1"
           id="page-title"

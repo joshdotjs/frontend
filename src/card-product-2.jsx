@@ -49,7 +49,7 @@ export default function ProductCard({ product, openModal }) {
     <Card sx={{ maxWidth: 345 }} id={ `product-card-${product.id}` }>
       <CardMedia
         component="img"
-        alt="green iguana"
+        alt={product?.image_alt}
         height="140"
         // image="/static/images/cards/contemplative-reptile.jpg"
         image={ product?.image_url ?? '/food.jpg' }
