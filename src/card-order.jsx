@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 
 // comps:
 import OrderProductsTable from './table-order-products';
-import AccurateOrderTimer from './orders-timer-accurate';
+// import AccurateOrderTimer from './orders-timer-accurate';
 
 // utils:
 // import { http } from './util/http';
@@ -32,7 +32,7 @@ export default function OrderCard ({ order, line_items, updateStatus }) {
 
   return (
     <>
-      <AccurateOrderTimer created_at={order.created_at} />
+      {/* <AccurateOrderTimer created_at={order.created_at} /> */}
 
       {/* <Box>
         <Typography sx={{ color: 'black' }}>Status: </Typography>

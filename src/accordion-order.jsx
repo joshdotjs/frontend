@@ -11,6 +11,7 @@ import dayjs from 'dayjs';
 
 // comps:
 import OrderCard from './card-order';
+import AccurateOrderTimer from './orders-timer-accurate';
 
 // utils:
 // import { http } from './util/http';
@@ -42,6 +43,9 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
         <Box>
           <Chip label={int2status(order?.status)} color={statusInt2Color(order?.status)} />
         </Box>
+
+        <AccurateOrderTimer created_at={order.created_at} />
+
 
       </AccordionSummary>
       <AccordionDetails>
