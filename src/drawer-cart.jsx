@@ -1,9 +1,16 @@
 import * as React from 'react';
+import { styled  } from '@mui/system';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import { styled  } from '@mui/system';
 import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+
+// comps:
+
 
 // utils:
 import { http } from './util/http';
@@ -105,7 +112,25 @@ export default function CartDrawer() {
     // padding: theme.spacing(1),
     // borderRadius: theme.shape.borderRadius,
     marginBottom: theme.spacing(4),
+
+    display: 'grid',
+    gridTemplateRows: '1fr 1fr',
+    gridTemplateColumns: '1fr 1fr 1fr',
   }));
+
+  // ============================================
+
+  const Title = styled('h5')(({ theme }) => ({
+    border: 'solid red 1px',
+    color: 'red',
+  })) ;
+
+  // ============================================
+
+  const SubTitle = styled('p')(({ theme }) => ({
+    border: 'solid yellow 1px',
+    color: 'yellow',
+  })) ;
 
   // ============================================
 
@@ -141,8 +166,20 @@ export default function CartDrawer() {
                     image={ product?.image_url ?? '/food.jpg' }
                   />
 
-                  <p>{product.title}</p>
-                  <span>QTY: {qty}</span>
+                  <Title>{product.title}</Title>
+                  <SubTitle>{product.description}</SubTitle>
+
+                  <ButtonGroup variant="text" aria-label="text button group" color='secondary'>
+                    <Button>
+                      { qty === 1 && <DeleteOutlineIcon /> }
+                      { qty > 1 && <RemoveIcon /> }
+                    </Button>
+                    <Button>{qty}</Button>
+                    <Button><AddOutlinedIcon /></Button>
+                  </ButtonGroup>
+
+
+                  <ButtonGroup />
                 </LineItem>
               );
             })}
