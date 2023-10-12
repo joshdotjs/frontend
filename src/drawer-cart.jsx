@@ -16,6 +16,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
+import { money } from './util/money';
 
 // context:
 import { CartContext } from './context/cart-context';
@@ -116,13 +117,25 @@ export default function CartDrawer() {
     display: 'grid',
     gridTemplateRows: '1fr 1fr',
     gridTemplateColumns: '1fr 1fr 1fr',
+    // gridTemplateAreas: `
+    //   'A B',
+    //   'B C',
+    // `
   }));
+
+  // ============================================
+
+  // const Img = styled('CardMedia')(({ theme }) => ({
+  //   gridArea: 'A',
+  // });
 
   // ============================================
 
   const Title = styled('h5')(({ theme }) => ({
     border: 'solid red 1px',
     color: 'red',
+    // gridArea: 'A',
+    margin: '0',
   })) ;
 
   // ============================================
@@ -130,6 +143,17 @@ export default function CartDrawer() {
   const SubTitle = styled('p')(({ theme }) => ({
     border: 'solid yellow 1px',
     color: 'yellow',
+    // gridArea: 'B'
+    margin: '0',
+  })) ;
+
+  // ============================================
+
+  const Price = styled('p')(({ theme }) => ({
+    border: 'solid white 1px',
+    color: 'white',
+    // gridArea: 'B'
+    margin: '0',
   })) ;
 
   // ============================================
@@ -161,13 +185,17 @@ export default function CartDrawer() {
                   <CardMedia
                     component="img"
                     alt={product?.image_alt}
-                    height="140"
+                    // height="140"
                     // image="/static/images/cards/contemplative-reptile.jpg"
                     image={ product?.image_url ?? '/food.jpg' }
+                    // sx={{ gridArea: 'A' }}
+                    sx={{ gridColumn: '1 / 2', gridRow: '1 / 3' }}
                   />
 
-                  <Title>{product.title}</Title>
-                  <SubTitle>{product.description}</SubTitle>
+                  <Title>{ product.title }</Title>
+                  <Price>{ money(product.price )}</Price>
+                  
+                  <SubTitle>{ product.description }</SubTitle>
 
                   <ButtonGroup variant="text" aria-label="text button group" color='secondary'>
                     <Button>
@@ -177,6 +205,7 @@ export default function CartDrawer() {
                     <Button>{qty}</Button>
                     <Button><AddOutlinedIcon /></Button>
                   </ButtonGroup>
+
 
 
                   <ButtonGroup />
