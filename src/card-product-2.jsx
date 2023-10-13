@@ -1,3 +1,4 @@
+// libs:
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -6,30 +7,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+// comps:
+import Clamp from './text-clamp';
+
+// context:
 import { CartContext } from './context/cart-context';
 
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-
-const Clamp = ({ children, lines }) => (
-  <Typography variant="body1" color="text.secondary"
-    sx={{ // clamp text to 3 lines
-      // display: 'block',
-      display: '-webkit-box',
-      WebkitBoxOrient: 'vertical',
-      overflow: 'hidden',
-      lineHeight: '1.2em',  // Line height
-      maxHeight: '3.6em',   // Max height = lineHeight * number of lines
-      WebkitLineClamp: lines, // Number of lines to display
-      textOverflow: 'ellipsis',
-    }}
-  >
-    { children }
-  </Typography>
-);
 
 // ==============================================
 // ==============================================

@@ -10,7 +10,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 // comps:
-
+import Clamp from './text-clamp';
 
 // utils:
 import { http } from './util/http';
@@ -24,8 +24,68 @@ import { CartContext } from './context/cart-context';
 // hooks:
 // import { useNavigate } from 'react-router-dom';
 import { useNotification } from './hooks/use-notification';
+import { Typography } from '@mui/material';
 
 // ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
+const margin = 0;
+const padding = '1rem';
+
+// ==============================================
+// ==============================================
+
+const LineItem = styled('div')(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  backgroundColor: theme.palette.primary.main,
+  // padding: theme.spacing(1),
+  // borderRadius: theme.shape.borderRadius,
+  marginBottom: theme.spacing(4),
+
+  display: 'grid',
+  gridTemplateRows: '1fr 1fr',
+  gridTemplateColumns: '1fr 1fr 1fr',
+  // gridTemplateAreas: `
+  //   'A B',
+  //   'B C',
+  // `
+}));
+
+// ==============================================
+// ==============================================
+
+const Title = styled('h5')(({ theme }) => ({
+  border: 'solid red 1px',
+  color: 'red',
+  // gridArea: 'A',
+  margin,
+  padding
+})) ;
+
+// ==============================================
+// ==============================================
+
+const SubTitle = styled('p')(({ theme }) => ({
+  border: 'solid yellow 1px',
+  color: 'yellow',
+  // gridArea: 'B'
+  margin,
+  padding
+})) ;
+
+// ==============================================
+// ==============================================
+
+const Price = styled('p')(({ theme }) => ({
+  border: 'solid white 1px',
+  color: 'white',
+  // gridArea: 'B'
+  margin,
+  padding
+}));
+
 // ==============================================
 // ==============================================
 // ==============================================
@@ -40,7 +100,9 @@ export default function CartDrawer() {
 
   const { 
     cart, open, 
-    openCart, closeCart, emptyCart
+    closeCart, emptyCart,
+    addToCart, subtractFromCart,
+    getTotal,
   } = React.useContext(CartContext);
 
   // ============================================
@@ -107,57 +169,6 @@ export default function CartDrawer() {
 
   // ============================================
 
-  const LineItem = styled('div')(({ theme }) => ({
-    color: theme.palette.primary.contrastText,
-    backgroundColor: theme.palette.primary.main,
-    // padding: theme.spacing(1),
-    // borderRadius: theme.shape.borderRadius,
-    marginBottom: theme.spacing(4),
-
-    display: 'grid',
-    gridTemplateRows: '1fr 1fr',
-    gridTemplateColumns: '1fr 1fr 1fr',
-    // gridTemplateAreas: `
-    //   'A B',
-    //   'B C',
-    // `
-  }));
-
-  // ============================================
-
-  // const Img = styled('CardMedia')(({ theme }) => ({
-  //   gridArea: 'A',
-  // });
-
-  // ============================================
-
-  const Title = styled('h5')(({ theme }) => ({
-    border: 'solid red 1px',
-    color: 'red',
-    // gridArea: 'A',
-    margin: '0',
-  })) ;
-
-  // ============================================
-
-  const SubTitle = styled('p')(({ theme }) => ({
-    border: 'solid yellow 1px',
-    color: 'yellow',
-    // gridArea: 'B'
-    margin: '0',
-  })) ;
-
-  // ============================================
-
-  const Price = styled('p')(({ theme }) => ({
-    border: 'solid white 1px',
-    color: 'white',
-    // gridArea: 'B'
-    margin: '0',
-  })) ;
-
-  // ============================================
-
   return (
     <>
       <Drawer
@@ -189,21 +200,26 @@ export default function CartDrawer() {
                     // image="/static/images/cards/contemplative-reptile.jpg"
                     image={ product?.image_url ?? '/food.jpg' }
                     // sx={{ gridArea: 'A' }}
-                    sx={{ gridColumn: '1 / 2', gridRow: '1 / 3' }}
+                    sx={{ gridColumn: '1 / 2', gridRow: '1 / 3', padding: '1rem' }}
                   />
 
                   <Title>{ product.title }</Title>
                   <Price>{ money(product.price )}</Price>
                   
-                  <SubTitle>{ product.description }</SubTitle>
+                  {/* <SubTitle> */}
+                    <Clamp lines={4}>
+                      { product.description }
+                    </Clamp>
+                  {/* </SubTitle> */}
 
-                  <ButtonGroup variant="text" aria-label="text button group" color='secondary'>
+
+                  <ButtonGroup variant="text" aria-label="text button group" color='black' sx={{ padding: '1rem', height: 'fit-content' }}>
                     <Button>
-                      { qty === 1 && <DeleteOutlineIcon /> }
-                      { qty > 1 && <RemoveIcon /> }
+                      { qty === 1 && <DeleteOutlineIcon onClick={() => subtractFromCart(product)} /> }
+                      { qty > 1 && <RemoveIcon onClick={() => subtractFromCart(product)} /> }
                     </Button>
                     <Button>{qty}</Button>
-                    <Button><AddOutlinedIcon /></Button>
+                    <Button><AddOutlinedIcon onClick={() => addToCart(product)} /></Button>
                   </ButtonGroup>
 
 
@@ -216,6 +232,12 @@ export default function CartDrawer() {
 
 
           <div style={{ display: 'flex', flexDirection: 'column'}}>
+
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              { 
+                money(getTotal())
+              }
+            </Typography>
             
             <Button
               id="empty-cart-button"

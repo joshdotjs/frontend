@@ -4,6 +4,7 @@ import App from './_App.jsx';
 import './_index.css';
 import { createTheme, ThemeProvider } from '@mui/material';
 
+
 const theme = createTheme({
   palette: {
     // primary: {
@@ -12,6 +13,9 @@ const theme = createTheme({
     // secondary: {
     //   main: '',
     // },
+    black: {
+      main: 'rgba(0, 0, 0)'
+    },
   },
   typography: {
     h1: {
