@@ -75,7 +75,7 @@ const CartContext = createContext({
     
     // step 3: update cart
     let new_cart;
-    if (idx === null) { // idx === null  =>  cart-ls not set  =>  create cart with first item)
+    if (idx === null || idx === undefined) { // idx === null  =>  cart-ls not set  =>  create cart with first item)
       new_cart = [{ product, qty: 1 }];
     } else if (idx < 0) {  // idx === -1  =>  product not in cart  =>  add product to cart
       new_cart = [...prev_cart, { product, qty: 1 }]; 
@@ -107,7 +107,7 @@ const CartContext = createContext({
 
     // step 3: update cart
     let new_cart;
-    if (idx === null) { // idx === null  =>  cart-ls not set  =>  don't do anything
+    if (idx === null || idx === undefined) { // idx === null  =>  cart-ls not set  =>  don't do anything
       return;
     } else if (idx < 0) {  // idx === -1  =>  product not in cart  =>  don't do anything
       return;
