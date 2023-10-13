@@ -23,7 +23,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'; // for responsive lines
 
 const img_size = {
   xs: '115px',
-  sm: '160px',
+  sm: '140px',
 };
 
 // ==============================================
