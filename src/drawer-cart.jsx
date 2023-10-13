@@ -33,57 +33,40 @@ import { Typography } from '@mui/material';
 
 const margin = 0;
 const padding = '1rem';
+const img_size = '70px';
+
+// ==============================================
+// ==============================================
+
+const Container = styled('div')(({ theme }) => ({
+  minWidth: '150px', 
+  paddingTop: '2rem',
+  paddingBottom: '2rem',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  // background: 'red',
+  height: '100%',
+  // width: '400px'
+}));
 
 // ==============================================
 // ==============================================
 
 const LineItem = styled('div')(({ theme }) => ({
   color: theme.palette.primary.contrastText,
-  backgroundColor: theme.palette.primary.main,
+  // backgroundColor: theme.palette.primary.main,
   // padding: theme.spacing(1),
   // borderRadius: theme.shape.borderRadius,
+  border: 'solid #E5E7EB 1px',
   marginBottom: theme.spacing(4),
-
+  padding,
   display: 'grid',
-  gridTemplateRows: '1fr 1fr',
-  gridTemplateColumns: '1fr 1fr 1fr',
-  // gridTemplateAreas: `
-  //   'A B',
-  //   'B C',
-  // `
-}));
-
-// ==============================================
-// ==============================================
-
-const Title = styled('h5')(({ theme }) => ({
-  border: 'solid red 1px',
-  color: 'red',
-  // gridArea: 'A',
-  margin,
-  padding
-})) ;
-
-// ==============================================
-// ==============================================
-
-const SubTitle = styled('p')(({ theme }) => ({
-  border: 'solid yellow 1px',
-  color: 'yellow',
-  // gridArea: 'B'
-  margin,
-  padding
-})) ;
-
-// ==============================================
-// ==============================================
-
-const Price = styled('p')(({ theme }) => ({
-  border: 'solid white 1px',
-  color: 'white',
-  // gridArea: 'B'
-  margin,
-  padding
+  // gap: '1rem',
+  columnGap: '1rem',
+  gridTemplateRows: 'auto 1fr',
+  gridTemplateColumns: `${img_size} 1fr 1fr`,
 }));
 
 // ==============================================
@@ -177,17 +160,14 @@ export default function CartDrawer() {
         open={open}
         onClose={() => closeCart()}
       >
-        <div style={{ 
-          minWidth: '150px', 
-          paddingTop: '2rem',
-          paddingBottom: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          // background: 'red',
-          height: '100%',
-        }}>
+        <Container
+          sx={{
+            width: {
+              xs: '90vw',
+              sm: '400px',
+            },
+          }}
+        >
 
           <div>
             { cart.map(({ product, qty }) => {
@@ -197,32 +177,75 @@ export default function CartDrawer() {
                     component="img"
                     alt={product?.image_alt}
                     // height="140"
+                    // width="140"
                     // image="/static/images/cards/contemplative-reptile.jpg"
                     image={ product?.image_url ?? '/food.jpg' }
-                    // sx={{ gridArea: 'A' }}
-                    sx={{ gridColumn: '1 / 2', gridRow: '1 / 3', padding: '1rem' }}
+                    sx={{ 
+                      gridColumn: '1 / 2', 
+                      gridRow: '1 / 3', 
+                      border: 'solid #E5E7EB 1px', 
+                      borderRadius: '4px', 
+                      height: img_size, 
+                      width: img_size
+                    }}
                   />
 
-                  <Title>{ product.title }</Title>
-                  <Price>{ money(product.price )}</Price>
+                  <Typography 
+                    variant="h6"
+                    color="text.primary" 
+                    sx={{ 
+                      fontWeight: 'bold',
+                      background: 'limegreen',
+                    }}
+                  >
+                    { product.title }
+                  </Typography>
+
+                  <Clamp 
+                    lines={1}
+                    variant='h5'
+                    color="text.primary"
+                    sx={{ 
+                      background: 'deepskyblue',
+                      textAlign: 'right'
+                    }}
+                  >
+                    { money(product.price )}
+                  </Clamp>
                   
-                  {/* <SubTitle> */}
-                    <Clamp lines={4}>
-                      { product.description }
-                    </Clamp>
-                  {/* </SubTitle> */}
-
-
-                  <ButtonGroup variant="text" aria-label="text button group" color='black' sx={{ padding: '1rem', height: 'fit-content' }}>
-                    <Button>
-                      { qty === 1 && <DeleteOutlineIcon onClick={() => subtractFromCart(product)} /> }
-                      { qty > 1 && <RemoveIcon onClick={() => subtractFromCart(product)} /> }
-                    </Button>
-                    <Button>{qty}</Button>
-                    <Button><AddOutlinedIcon onClick={() => addToCart(product)} /></Button>
-                  </ButtonGroup>
-
-
+                  <Clamp 
+                    lines={2}
+                    variant='body1'
+                    color="text.secondary"
+                    sx={{ 
+                      background: 'darkorange',
+                      
+                    }}
+                  >
+                    { product.description }
+                  </Clamp>
+                
+                  <Box
+                    sx={{ 
+                      background: 'deeppink',
+                      textAlign: 'right'
+                    }}
+                  >
+                    <ButtonGroup 
+                      variant="text" 
+                      aria-label="text button group" 
+                      color='black' 
+                      sx={{ 
+                        background: 'deeppink',
+                      }}>
+                      <Button>
+                        { qty === 1 && <DeleteOutlineIcon onClick={() => subtractFromCart(product)} /> }
+                        { qty > 1 && <RemoveIcon onClick={() => subtractFromCart(product)} /> }
+                      </Button>
+                      <Button>{qty}</Button>
+                      <Button><AddOutlinedIcon onClick={() => addToCart(product)} /></Button>
+                    </ButtonGroup>
+                  </Box>
 
                   <ButtonGroup />
                 </LineItem>
@@ -231,12 +254,12 @@ export default function CartDrawer() {
           </div>
 
 
+
+          {/* Cart Total / Checkout Buttons */}
           <div style={{ display: 'flex', flexDirection: 'column'}}>
 
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              { 
-                money(getTotal())
-              }
+              { money(getTotal()) }
             </Typography>
             
             <Button
@@ -269,7 +292,7 @@ export default function CartDrawer() {
             </Button>
 
           </div>
-        </div>
+        </Container>
       </Drawer>
     </>
   );
