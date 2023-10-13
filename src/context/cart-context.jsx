@@ -114,18 +114,21 @@ const CartContext = createContext({
     } else { // idx >= 0  =>  product in cart  =>  update product's quantity in cart
 
       const qty = prev_cart[idx].qty;
-      if (qty < 1) { // don't allow negative quantities
-        alert('TODO: remove from cart!!!');
-        return;
-       } 
-
-      new_cart = structuredClone(prev_cart);
-      new_cart[idx] = {...prev_cart[idx], qty: qty - 1}; // update specific item's quantity in the cloned cart array.        
-    }
+      if (qty === 1) { // remote from cart
+        const filtered = prev_cart.filter(line => line.product.id !== product.id);
+        new_cart = filtered;
+      } else { // subtract from cart
+        new_cart = structuredClone(prev_cart);
+        new_cart[idx] = {...prev_cart[idx], qty: qty - 1}; // update specific item's quantity in the cloned cart array.        
+      }  // if (qty)
+    } // if (idx)
 
     // step 4: update LS
     setCart(new_cart);
     setCartLS(new_cart);
+
+    // Step 5: close cart
+    if (new_cart.length === 0) closeCart();
   };
 
   // ============================================
