@@ -19,7 +19,7 @@ import { CartContext } from './context/cart-context';
 // ==============================================
 
 const img_size = {
-  xs: '160px',
+  xs: '140px',
   xl: '160px',
 };
 
@@ -54,7 +54,21 @@ export default function ProductCard({ product, openModal }) {
       <Box>
         <CardContent sx={{ textAlign: 'left' }}>
           
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography 
+            gutterBottom 
+            variant="h5" 
+            component="div" 
+            sx={{ 
+              fontWeight: 'bold',
+              fontSize: {
+                xs: '1.000rem',
+                sm: '1.025rem',
+                md: '1.050rem',
+                lg: '1.075rem',
+                xl: '1.100rem',
+              },
+            }}
+          >
             { product.title }
           </Typography>
 

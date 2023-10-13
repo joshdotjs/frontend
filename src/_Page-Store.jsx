@@ -74,7 +74,6 @@ export default function StorePage () {
 
   // ============================================
   
-
   return (
     <Layout>
 
