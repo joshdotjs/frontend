@@ -18,7 +18,10 @@ import { CartContext } from './context/cart-context';
 // ==============================================
 // ==============================================
 
-const img_size = '160px';
+const img_size = {
+  xs: '160px',
+  xl: '160px',
+};
 
 // ==============================================
 // ==============================================
@@ -34,7 +37,19 @@ export default function ProductCard({ product, openModal }) {
   // ============================================
 
   return (
-    <Card sx={{ display: 'flex', width: '500px' }} id={ `product-card-${product.id}` }>
+    <Card 
+      id={ `product-card-${product.id}`}
+      sx={{ 
+        display: 'flex', 
+        width: {
+          xs: '325px',
+          sm: '500px',
+          md: '400px',
+          lg: '425px',
+          xl: '450px',
+        },
+      }}
+    >
 
       <Box>
         <CardContent sx={{ textAlign: 'left' }}>
