@@ -54,11 +54,11 @@ export default function StorePage () {
   }
 
   // DEBUG: 
-  useEffect(() => {
-    console.log('product: ', product);
-    if (products.length > 0)
-      openModal(products[0].id);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log('product: ', product);
+  //   if (products.length > 0)
+  //     openModal(products[0].id);
+  // }, [products]);
 
   // ============================================
 
