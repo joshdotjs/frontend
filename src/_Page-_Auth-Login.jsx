@@ -32,24 +32,6 @@ import { AuthContext } from './context/auth-context';
 // ==============================================
 // ==============================================
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.node-web-app.com">
-        eCommerce Demo
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// ==============================================
-// ==============================================
-// ==============================================
-// ==============================================
-
 export default function SignInSide() {
 
   // ============================================
@@ -193,7 +175,6 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
