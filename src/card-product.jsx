@@ -37,12 +37,14 @@ export default function ProductCard({ product, openModal }) {
 
   const cart_ctx = React.useContext(CartContext);
 
+  // ============================================
+
+  // responsive lines in Clamp:
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
 
   let lines = 1;
-  if (sm)
-    lines = 2;
+  if (sm) lines = 2;
 
   // ============================================
 
@@ -98,15 +100,7 @@ export default function ProductCard({ product, openModal }) {
             { product.title }
           </Typography>
 
-          <Clamp 
-            lines={lines}
-            // sx={{
-            //   display: {
-            //     xs: 'none',
-            //     sm: '-webkit-box',
-            //   },
-            // }}
-          >
+          <Clamp lines={lines}>
             { product.description }
           </Clamp>
 

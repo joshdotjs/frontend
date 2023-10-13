@@ -1,3 +1,4 @@
+// libs:
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -6,21 +7,11 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+// context:
 import { CartContext } from './context/cart-context';
 
-// ==============================================
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
+// utils:
+import { money } from './util/money';
 
 // ==============================================
 // ==============================================
@@ -54,18 +45,64 @@ export default function TransitionsModal({ open, setOpen, product }) {
             timeout: 500,
           },
         }}
-        sx={{ color: 'black'}}
+        // sx={{ color: 'black'}}
       >
         <Fade in={open}>
-          <Box sx={style}>
-            <Typography id="transition-modal-title" variant="h6" component="h2">
+          <Box sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            // border: '2px solid #000',
+            boxShadow: 7,
+            p: 4,
+            borderRadius: '4px', // TODO: Make global for consistency [also used in product-card / cart-image]
+          }}>
+            <Typography 
+              id="transition-modal-title" 
+              variant="h6" 
+              component="h6"
+              sx={{
+                fontWeight: 'bold',
+                margin: 0,
+                padding: 0,
+                marginBottom: '0.5rem',
+                fontSize: {
+                  xs: '1.100rem',
+                  sm: '1.125rem',
+                  md: '1.150rem',
+                  lg: '1.175rem',
+                  xl: '1.200rem',
+                },
+              }}
+            >
               {product?.title ?? 'Product Title'}
             </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+            <Typography 
+              id="transition-modal-description" 
+              sx={{ 
+                lineHeight: '1.5em',  // Line height
+                fontSize: {
+                  xs: '1.000rem',
+                  sm: '1.025rem',
+                  md: '1.050rem',
+                  lg: '1.075rem',
+                  xl: '1.100rem',
+                },
+                mb: 2
+              }}
+            >
               {product?.description ?? 'Product Description'}
             </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              ${product?.price / 100 ?? 'Product Price'}
+            <Typography 
+              id="transition-modal-description" 
+              sx={{ 
+                mb: 2,
+              }}
+            >
+              { money(product?.price) ?? 'Product Price' }
             </Typography>
 
             <Button size="small" variant='contained' color='info' 

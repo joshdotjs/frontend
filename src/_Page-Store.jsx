@@ -26,6 +26,8 @@ export default function StorePage () {
 
   // ============================================
 
+  // Product details modal:
+
   const [product, setProduct] = useState({
     uuid: '',
     title: '',
@@ -50,6 +52,13 @@ export default function StorePage () {
     setProduct(product);
     setOpen(true);
   }
+
+  // DEBUG: 
+  useEffect(() => {
+    console.log('product: ', product);
+    if (products.length > 0)
+      openModal(products[0].id);
+  }, [products]);
 
   // ============================================
 
