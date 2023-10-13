@@ -16,6 +16,10 @@ import { CartContext } from './context/cart-context';
 
 // ==============================================
 // ==============================================
+
+const img_size = '100px';
+
+// ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
@@ -29,25 +33,31 @@ export default function ProductCard({ product, openModal }) {
   // ============================================
 
   return (
-    <Card sx={{ maxWidth: 345 }} id={ `product-card-${product.id}` }>
+    <Card sx={{ display: 'flex', width: '400px' }} id={ `product-card-${product.id}` }>
+
       <CardMedia
         component="img"
         alt={product?.image_alt}
-        height="140"
-        // image="/static/images/cards/contemplative-reptile.jpg"
+        // height="140"
+        sx={{ 
+          width: img_size, 
+          height: img_size, 
+        }}
         image={ product?.image_url ?? '/food.jpg' }
       />
+
       <CardContent>
         
         <Typography gutterBottom variant="h5" component="div">
           { product.title }
         </Typography>
 
-        <Clamp lines={3}>
+        <Clamp lines={2}>
           { product.description }
         </Clamp>
 
       </CardContent>
+
       <CardActions>
         <Button size="small" variant='outlined' color='info'
           onClick={() => {
@@ -61,6 +71,7 @@ export default function ProductCard({ product, openModal }) {
           cart_ctx.addToCart(product);
         }}>Add to Cart</Button>
       </CardActions>
+
     </Card>
   );
 }
