@@ -1,6 +1,7 @@
 import Typography from '@mui/material/Typography';
 
-export default function Clamp({ children, lines, color='text.primary', variant='body1', sx={} }) {
+export default function Clamp({ children, lines, color='text.primary', variant='body1', sx=null }) {
+
   return (
     <Typography 
       variant={variant} 

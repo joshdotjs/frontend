@@ -15,6 +15,30 @@ import { money } from './util/money';
 
 // ==============================================
 // ==============================================
+
+const title_font_size = {
+  fontSize: {
+    xs: '1.100rem',
+    sm: '1.125rem',
+    md: '1.150rem',
+    lg: '1.175rem',
+    xl: '1.200rem',
+  },
+}
+
+const sub_title_font_size = {
+  fontSize: {
+    xs: '1.000rem',
+    sm: '1.025rem',
+    md: '1.050rem',
+    lg: '1.075rem',
+    xl: '1.100rem',
+  },
+}
+
+
+// ==============================================
+// ==============================================
 // ==============================================
 // ==============================================
 
@@ -69,13 +93,7 @@ export default function TransitionsModal({ open, setOpen, product }) {
                 margin: 0,
                 padding: 0,
                 marginBottom: '0.5rem',
-                fontSize: {
-                  xs: '1.100rem',
-                  sm: '1.125rem',
-                  md: '1.150rem',
-                  lg: '1.175rem',
-                  xl: '1.200rem',
-                },
+                ...title_font_size,
               }}
             >
               {product?.title ?? 'Product Title'}
@@ -84,33 +102,38 @@ export default function TransitionsModal({ open, setOpen, product }) {
               id="transition-modal-description" 
               sx={{ 
                 lineHeight: '1.5em',  // Line height
-                fontSize: {
-                  xs: '1.000rem',
-                  sm: '1.025rem',
-                  md: '1.050rem',
-                  lg: '1.075rem',
-                  xl: '1.100rem',
-                },
+                ...sub_title_font_size,
                 mb: 2
               }}
             >
               {product?.description ?? 'Product Description'}
             </Typography>
-            <Typography 
-              id="transition-modal-description" 
-              sx={{ 
-                mb: 2,
-              }}
-            >
-              { money(product?.price) ?? 'Product Price' }
-            </Typography>
 
-            <Button size="small" variant='contained' color='info' 
-              onClick={() => {
-              console.log('addToCart()');
-              cart_ctx.addToCart(product);
-              handleClose();
-            }}>Add to Cart</Button>
+            <Box sx={{ 
+              display: 'flex',
+              justifyContent: 'space-between'
+            }}>
+              <Typography 
+                id="transition-modal-description" 
+                sx={{ 
+                  display: 'flex',
+                  alignItems: 'center',
+                  // background: 'red',
+                  fontWeight: 'bold',
+                  // ...title_font_size,
+                  ...sub_title_font_size,
+                }}
+              >
+                { money(product?.price) ?? 'Product Price' }
+              </Typography>
+
+              <Button size="small" variant='contained' color='info' 
+                onClick={() => {
+                console.log('addToCart()');
+                cart_ctx.addToCart(product);
+                handleClose();
+              }}>Add to Cart</Button>
+            </Box>
           </Box>
         </Fade>
       </Modal>
