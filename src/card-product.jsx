@@ -14,13 +14,16 @@ import Clamp from './text-clamp';
 // context:
 import { CartContext } from './context/cart-context';
 
+// hooks:
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery'; // for responsive lines in Clamp
 
 // ==============================================
 // ==============================================
 
 const img_size = {
-  xs: '140px',
-  xl: '160px',
+  xs: '115px',
+  sm: '160px',
 };
 
 // ==============================================
@@ -34,13 +37,21 @@ export default function ProductCard({ product, openModal }) {
 
   const cart_ctx = React.useContext(CartContext);
 
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+
+  let lines = 1;
+  if (sm)
+    lines = 2;
+
   // ============================================
 
   return (
     <Card 
       id={ `product-card-${product.id}`}
       sx={{ 
-        display: 'flex', 
+        display: 'flex',
+        justifyContent: 'space-between',
         width: {
           xs: '325px',
           sm: '500px',
@@ -51,15 +62,30 @@ export default function ProductCard({ product, openModal }) {
       }}
     >
 
-      <Box>
-        <CardContent sx={{ textAlign: 'left' }}>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '1rem',
+      }}>
+        <CardContent 
+          sx={{ 
+            textAlign: 'left',
+            padding: 0,
+            margin: 0,
+            marginBottom: '0.5rem',
+          }}
+        >
           
           <Typography 
-            gutterBottom 
+            // gutterBottom 
             variant="h5" 
-            component="div" 
+            // component="div" 
             sx={{ 
               fontWeight: 'bold',
+              margin: 0,
+              padding: 0,
+              marginBottom: '0.25rem',
               fontSize: {
                 xs: '1.000rem',
                 sm: '1.025rem',
@@ -72,13 +98,26 @@ export default function ProductCard({ product, openModal }) {
             { product.title }
           </Typography>
 
-          <Clamp lines={2}>
+          <Clamp 
+            lines={lines}
+            // sx={{
+            //   display: {
+            //     xs: 'none',
+            //     sm: '-webkit-box',
+            //   },
+            // }}
+          >
             { product.description }
           </Clamp>
 
         </CardContent>
 
-        <CardActions>
+        <CardActions
+          sx={{
+            margin: 0,
+            padding: 0,
+          }}
+        >
           <Button size="small" variant='outlined' color='info'
             onClick={() => {
             console.log('learnMore()');
