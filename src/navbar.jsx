@@ -204,6 +204,7 @@ export default function ResponsiveAppBar() {
             <Tooltip title="open cart">
               <IconButton 
                 id="open-cart-button"
+                data-testid="open-cart-button"
                 onClick={() => openCart()} 
                 sx={{ p: 0, color: 'white' }}
               >

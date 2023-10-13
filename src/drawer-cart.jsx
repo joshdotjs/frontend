@@ -253,8 +253,6 @@ export default function CartDrawer() {
             })}
           </div>
 
-
-
           {/* Cart Total / Checkout Buttons */}
           <div style={{ display: 'flex', flexDirection: 'column'}}>
 
