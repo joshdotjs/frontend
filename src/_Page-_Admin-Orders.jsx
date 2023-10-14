@@ -147,7 +147,14 @@ export default function AdminOrdersPage () {
 
         <RealTimeCheckbox checked={polling} setChecked={setPolling} { ...{ enablePolling, disablePolling } } />
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            gap: '1rem',
+            mb: '2rem',
+          }}>
           <OrdersDate date={date} update={setDate} disabled={polling} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
@@ -164,7 +171,6 @@ export default function AdminOrdersPage () {
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
               <Fragment key={order.uuid}>
                 <OrderAccordion { ...{ order, line_items, updateStatus } }  />
-
                 <Divider />
               </Fragment>
             );

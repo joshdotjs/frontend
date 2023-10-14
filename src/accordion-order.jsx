@@ -119,7 +119,13 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
 
       <AccordionDetails>
 
-        <Stack direction="row" spacing={1}>
+        <Stack 
+          direction="row" 
+          spacing={1}
+          sx={{
+            mb: '1.25rem',
+          }}
+        >
           <Button variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status_int: 2 })}>Preparing</Button>
           <Button variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status_int: 3 })}>Ready</Button>
           <Button variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status_int: 4 })}>Done</Button>
