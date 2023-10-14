@@ -38,6 +38,29 @@ const img_size = '70px';
 
 // ==============================================
 // ==============================================
+
+const title_font_size = {
+  fontSize: {
+    xs: '1.000rem',
+    sm: '1.025rem',
+    md: '1.050rem',
+    lg: '1.075rem',
+    xl: '1.100rem',
+  },
+}
+
+const sub_title_font_size = {
+  fontSize: {
+    xs: '0.900rem',
+    sm: '0.925rem',
+    md: '0.950rem',
+    lg: '0.975rem',
+    xl: '1.000rem',
+  },
+}
+
+// ==============================================
+// ==============================================
 // ==============================================
 // ==============================================
 
@@ -130,7 +153,7 @@ export default function CartDrawer() {
 
   const Container = styled('div')(({ theme }) => ({
     minWidth: '150px', 
-    paddingTop: '3rem',
+    paddingTop: '2.5rem',
     paddingBottom: cart_pb,
     display: 'flex',
     flexDirection: 'column',
@@ -219,31 +242,35 @@ export default function CartDrawer() {
                     color="text.primary" 
                     sx={{ 
                       fontWeight: 'bold',
-                      background: 'limegreen',
+                      // background: 'limegreen',
+                      ...title_font_size,
+                      mb: '0.2rem'
                     }}
                   >
                     { product.title }
                   </Typography>
 
-                  <Clamp 
-                    lines={1}
-                    variant='h5'
-                    color="text.primary"
+
+                  <Typography 
+                    variant="h6"
+                    color="text.primary" 
                     sx={{ 
-                      background: 'deepskyblue',
-                      textAlign: 'right'
+                      // background: 'deepskyblue',
+                      textAlign: 'right',
+                      ...title_font_size
                     }}
                   >
                     { money(product.price )}
-                  </Clamp>
+                  </Typography>
                   
                   <Clamp 
                     lines={2}
                     variant='body1'
                     color="text.secondary"
                     sx={{ 
-                      background: 'darkorange',
-                      
+                      // background: 'darkorange',
+                      lineHeight: '1.25em',
+                      ...sub_title_font_size,
                     }}
                   >
                     { product.description }
@@ -251,8 +278,7 @@ export default function CartDrawer() {
                 
                   <Box
                     sx={{ 
-                      background: 'deeppink',
-                      textAlign: 'right'
+                      textAlign: 'right',
                     }}
                   >
                     <ButtonGroup 
@@ -260,7 +286,7 @@ export default function CartDrawer() {
                       aria-label="text button group" 
                       color='black' 
                       sx={{ 
-                        background: 'deeppink',
+                        // background: 'deeppink',
                       }}>
                       <Button>
                         { qty === 1 && <DeleteOutlineIcon onClick={() => subtractFromCart(product)} /> }
