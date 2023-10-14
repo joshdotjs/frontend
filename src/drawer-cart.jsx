@@ -81,11 +81,11 @@ export default function CartDrawer() {
   // ============================================
 
   // responsive lines in Clamp:
-  const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  // const theme = useTheme();
+  // const sm = useMediaQuery(theme.breakpoints.up('sm'));
 
-  let cart_pb = '0.5rem';
-  if (sm) cart_pb = '0rem';
+  // let cart_pb = '0rem';
+  // if (sm) cart_pb = '0rem';
 
   // ============================================
 
@@ -154,7 +154,7 @@ export default function CartDrawer() {
   const Container = styled('div')(({ theme }) => ({
     minWidth: '150px', 
     paddingTop: '2.5rem',
-    paddingBottom: cart_pb,
+    // paddingBottom: cart_pb,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

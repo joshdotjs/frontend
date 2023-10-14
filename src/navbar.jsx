@@ -30,8 +30,8 @@ import favicon from '/favicon.svg';
 // ==============================================
 
 const pages = [
-  { title: 'Products', route: '/',               logged_in: false, admin: false }, 
-  { title: 'About',    route: '/about',          logged_in: false, admin: false },
+  { title: 'Store', route: '/',               logged_in: false, admin: false }, 
+  // { title: 'About',    route: '/about',          logged_in: false, admin: false },
   { title: 'Users',    route: '/users',          logged_in: false, admin: true },
   { title: 'Orders',   route: '/admin/orders',   logged_in: false, admin: true },
   { title: 'Login',    route: '/auth/login',     logged_in: true, admin: false },
@@ -97,7 +97,7 @@ const Navlinks = () => {
             return (
               <MenuItem key={ page.title } onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
-                  <NavLink to={ page.route }>{ page.title }</NavLink>
+                  <NavLink to={ page.route } style={{ color: 'black' }}>{ page.title }</NavLink>
                 </Typography>
               </MenuItem>
             );
@@ -130,19 +130,26 @@ const Navlinks = () => {
         <img src={favicon} height="32" />
       </Box>
       
-      <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+      <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, pl: '0.5rem' }}>
         {pages.map((page) => {
           if (page.admin && !is_admin) return null;
           if (page.logged_in && logged_in) return null;
 
           return (
-            <Button
-              key={ page.title }
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white', display: 'block' }}
-            >
-              <NavLink to={ page.route }>{ page.title }</NavLink>
-            </Button>
+            // <Button
+            //   key={ page.title }
+            //   onClick={handleCloseNavMenu}
+            //   sx={{ my: 2, color: 'white', display: 'block' }}
+            // >
+              <NavLink 
+                key={ page.title }
+                to={ page.route }
+            //   onClick={handleCloseNavMenu}
+                style={{ marginRight: '1.5rem', color: 'white' }}
+              >
+                { page.title }
+              </NavLink>
+            // </Button>
           );
         })}
       </Box>
@@ -193,6 +200,7 @@ export default function ResponsiveAppBar() {
               >
                 Store
               </Typography> */}
+
             </Box>
           </Link>
 
@@ -201,18 +209,16 @@ export default function ResponsiveAppBar() {
           { logged_in && is_admin && <NavbarAvatar /> }
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="open cart">
-              <IconButton 
-                id="open-cart-button"
-                data-testid="open-cart-button"
-                onClick={() => openCart()} 
-                sx={{ p: 0, color: 'white' }}
-              >
-                <svg width="28" height="28" fill="currentColor" className="bi bi-bag" viewBox="0 0 16 16">
-                  <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                </svg>
-              </IconButton>
-            </Tooltip>
+            <IconButton 
+              id="open-cart-button"
+              data-testid="open-cart-button"
+              onClick={() => openCart()} 
+              sx={{ p: 0, color: 'white' }}
+            >
+              <svg width="28" height="28" fill="currentColor" className="bi bi-bag" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+              </svg>
+            </IconButton>
           </Box>
 
         </Toolbar>

@@ -33,7 +33,7 @@ const CartContext = createContext({
 
   // ============================================
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const openCart = () => setOpen(true);
   const closeCart = () => setOpen(false);
