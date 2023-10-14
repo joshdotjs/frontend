@@ -45,8 +45,8 @@ const Pages = () => {
       {/* TODO: DEV: */}
       {/* <Route path="/"                 element={<AdminOrdersPage  />} /> */}
 
-      <Route path="/admin/orders"     element={<AdminOrdersPage  />} />
-      <Route path="/users"            element={<UsersPage  />} />
+      <Route path="/admin/orders"     element={<AdminOrdersPage />} />
+      <Route path="/users"            element={<UsersPage />} />
     </>;
   } else {
     admin_routes = <>

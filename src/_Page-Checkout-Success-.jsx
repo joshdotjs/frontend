@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+// libs:
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
 
+// comps
 import Layout from './_layout';
 import OrderProductsTable from './table-order-products';
+
+// hooks:
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 // utils:
 import { http } from './util/http';
