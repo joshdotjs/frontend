@@ -27,6 +27,7 @@ import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 // import { sortDataById } from './util/sort';
+import { truncateFront } from './util/string';
 
 
 // ==============================================
@@ -59,7 +60,7 @@ const products = [
 // ==============================================
 // ==============================================
 
-function Review() {
+function Review({ order }) {
   return (
     <>
 
@@ -91,18 +92,34 @@ function Review() {
 
 
       <Box
-        sx={{
-          // background: 'red',
+        sx={{ 
+          // border: 'solid blue 10px',
         }}
       >
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            mb: '1rem'
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            // border: 'dashed hotpink 10px',
+            mb: '1rem',
           }}
         >
-          Pickup
-        </Typography>
+          <Typography variant="h6" >
+            Pickup
+          </Typography>
+
+          <Box>
+            <Typography variant="span" sx={{ fontWeight: 'bold', mr: '10px' }}>
+              Order Number:
+            </Typography>
+
+            <Typography variant="span">
+              {/* { truncateFront( order?.uuid ?? '' ) } */}
+              { order?.uuid }
+            </Typography>
+          </Box>
+        </Box>
 
         <Paper>
           <CardMedia
@@ -199,7 +216,7 @@ export default function CheckoutSuccessPage() {
             ))}
           </Stepper>
 
-          <Review />
+          <Review { ...{ order } } />
 
         </Paper>
       </Container>
