@@ -6,6 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import { Container, Paper, Box, Button  } from '@mui/material';
 import dayjs from 'dayjs';
 
@@ -117,6 +118,14 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
       {/* =================================== */}
 
       <AccordionDetails>
+
+        <Stack direction="row" spacing={1}>
+          <Button variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status_int: 2 })}>Preparing</Button>
+          <Button variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status_int: 3 })}>Ready</Button>
+          <Button variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status_int: 4 })}>Done</Button>
+        </Stack>
+
+
         <OrderProductsTable { ...{ line_items, order } } />
       </AccordionDetails>
 

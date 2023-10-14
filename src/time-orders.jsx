@@ -9,14 +9,18 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 // ==============================================
 // ==============================================
 
-export default function BasicTimePicker({time, update}) {
+export default function BasicTimePicker({time, update, disabled}) {
 
   // ============================================
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['TimePicker']}>
-        <TimePicker value={time} onChange={(newTime) => update(newTime)} />
+        <TimePicker 
+          value={time} 
+          onChange={(newTime) => update(newTime)}
+          disabled={disabled}
+        />
       </DemoContainer>
     </LocalizationProvider>
   );
