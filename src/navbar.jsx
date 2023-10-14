@@ -98,11 +98,11 @@ const Navlinks = () => {
               <MenuItem 
                 key={ page.title } 
                 onClick={handleCloseNavMenu}
-                sx={{
-                  pb: '0.25rem',
-                }}
+                // sx={{
+                //   pb: '0.2rem',
+                // }}
               >
-                <NavLink to={ page.route } style={{ color: 'black' }}>{ page.title }</NavLink>
+                <Link to={ page.route } style={{ color: 'black' }}>{ page.title }</Link>
               </MenuItem>
             );
           })}
