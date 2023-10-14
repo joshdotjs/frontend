@@ -39,6 +39,12 @@ const Pages = () => {
 
   if ( is_admin ) {
     admin_routes = <>
+      {/* TODO: DEV: */}
+      {/* TODO: DEV: */}
+      {/* TODO: DEV: */}
+      {/* TODO: DEV: */}
+      <Route path="/"                 element={<AdminOrdersPage  />} />
+
       <Route path="/admin/orders"     element={<AdminOrdersPage  />} />
       <Route path="/users"            element={<UsersPage  />} />
     </>;
@@ -65,9 +71,10 @@ const Pages = () => {
 
   return (
     <Routes>
-      <Route path="/"                 element={<StorePage  />} />
-      { user_routes }      
       { admin_routes }
+      <Route path="/"                 element={<StorePage  />} />
+      { user_routes } 
+      {/* TODO: { admin_routes } */}
       <Route path="/about"            element={<AboutPage  />} />
       <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
       <Route path="/*"                element={<ErrorPage />} />
