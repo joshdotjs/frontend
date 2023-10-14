@@ -43,7 +43,7 @@ const Pages = () => {
       {/* TODO: DEV: */}
       {/* TODO: DEV: */}
       {/* TODO: DEV: */}
-      <Route path="/"                 element={<AdminOrdersPage  />} />
+      {/* <Route path="/"                 element={<AdminOrdersPage  />} /> */}
 
       <Route path="/admin/orders"     element={<AdminOrdersPage  />} />
       <Route path="/users"            element={<UsersPage  />} />
@@ -72,12 +72,11 @@ const Pages = () => {
   return (
     <Routes>
       { admin_routes }
-      <Route path="/"                 element={<StorePage  />} />
       { user_routes } 
-      {/* TODO: { admin_routes } */}
       <Route path="/about"            element={<AboutPage  />} />
       <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
       {/* <Route path="/*"                element={<ErrorPage />} /> */}
+      <Route path="/"                 element={<StorePage  />} />
       <Route path="/*"                element={<StorePage />} />
     </Routes>
   );
