@@ -95,10 +95,14 @@ const Navlinks = () => {
             if (page.logged_in && logged_in) return null;
 
             return (
-              <MenuItem key={ page.title } onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <NavLink to={ page.route } style={{ color: 'black' }}>{ page.title }</NavLink>
-                </Typography>
+              <MenuItem 
+                key={ page.title } 
+                onClick={handleCloseNavMenu}
+                sx={{
+                  pb: '0.25rem',
+                }}
+              >
+                <NavLink to={ page.route } style={{ color: 'black' }}>{ page.title }</NavLink>
               </MenuItem>
             );
           })}
