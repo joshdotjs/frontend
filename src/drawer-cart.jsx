@@ -84,7 +84,7 @@ export default function CartDrawer() {
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
 
-  let cart_pb = '1rem';
+  let cart_pb = '0.5rem';
   if (sm) cart_pb = '0rem';
 
   // ============================================
