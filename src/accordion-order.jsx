@@ -19,6 +19,19 @@ import { truncateFront } from './util/string';
 
 // ==============================================
 // ==============================================
+
+const display = {
+  xs: 'none',
+  md: 'flex',
+};
+
+const gridTemplateColumns = {
+  xs: '1fr 1fr 1fr',
+  md: '1fr 1fr 1fr 1fr',
+};
+
+// ==============================================
+// ==============================================
 // ==============================================
 // ==============================================
 
@@ -40,36 +53,62 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
           sx={{
             display: 'grid',
             flexGrow: 1,
-            gridTemplateColumns: '1fr 1fr 1fr 1fr',
+            gridTemplateColumns,
             justifyContent: 'space-between',
             alignItems: 'center',
             // outline: 'solid red 2px',
             pr: 4
           }}
         >  
-          {/* <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          > */}
-            <Chip label={int2status(order?.status)} color={statusInt2Color(order?.status)} />
-            <Typography sx={{ color: 'black' }}>Order: { truncateFront({ str: order?.uuid, len: 4 })}</Typography>
-          {/* </Box> */}
 
+            <Chip 
+              label={int2status(order?.status)}
+              color={statusInt2Color(order?.status)}
+              sx={{
+                mr: '1rem',
+              }}
+            />
 
-          {/* <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          > */}
-            <Typography variant='span' sx={{ color: 'black', mr: '1rem' }}>{dayjs(order.created_at).format('h:mm:ss a')}</Typography>
+            <Box
+              sx={{
+                display: 'flex'
+              }}
+            >
+              <Typography 
+                sx={{ 
+                  fontWeight: 'bold',
+                  color: 'black',
+                  mr: '8px',
+                  display,
+                }}
+              >
+                Order:
+              </Typography>
+
+              <Typography 
+                sx={{ 
+                  color: 'black',
+                  // mr: '1rem',
+                }}
+              >
+                { truncateFront({ str: order?.uuid, len: 4 })}
+              </Typography>
+            </Box>
+
+            <Typography 
+              variant='span' 
+              sx={{ 
+                color: 'black', 
+                mr: '1rem',
+                display
+              }}
+            >
+              { dayjs(order.created_at).format('h:mm:ss a') }
+            </Typography>
             {/* <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography> */}
 
             <AccurateOrderTimer created_at={order.created_at} />
-          {/* </Box> */}
+
 
         </Box>
 
