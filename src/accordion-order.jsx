@@ -36,17 +36,43 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        {/* <Typography>Accordion 1</Typography> */}
-        <Chip label={int2status(order?.status)} color={statusInt2Color(order?.status)} />
+        <Box
+          sx={{
+            display: 'grid',
+            flexGrow: 1,
+            gridTemplateColumns: '1fr 1fr 1fr 1fr',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            // outline: 'solid red 2px',
+            pr: 4
+          }}
+        >  
+          {/* <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+            }}
+          > */}
+            <Chip label={int2status(order?.status)} color={statusInt2Color(order?.status)} />
+            <Typography sx={{ color: 'black' }}>Order: { truncateFront({ str: order?.uuid, len: 4 })}</Typography>
+          {/* </Box> */}
 
-        <Typography sx={{ color: 'black' }}>Order: { truncateFront({ str: order?.uuid, len: 4 })}</Typography>
-        {/* <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography> */}
 
-        <AccurateOrderTimer created_at={order.created_at} />
+          {/* <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          > */}
+            <Typography variant='span' sx={{ color: 'black', mr: '1rem' }}>{dayjs(order.created_at).format('h:mm:ss a')}</Typography>
+            {/* <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography> */}
 
-        <Box>
-          <Typography variant='span' sx={{ color: 'black', mr: '1rem', fontWeight: '700' }}>{dayjs(order.created_at).format('h:mm:ss a')}</Typography>
+            <AccurateOrderTimer created_at={order.created_at} />
+          {/* </Box> */}
+
         </Box>
+
       </AccordionSummary>
 
       {/* =================================== */}

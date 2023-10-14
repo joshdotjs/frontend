@@ -1,6 +1,10 @@
+// libs:
 import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import dayjs from 'dayjs';
 
+// utils:
 import { zeroPad } from './util/string';
 
 // ==============================================
@@ -92,9 +96,28 @@ function PreciseTimer({ created_at }) {
   // ============================================
 
   return (
-    <>
-      <h1>{ toMin(elapsedTime) }:{ toSec(elapsedTime) }</h1>
-    </>
+    <Box
+      // sx={{
+      //   background: 'lightblue',
+      // }}
+    >
+      <Typography
+        component="span"
+        sx={{ 
+          fontWeight: 'bold',
+          fontSize: '1.5rem',
+          mr: '3px',
+         }}
+      >
+        { toMin(elapsedTime) }:{ toSec(elapsedTime) }
+      </Typography>
+
+      <Typography
+        component="span"
+      >
+        min
+      </Typography>
+    </Box>
   );
 }
 
