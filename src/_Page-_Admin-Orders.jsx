@@ -1,8 +1,8 @@
 // libs:
 import { useState, useEffect, useContext, Fragment } from 'react';
 import { Container, Typography, Paper, Box, Button  } from '@mui/material';
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
+
 import dayjs from 'dayjs';
 
 // comps:
@@ -29,8 +29,6 @@ import { useNotification } from './hooks/use-notification';
 // context:
 // import { AuthContext } from './context/auth-context';
 
-// ==============================================
-// ==============================================
 // ==============================================
 // ==============================================
 
@@ -149,13 +147,20 @@ export default function AdminOrdersPage () {
 
         <RealTimeCheckbox checked={polling} setChecked={setPolling} { ...{ enablePolling, disablePolling } } />
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem'}}>
-          <OrdersDate date={date} update={setDate} />
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            gap: '1rem',
+            mb: '2rem',
+          }}>
+          <OrdersDate date={date} update={setDate} disabled={polling} />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
-            <OrdersTime time={time_lo} update={setTimeLo} />
+            <OrdersTime time={time_lo} update={setTimeLo} disabled={polling} />
             <Typography sx={{ color: 'black' }}> to </Typography>
-            <OrdersTime time={time_hi} update={setTimeHi} />
+            <OrdersTime time={time_hi} update={setTimeHi} disabled={polling} />
           </Box>
         </Box>
 
@@ -164,9 +169,10 @@ export default function AdminOrdersPage () {
 
             return (
               // <Fragment key={order.uuid}>{JSON.stringify(order)}</Fragment>
-              <div key={order.uuid}>
+              <Fragment key={order.uuid}>
                 <OrderAccordion { ...{ order, line_items, updateStatus } }  />
-              </div>
+                <Divider />
+              </Fragment>
             );
           })
         }

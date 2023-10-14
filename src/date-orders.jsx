@@ -13,14 +13,18 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // ==============================================
 // ==============================================
 
-export default function ControlledComponent({date, update}) {
+export default function ControlledComponent({date, update, disabled}) {
 
   // ============================================
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker value={date} onChange={(newDate) => update(newDate)} />
+        <DatePicker 
+          value={date} 
+          onChange={(newDate) => update(newDate)}
+          disabled={disabled}
+        />
       </DemoContainer>
     </LocalizationProvider>
   );

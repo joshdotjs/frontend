@@ -1,21 +1,17 @@
-function truncateString({ str, len = 6 }) {
-    if (str.length > len) {
-        return str.substring(0, len) + "...";
-    }
-    else {
-        return str;
-    }
+function truncate({ str, len = 6 }) {
+  if (str.length > len)
+    return str.substring(0, len) + "...";
+  else
+    return str;
 }
 
 // ==============================================
 
-function truncateStringFront({ str, len = 6 }) {
-    if (str.length > len) {
-        return "..." + str.substring(str.length - len, str.length);
-    }
-    else {
-        return str;
-    }
+function truncateFront({ str, len = 6 }) {
+  if (str.length > len)
+    return "..." + str.substring(str.length - len, str.length);
+  else
+    return str;
 }
 
 // ==============================================
@@ -30,7 +26,7 @@ function zeroPad(n, width = 2) {
 // ==============================================
 
 export {
-    truncateString,
-    truncateStringFront,
+    truncate,
+    truncateFront,
     zeroPad
 };
