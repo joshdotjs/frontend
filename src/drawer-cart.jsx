@@ -26,48 +26,15 @@ import { CartContext } from './context/cart-context';
 // import { useNavigate } from 'react-router-dom';
 import { useNotification } from './hooks/use-notification';
 import { Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles'; // responsive
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-// ==============================================
-// ==============================================
 // ==============================================
 // ==============================================
 
 const margin = 0;
 const padding = '1rem';
 const img_size = '70px';
-
-// ==============================================
-// ==============================================
-
-const Container = styled('div')(({ theme }) => ({
-  minWidth: '150px', 
-  paddingTop: '3rem',
-  paddingBottom: '2rem',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  // background: 'red',
-  height: '100%',
-  // width: '400px'
-}));
-
-// ==============================================
-// ==============================================
-
-const LineItem = styled('div')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  // backgroundColor: theme.palette.primary.main,
-  // padding: theme.spacing(1),
-  // borderRadius: theme.shape.borderRadius,
-  borderBottom: 'solid #E5E7EB 1px',
-  padding,
-  display: 'grid',
-  // gap: '1rem',
-  columnGap: '1rem',
-  gridTemplateRows: 'auto 1fr',
-  gridTemplateColumns: `${img_size} 1fr 1fr`,
-}));
 
 // ==============================================
 // ==============================================
@@ -87,6 +54,15 @@ export default function CartDrawer() {
     addToCart, subtractFromCart,
     getTotal,
   } = React.useContext(CartContext);
+
+  // ============================================
+
+  // responsive lines in Clamp:
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+
+  let cart_pb = '1rem';
+  if (sm) cart_pb = '0rem';
 
   // ============================================
 
@@ -149,6 +125,37 @@ export default function CartDrawer() {
       window.location.href = data.url;
     }, 1e3);
   };
+
+  // ============================================
+
+  const Container = styled('div')(({ theme }) => ({
+    minWidth: '150px', 
+    paddingTop: '3rem',
+    paddingBottom: cart_pb,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    // background: 'red',
+    height: '100%',
+    // width: '400px'
+  }));
+  
+  // ==============================================
+  
+  const LineItem = styled('div')(({ theme }) => ({
+    color: theme.palette.primary.contrastText,
+    // backgroundColor: theme.palette.primary.main,
+    // padding: theme.spacing(1),
+    // borderRadius: theme.shape.borderRadius,
+    borderBottom: 'solid #E5E7EB 1px',
+    padding,
+    display: 'grid',
+    // gap: '1rem',
+    columnGap: '1rem',
+    gridTemplateRows: 'auto 1fr',
+    gridTemplateColumns: `${img_size} 1fr 1fr`,
+  }));
 
   // ============================================
 
