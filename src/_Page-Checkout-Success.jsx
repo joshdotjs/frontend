@@ -28,38 +28,12 @@ import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 // import { sortDataById } from './util/sort';
 import { truncateFront } from './util/string';
+import { money } from './util/money';
 
 // ==============================================
 // ==============================================
 
-const products = [
-  {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
-  },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
-  },
-  { name: 'Tax', desc: '', price: 'TODO' },
-];
-
-// ==============================================
-// ==============================================
-
-function Review({ order }) {
+function Review({ order, line_items }) {
   return (
     <>
 
@@ -69,16 +43,29 @@ function Review({ order }) {
           mb: '0.5rem',
         }}
       >
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        { line_items.map((line_item) => (
+          <ListItem key={`line-item-${line_item.product_id}`} sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={line_item.product_name} secondary={`${line_item.quantity} × ${ money(line_item.product_price) } each`} />
+            <Typography variant="body2">{ money(line_item.quantity * line_item.product_price) }</Typography>
           </ListItem>
         ))}
         <ListItem sx={{ py: 1, px: 0 }}>
+          <ListItemText primary="Tax" />
+          <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+            TODO
+          </Typography>
+        </ListItem>
+
+        <Divider
+          sx={{
+            mb: '0.5rem',
+          }}
+        />
+
+        <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+            { money(order?.total) }
           </Typography>
         </ListItem>
       </List>
@@ -215,7 +202,7 @@ export default function CheckoutSuccessPage() {
             ))}
           </Stepper>
 
-          <Review { ...{ order } } />
+          <Review { ...{ order, line_items } } />
 
         </Paper>
       </Container>
