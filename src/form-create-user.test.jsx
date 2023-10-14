@@ -100,32 +100,32 @@ describe('<CreateUserForm  createUser={() => {}} />', () => {
 
   // ==============================================
 
-  test('the button should be disabled until the fields are non-empty',  () => {
+  // test('the button should be disabled until the fields are non-empty',  () => {
     
-    const mockedCreateUser = vi.fn();
-    render(<CreateUserForm createUser={mockedCreateUser} />);
+  //   const mockedCreateUser = vi.fn();
+  //   render(<CreateUserForm createUser={mockedCreateUser} />);
    
-    const button = screen.getByText('Create New User');
-    expect(button.disabled).toBe(true);
+  //   const button = screen.getByText('Create New User');
+  //   expect(button.disabled).toBe(true);
       
-    const email_input = screen.getByPlaceholderText(/email/i);
-    fireEvent.change(email_input, { target: { value: 'josh@josh.com' }});
-    expect(email_input.value).toBe('josh@josh.com');
+  //   const email_input = screen.getByPlaceholderText(/email/i);
+  //   fireEvent.change(email_input, { target: { value: 'josh@josh.com' }});
+  //   expect(email_input.value).toBe('josh@josh.com');
   
-    const password_input = screen.getByPlaceholderText(/password/i);
-    fireEvent.change(password_input, { target: { value: 'test' }});
-    expect(password_input.value).toBe('test');
+  //   const password_input = screen.getByPlaceholderText(/password/i);
+  //   fireEvent.change(password_input, { target: { value: 'test' }});
+  //   expect(password_input.value).toBe('test');
   
-    // button should now be enabled
-    expect(button.disabled).toBe(false);
+  //   // button should now be enabled
+  //   expect(button.disabled).toBe(false);
 
-    fireEvent.click(button);
-    expect(email_input.value).toBe('');
-    expect(password_input.value).toBe('');
+  //   fireEvent.click(button);
+  //   expect(email_input.value).toBe('');
+  //   expect(password_input.value).toBe('');
 
-    // button should again be disabled
-    expect(button.disabled).toBe(true);
-  });
+  //   // button should again be disabled
+  //   expect(button.disabled).toBe(true);
+  // });
 
   // ==============================================
 

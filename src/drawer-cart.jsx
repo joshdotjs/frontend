@@ -156,6 +156,7 @@ export default function CartDrawer() {
     <>
       <Drawer
         id="cart-drawer"
+        data-testid="cart-drawer"
         anchor={'right'}
         open={open}
         onClose={() => closeCart()}
@@ -254,13 +255,20 @@ export default function CartDrawer() {
           </div>
 
           {/* Cart Total / Checkout Buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column'}}>
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              width: '100%',
+              p: 2 // padding: '1rem',
+            }}
+          >
 
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            {/* <Typography variant="h5" align="center" color="text.secondary" paragraph>
               { money(getTotal()) }
-            </Typography>
+            </Typography> */}
             
-            <Button
+            {/* <Button
               id="empty-cart-button"
               // variant="outlined"
               color='info'
@@ -268,28 +276,38 @@ export default function CartDrawer() {
               onClick={() => emptyCart()}
             >
               Empty Cart
-            </Button>
+            </Button> */}
 
-            <Button
+            {/* <Button
               id="close-cart-button"
+              data-testid="close-cart-button"
               variant="outlined"
               color='info'
               sx={{  mb: '1rem' }}
               onClick={() => closeCart()
             }>
-              Close Cart
-            </Button>
+              Close
+            </Button> */}
 
             <Button
               id="checkout-cart-button"
               variant="contained"
               color='info'
-              onClick={() => checkout()
-            }>
-              Checkout
+              onClick={() => checkout()}
+              sx={{
+                // width: '500px'
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+              fullWidth
+            >
+              <Typography>Checkout</Typography>  
+              <Typography>{ money(getTotal()) }</Typography>
             </Button>
 
-          </div>
+          </Box>
+             
+              
         </Container>
       </Drawer>
     </>
