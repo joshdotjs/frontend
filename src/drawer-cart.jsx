@@ -8,6 +8,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import CloseIcon from '@mui/icons-material/Close';
 
 // comps:
 import Clamp from './text-clamp';
@@ -40,7 +41,7 @@ const img_size = '70px';
 
 const Container = styled('div')(({ theme }) => ({
   minWidth: '150px', 
-  paddingTop: '2rem',
+  paddingTop: '3rem',
   paddingBottom: '2rem',
   display: 'flex',
   flexDirection: 'column',
@@ -59,8 +60,7 @@ const LineItem = styled('div')(({ theme }) => ({
   // backgroundColor: theme.palette.primary.main,
   // padding: theme.spacing(1),
   // borderRadius: theme.shape.borderRadius,
-  border: 'solid #E5E7EB 1px',
-  marginBottom: theme.spacing(4),
+  borderBottom: 'solid #E5E7EB 1px',
   padding,
   display: 'grid',
   // gap: '1rem',
@@ -163,6 +163,7 @@ export default function CartDrawer() {
       >
         <Container
           sx={{
+            position: 'relative',
             width: {
               xs: '90vw',
               sm: '400px',
@@ -170,6 +171,21 @@ export default function CartDrawer() {
           }}
         >
 
+          {/* =============================== */}
+
+          <CloseIcon 
+            sx={{
+              position: 'absolute',
+              top: '1rem',
+              left: '1rem',
+              cursor: 'pointer',
+            }}
+            onClick={() => closeCart()}
+          />
+
+          {/* =============================== */}
+
+          {/* Line Items */}
           <div>
             { cart.map(({ product, qty }) => {
               return (
@@ -254,6 +270,8 @@ export default function CartDrawer() {
             })}
           </div>
 
+          {/* =============================== */}
+
           {/* Cart Total / Checkout Buttons */}
           <Box 
             sx={{ 
@@ -307,6 +325,7 @@ export default function CartDrawer() {
 
           </Box>
              
+          {/* =============================== */}
               
         </Container>
       </Drawer>
