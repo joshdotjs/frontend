@@ -8,7 +8,7 @@ function truncate({ str, len = 6 }) {
 // ==============================================
 
 function truncateFront({ str, len = 6 }) {
-  if (str.length > len)
+  if (str?.length > len)
     return "..." + str.substring(str.length - len, str.length);
   else
     return str;

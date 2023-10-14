@@ -29,7 +29,6 @@ import { asynch } from './util/async';
 // import { sortDataById } from './util/sort';
 import { truncateFront } from './util/string';
 
-
 // ==============================================
 // ==============================================
 
@@ -115,8 +114,8 @@ function Review({ order }) {
             </Typography>
 
             <Typography variant="span">
-              {/* { truncateFront( order?.uuid ?? '' ) } */}
-              { order?.uuid }
+              { truncateFront({ str: order?.uuid, len: 4 }) }
+              {/* { order?.uuid } */}
             </Typography>
           </Box>
         </Box>
