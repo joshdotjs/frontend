@@ -16,6 +16,9 @@ const theme = createTheme({
     black: {
       main: 'rgba(0, 0, 0)'
     },
+    pg_white: {
+      main: '#E9F7FF'
+    },
   },
   typography: {
     h1: {
