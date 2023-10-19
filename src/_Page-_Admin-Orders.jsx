@@ -63,7 +63,7 @@ export default function AdminOrdersPage () {
   // ============================================
 
   // -load page with all orders from today
-  // -set up polling to update orders every 30 seconds
+  // -set up polling to update orders every N-seconds
   useEffect(() => { 
     getFilteredOrders({ date, time_lo, time_hi, status }); 
   }, [date, time_lo, time_hi, status]);
@@ -76,7 +76,7 @@ export default function AdminOrdersPage () {
     disablePolling(); // clear any existing polling
 
     interval_id = setInterval(() => {
-      console.clear();
+      // console.clear();
       console.log('polling for orders... ', dayjs().format('h:mm:ss A'));
       setTimeLo(dayjs().startOf('day'));  
       setTimeHi(dayjs());
@@ -102,10 +102,13 @@ export default function AdminOrdersPage () {
     const date_time_lo = formatDateTime(date, time_lo);
     const date_time_hi = formatDateTime(date, time_hi);
 
+    const body = { date_time_lo, date_time_hi, status };
+    console.log('getFilteredOrders()  --  body: ', body);
+
     const promise = http({ 
       url: apiUrl('orders/get-filtered'),
       method: 'POST',
-      body: { date_time_lo, date_time_hi, status }
+      body,
      });
     const [orders, error] = await asynch( promise );
     // console.log('orders: ', orders);

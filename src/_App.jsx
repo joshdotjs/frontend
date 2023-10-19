@@ -75,9 +75,9 @@ const Pages = () => {
       { user_routes } 
       <Route path="/about"            element={<AboutPage  />} />
       <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
-      {/* <Route path="/*"                element={<ErrorPage />} /> */}
       <Route path="/"                 element={<StorePage  />} />
       <Route path="/*"                element={<StorePage />} />
+      {/* <Route path="/*"                element={<ErrorPage />} /> */}
     </Routes>
   );
 };
