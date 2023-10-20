@@ -70,14 +70,8 @@ function AuthContextProvider ({ children }) {
 
     setUser(USER);
     setLS('user', USER); // mysql 1 => true
-
-    setLoggedIn(true);
-    setLS('logged_in', true);
-
     
     if (user?.is_admin) {
-      setIsAdmin(true);
-      setLS('is_admin', true);
       navigate('/admin/orders')
     }
     // else
