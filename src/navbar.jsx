@@ -30,7 +30,7 @@ import favicon from '/favicon.svg';
 // ==============================================
 
 const pages = [
-  { title: 'Store', route: '/',               logged_in: false, admin: false }, 
+  { title: 'Store',    route: '/',               logged_in: false, admin: false }, 
   // { title: 'About',    route: '/about',          logged_in: false, admin: false },
   { title: 'Users',    route: '/users',          logged_in: false, admin: true },
   { title: 'Orders',   route: '/admin/orders',   logged_in: false, admin: true },
@@ -59,105 +59,104 @@ const Navlinks = () => {
 
   // ============================================
 
-  return (
-    <>
-      <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleOpenNavMenu}
-          color="inherit"
-        >
-          <MenuIcon />
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={anchorElNav}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          open={Boolean(anchorElNav)}
-          onClose={handleCloseNavMenu}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-          }}
-        >
-          {pages.map((page) => {
-            if (page.admin && !is_admin) return null;
-            if (page.logged_in && logged_in) return null;
+  const mobile = <>
+    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+      {/* Hambuerger */}
+      <IconButton
+        size="large"
+        aria-label="account of current user"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleOpenNavMenu}
+        color="inherit"
+      >
+        <MenuIcon />
+      </IconButton>
 
-            return (
-              <MenuItem 
-                key={ page.title } 
-                onClick={handleCloseNavMenu}
-                // sx={{
-                //   pb: '0.2rem',
-                // }}
-              >
-                <Link to={ page.route } style={{ color: 'black' }}>{ page.title }</Link>
-              </MenuItem>
-            );
-          })}
-        </Menu>
-      </Box>
-
-      {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-
-      {/* <Typography
-        variant="h5"
-        noWrap
-        component="a"
-        href="/"
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorElNav}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        open={Boolean(anchorElNav)}
+        onClose={handleCloseNavMenu}
         sx={{
-          mr: 2,
-          display: { xs: 'flex', md: 'none' },
-          flexGrow: 1,
-          fontFamily: 'monospace',
-          fontWeight: 700,
-          letterSpacing: '.3rem',
-          color: 'inherit',
-          textDecoration: 'none',
+          display: { xs: 'block', md: 'none' },
         }}
       >
-        LOGO
-      </Typography> */}
-
-      <Box sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: { xs: 'flex', md: 'none' }, }}>
-        <img src={favicon} height="32" />
-      </Box>
-      
-      <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, pl: '0.5rem' }}>
         {pages.map((page) => {
           if (page.admin && !is_admin) return null;
           if (page.logged_in && logged_in) return null;
 
           return (
-            // <Button
-            //   key={ page.title }
-            //   onClick={handleCloseNavMenu}
-            //   sx={{ my: 2, color: 'white', display: 'block' }}
-            // >
-              <NavLink 
-                key={ page.title }
-                to={ page.route }
-            //   onClick={handleCloseNavMenu}
-                style={{ marginRight: '1.5rem', color: 'white' }}
+            <MenuItem 
+              key={ page.title } 
+              onClick={handleCloseNavMenu}
+            >
+              <Link 
+                to={ page.route } 
+                style={{ color: 'black' }}
+                data-cy={ `navlink-${page.title}-mobile` }
               >
-                { page.title }
-              </NavLink>
-            // </Button>
+                  { page.title }
+              </Link>
+            </MenuItem>
           );
         })}
-      </Box>
+      </Menu>
+    </Box>
 
+
+    {/* mobile icon */}
+    <Box sx={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', display: { xs: 'flex', md: 'none' }, }}>
+      <img src={favicon} height="32" />
+    </Box>
+  </>; // mobile
+
+  // ============================================
+
+  const desktop = <>
+    <Link to='/'>
+      <Box sx={{ display: 'flex' }}>       
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+          <img src={favicon} height="32" />
+        </Box>
+      </Box>
+    </Link>
+
+    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, pl: '0.5rem' }}>
+      {pages.map((page) => {
+        if (page.admin && !is_admin) return null;
+        if (page.logged_in && logged_in) return null;
+
+        return (
+          <NavLink 
+            key={ page.title }
+            to={ page.route }
+            //   onClick={handleCloseNavMenu}
+            style={{ marginRight: '1.5rem', color: 'white' }}
+            data-cy={ `navlink-${page.title}-desktop` }
+          >
+            { page.title }
+          </NavLink>
+        );
+      })}
+    </Box>
+  </>; // desktop
+
+  // ============================================
+
+  return (
+    <>
+      { mobile }
+      { desktop }
     </>
   );
 };
@@ -180,33 +179,6 @@ export default function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-
-          <Link to='/'>
-            <Box sx={{ display: 'flex' }}>
-              <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
-                <img src={favicon} height="32" />
-              </Box>
-              
-              {/* <Typography
-                variant="h6"
-                noWrap
-                // component="a"
-                // href="/"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
-                  color: 'inherit',
-                  textDecoration: 'none',
-                }}
-              >
-                Store
-              </Typography> */}
-
-            </Box>
-          </Link>
 
           <Navlinks />
 

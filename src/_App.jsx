@@ -90,7 +90,7 @@ const Pages = () => {
 
 export default function App() {
   return (
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider maxSnack={3}  SnackbarProps={{ 'data-cy': 'notification' }}>
       <BrowserRouter>
         <AuthContextProvider>
           <CartContextProvider>

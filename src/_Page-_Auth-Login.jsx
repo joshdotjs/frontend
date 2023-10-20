@@ -42,7 +42,7 @@ export default function SignInSide() {
   // ============================================
 
   const loginFn = async (user) => {
-    notify({message: 'logging user in...', variant: 'info', duration: 1000})();
+    notify({ message: 'logging user in...', variant: 'info', duration: 1000 })();
     const URL = apiUrl('auth/login');
 
     const promise = http({ url: URL, method: 'POST', body: { 
@@ -52,12 +52,12 @@ export default function SignInSide() {
 
     const [data, error] = await asynch( promise );
     if (error) {
-      notify({message: 'Error logging user in...', variant: 'error', duration: 3000})();
+      notify({ message: 'Error logging user in...', variant: 'error', duration: 3000 })();
       console.log('if(error) in loginFn()');
       console.log(error);
       return;
     } else {
-      notify({message: 'successfully logged user in! 🙂', variant: 'success'})();
+      notify({ message: 'successfully logged user in! 🙂', variant: 'success', duration: 2000 })();
       console.log('data: ', data);
 
       const { user, token } = data;
@@ -132,6 +132,7 @@ export default function SignInSide() {
                 autoFocus
                 onChange={e => setEmail(e.target.value)}
                 value={email}
+                data-cy="auth-email-text-field"
               />
               <TextField
                 margin="normal"
@@ -144,6 +145,7 @@ export default function SignInSide() {
                 autoComplete="current-password"
                 onChange={e => setPassword(e.target.value)}
                 value={password}
+                data-cy="auth-password-text-field"
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -160,6 +162,7 @@ export default function SignInSide() {
                   setEmail('');
                   setPassword('');
                 }}
+                data-cy="auth-login-button"
               >
                 Sign In
               </Button>

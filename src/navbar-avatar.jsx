@@ -13,6 +13,7 @@ import Logout from '@mui/icons-material/Logout';
 
 // context:
 import { AuthContext } from './context/auth-context';
+import { useNotification } from './hooks/use-notification';
 
 // ==============================================
 // ==============================================
@@ -24,6 +25,7 @@ export default function UserAvatar() {
   // ============================================
 
   const { logOut } = React.useContext(AuthContext);
+  const [ notify ] = useNotification();
 
   // ============================================
 
@@ -33,6 +35,7 @@ export default function UserAvatar() {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    notify({ message: 'successfully logged user out! 🙂', variant: 'success', duration: 2000 })();
     logOut();
     setAnchorEl(null);
   };
@@ -47,6 +50,7 @@ export default function UserAvatar() {
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
+            data-cy="navbar-avatar-button"
           >
             <Avatar sx={{ width: 32, height: 32 }}>J</Avatar>
           </IconButton>
@@ -109,11 +113,14 @@ export default function UserAvatar() {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem 
+          onClick={handleClose}
+          data-cy="navbar-logout-button"
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          Log Out
         </MenuItem>
       </Menu>
     </>
