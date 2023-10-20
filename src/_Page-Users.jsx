@@ -85,11 +85,6 @@ export default function HomePage () {
   const createUser = async (user) => {
     notify({message: 'creating new user...', variant: 'info', duration: 1000})();
     const URL = apiUrl('users');
-    // const data = await http({ url: URL, method: 'POST', body: { 
-    //   email: user.email,
-    //   password: user.password,
-    //   is_admin: user.is_admin,
-    // } });
 
     const promise = http({ url: URL, method: 'POST', body: { 
       email: user.email,

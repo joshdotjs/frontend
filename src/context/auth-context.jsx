@@ -9,12 +9,24 @@ import { useNavigate } from 'react-router-dom';
 
 // ==============================================
 
-const AuthContext = createContext({
-  user: {},
-  setUser: () => {},
+const INIT_USER = {
+  id: null,
+  email: '',
+  first_name: '',
+  last_name: '',
+  password: '',
+
   token: '',
-  setToken: () => {},
+  is_admin: false,
   logged_in: false,
+};
+
+// ==============================================
+
+const AuthContext = createContext({
+  user: INIT_USER,
+  setUser: () => {},
+  setToken: () => {},
   logOut: () => {},
   logIn: () => {},
 });
@@ -30,50 +42,34 @@ function AuthContextProvider ({ children }) {
 
   // --------------------------------------------
 
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  // TODO: Combine these all into the user object
-  const [user, setUser]          = useState({});
-  const [token, setToken]        = useState('');
-  const [logged_in, setLoggedIn] = useState(false);
-  const [is_admin, setIsAdmin]   = useState(false);
+  const [user, setUser] = useState(INIT_USER);
   
   // --------------------------------------------
 
   // -Load data from LS on page load
   useEffect(() => {
-    const logged_in = getLS('logged_in');
-    console.log('logged_in: ', logged_in);
-
-    if (logged_in) {
-      setLoggedIn(logged_in);
-      setToken(getLS('token'));
-      setUser(getLS('user'));
-      setIsAdmin(getLS('is_admin'));
+    const user = getLS('user');
+    
+    if (user?.logged_in) {
+      setUser(user);
     }
 
   }, []);
 
   // --------------------------------------------
 
-  const logIn = ({token, user}) => {
+  const logIn = (user) => {
 
     console.log('logging user in (auth-ctx)');
-    // console.log('user: ', user);
-    // console.log('token: ', token);
+    
+    const USER = {
+      ...user, 
+      logged_in: true,
+      is_admin: !!user?.is_admin,
+    };
 
-    setToken(token);
-    setLS('token', token);
-
-    setUser(user);
-    setLS('user', {...user, is_admin: !!user?.is_admin}); // mysql 1 => true
+    setUser(USER);
+    setLS('user', USER); // mysql 1 => true
 
     setLoggedIn(true);
     setLS('logged_in', true);
@@ -91,28 +87,14 @@ function AuthContextProvider ({ children }) {
   // --------------------------------------------
   
   const logOut = () => {
-    setToken(null);
-    removeLS('token');
-
-    setUser(user);
+    setUser(INIT_USER);
     removeLS('user');
-
-    setLoggedIn(false);
-    removeLS('logged_in');
-
-    setIsAdmin(false);
-    removeLS('is_admin');
-
-    // router.replace('/');
   };
   
   // --------------------------------------------
   
   const context = {
     user,
-    token,
-    is_admin,
-    logged_in,
     logIn,
     logOut,
   };
