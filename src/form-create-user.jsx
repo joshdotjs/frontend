@@ -27,10 +27,6 @@ export default function CreateUserForm({ createUser }) {
   const [password, setPassword] = React.useState('');
   const [is_admin, setIsAdmin] = React.useState(false);
 
-  // React.useEffect(() => console.log('email: ', email), [email]);
-  // React.useEffect(() => console.log('password: ', password), [password]);
-  // React.useEffect(() => console.log('is_admin: ', is_admin), [is_admin]);
-  
   // ============================================
 
   return (

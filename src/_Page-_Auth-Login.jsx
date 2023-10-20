@@ -63,7 +63,19 @@ export default function SignInSide() {
       const { user, token } = data;
       console.log('user: ', user);
 
-      logIn({ user, token });
+      const { id, email, first_name, last_name, is_admin } = user;
+
+      const USER = {
+        id,
+        email,
+        first_name,
+        last_name,
+        password,
+        token,
+        is_admin,
+      };
+
+      logIn(USER);
     }
 
   };

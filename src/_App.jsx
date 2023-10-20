@@ -30,14 +30,14 @@ const Pages = () => {
 
   // ============================================
 
-  const { logged_in, is_admin } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   let admin_routes = <></>;
   let user_routes = <></>;
 
   // ============================================
 
-  if ( is_admin ) {
+  if ( user?.is_admin ) {
     admin_routes = <>
       {/* TODO: DEV: */}
       {/* TODO: DEV: */}
@@ -57,7 +57,7 @@ const Pages = () => {
 
   // ============================================
   
-  if ( !logged_in ) {
+  if ( !user?.logged_in ) {
     user_routes = <>
       <Route path="/auth/login"       element={<AuthLoginPage  />} />
     </>;

@@ -46,7 +46,7 @@ const Navlinks = () => {
 
   // ============================================
 
-  const { logged_in, is_admin } = React.useContext(AuthContext);
+  const { user } = React.useContext(AuthContext);
 
   // ============================================
 
@@ -92,8 +92,8 @@ const Navlinks = () => {
         }}
       >
         {pages.map((page) => {
-          if (page.admin && !is_admin) return null;
-          if (page.logged_in && logged_in) return null;
+          if (page.admin && !user?.is_admin) return null;
+          if (page.logged_in && user?.logged_in) return null;
 
           return (
             <MenuItem 
@@ -133,8 +133,8 @@ const Navlinks = () => {
 
     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, pl: '0.5rem' }}>
       {pages.map((page) => {
-        if (page.admin && !is_admin) return null;
-        if (page.logged_in && logged_in) return null;
+        if (page.admin && !user?.is_admin) return null;
+        if (page.logged_in && user?.logged_in) return null;
 
         return (
           <NavLink 
@@ -171,7 +171,7 @@ export default function ResponsiveAppBar() {
   // ============================================
 
   const { cart_open, openCart, closeCart } = React.useContext(CartContext);
-  const { logged_in, is_admin } = React.useContext(AuthContext);
+  const { user } = React.useContext(AuthContext);
 
   // ============================================
 
@@ -182,7 +182,7 @@ export default function ResponsiveAppBar() {
 
           <Navlinks />
 
-          { logged_in && is_admin && <NavbarAvatar /> }
+          { user?.logged_in && user?.is_admin && <NavbarAvatar /> }
 
           <Box sx={{ flexGrow: 0 }}>
             <IconButton 

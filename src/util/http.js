@@ -14,9 +14,9 @@ const http = async ({ url, method='GET', body={} }) => {
   if (method !== 'GET') // GET requests do not have a body
     config.body = JSON.stringify( body );
 
-  const token = getLS('token');
-  if (token) // auth protected endpoint
-    config.headers.Authorization = token;
+  const user = getLS('user');
+  if (user?.token) // auth protected endpoint
+    config.headers.Authorization = user.token;
   
   const resp = await fetch(url, config);
 
