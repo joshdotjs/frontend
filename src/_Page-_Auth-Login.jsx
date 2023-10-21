@@ -52,7 +52,7 @@ export default function SignInSide() {
 
     const [data, error] = await asynch( promise );
     if (error) {
-      notify({ message: 'Error logging user in...', variant: 'error', duration: 3000 })();
+      notify({ message: 'error logging user in...', variant: 'error', duration: 3000 })();
       console.log('if(error) in loginFn()');
       console.log(error);
       return;

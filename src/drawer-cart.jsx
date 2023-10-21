@@ -9,6 +9,7 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import CloseIcon from '@mui/icons-material/Close';
+import Backdrop from '@mui/material/Backdrop';
 
 // comps:
 import Clamp from './text-clamp';
@@ -137,8 +138,8 @@ export default function CartDrawer() {
       return;
     }
 
-    notify({message: 'created order in PENDING state 🙂', variant: 'info', duration: 2000})();
-    notify({message: 'sending to checkout...', variant: 'warning', duration: 4000 });
+    notify({message: 'created order in PENDING state 🙂', variant: 'success', duration: 2000})();
+    notify({message: 'sending to checkout...', variant: 'info', duration: 4000 });
 
     // wait on cart to close before navigating to orders page:
     // setTimeout(() => navigate('/orders'), 250);
@@ -187,6 +188,7 @@ export default function CartDrawer() {
       <Drawer
         id="cart-drawer"
         data-testid="cart-drawer"
+        data-cy="cart-drawer"
         anchor={'right'}
         open={open}
         onClose={() => closeCart()}
@@ -219,7 +221,10 @@ export default function CartDrawer() {
           <div>
             { cart.map(({ product, qty }) => {
               return (
-                <LineItem key={product.uuid}>
+                <LineItem 
+                  key={product.uuid}
+                  data-cy={`cart-item-${product.id}`}
+                >
                   <CardMedia
                     component="img"
                     alt={product?.image_alt}
@@ -238,6 +243,7 @@ export default function CartDrawer() {
                   />
 
                   <Typography 
+                    data-cy={`cart-item-${product.id}-title`}
                     variant="h6"
                     color="text.primary" 
                     sx={{ 
@@ -252,6 +258,7 @@ export default function CartDrawer() {
 
 
                   <Typography 
+                    data-cy={`cart-item-${product.id}-price`}
                     variant="h6"
                     color="text.primary" 
                     sx={{ 
@@ -288,12 +295,27 @@ export default function CartDrawer() {
                       sx={{ 
                         // background: 'deeppink',
                       }}>
-                      <Button>
-                        { qty === 1 && <DeleteOutlineIcon onClick={() => subtractFromCart(product)} /> }
-                        { qty > 1 && <RemoveIcon onClick={() => subtractFromCart(product)} /> }
+                      
+                        { qty === 1 && 
+                          <Button data-cy={`cart-item-${product.id}-quantity-trash`}>
+                            <DeleteOutlineIcon onClick={() => subtractFromCart(product)} /> 
+                          </Button>
+                        }
+                        { qty > 1 && 
+                          <Button data-cy={`cart-item-${product.id}-quantity-minus`}>
+                            <RemoveIcon onClick={() => subtractFromCart(product)} />
+                          </Button>
+                        }
+                      
+                      <Button
+                        data-cy={`cart-item-${product.id}-quantity`}
+                      >
+                        {qty}
                       </Button>
-                      <Button>{qty}</Button>
-                      <Button><AddOutlinedIcon onClick={() => addToCart(product)} /></Button>
+
+                      <Button data-cy={`cart-item-${product.id}-quantity-plus`}>
+                        <AddOutlinedIcon onClick={() => addToCart(product)} />
+                      </Button>
                     </ButtonGroup>
                   </Box>
 
@@ -341,7 +363,7 @@ export default function CartDrawer() {
             </Button> */}
 
             <Button
-              id="checkout-cart-button"
+              data-cy="cart-checkout-button"
               variant="contained"
               color='info'
               onClick={() => checkout()}
@@ -353,7 +375,11 @@ export default function CartDrawer() {
               fullWidth
             >
               <Typography>Checkout</Typography>  
-              <Typography>{ money(getTotal()) }</Typography>
+              <Typography
+                data-cy="cart-total"
+              >
+                { money(getTotal()) }
+              </Typography>
             </Button>
 
           </Box>

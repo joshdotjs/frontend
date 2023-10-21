@@ -50,7 +50,8 @@ export default function ProductCard({ product, openModal }) {
 
   return (
     <Card 
-      id={ `product-card-${product.id}`}
+      id={ `product-card-${product.id}` }
+      data-cy={ `product-card-${product.id}` }
       sx={{ 
         display: 'flex',
         justifyContent: 'space-between',
@@ -120,9 +121,13 @@ export default function ProductCard({ product, openModal }) {
           >Details</Button>
           <Button size="small" variant='contained' color='info' 
             onClick={() => {
-            console.log('addToCart()');
-            cart_ctx.addToCart(product);
-          }}>Add</Button>
+              console.log('addToCart()');
+              cart_ctx.addToCart(product);
+            }}
+            data-cy={ `product-card-${product.id}-add-button` }
+          >
+            Add
+          </Button>
         </CardActions>
       </Box>
 
