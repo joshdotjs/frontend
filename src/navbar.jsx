@@ -32,7 +32,7 @@ import favicon from '/favicon.svg';
 const pages = [
   { title: 'Store',    route: '/',               logged_in: false, admin: false }, 
   // { title: 'About',    route: '/about',          logged_in: false, admin: false },
-  { title: 'Users',    route: '/users',          logged_in: false, admin: true },
+  { title: 'Users',    route: '/admin/users',    logged_in: false, admin: true },
   { title: 'Orders',   route: '/admin/orders',   logged_in: false, admin: true },
   { title: 'Login',    route: '/auth/login',     logged_in: true, admin: false },
 ];
@@ -182,7 +182,7 @@ export default function ResponsiveAppBar() {
 
           <Navlinks />
 
-          { user?.logged_in && user?.is_admin && <NavbarAvatar /> }
+          { user?.logged_in && <NavbarAvatar /> }
 
           <Box sx={{ flexGrow: 0 }}>
             <IconButton 

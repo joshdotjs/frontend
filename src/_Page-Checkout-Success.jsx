@@ -44,12 +44,22 @@ function Review({ order, line_items }) {
         }}
       >
         { line_items.map((line_item) => (
-          <ListItem key={`line-item-${line_item.product_id}`} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={line_item.product_name} secondary={`${line_item.quantity} × ${ money(line_item.product_price) } each`} />
+          <ListItem 
+            key={`order-summary-line-item-${line_item.product_id}`} sx={{ py: 1, px: 0 }}
+            data-cy={`order-summary-line-item-${line_item.product_id}`}
+          >
+            <ListItemText 
+              data-cy={`order-summary-line-item-${line_item.product_id}-title`}
+              primary={line_item.product_name} 
+              secondary={`${line_item.quantity} × ${ money(line_item.product_price) } each`}
+            />
             <Typography variant="body2">{ money(line_item.quantity * line_item.product_price) }</Typography>
           </ListItem>
         ))}
-        <ListItem sx={{ py: 1, px: 0 }}>
+        <ListItem
+          data-cy={`order-summary-tax`}
+          sx={{ py: 1, px: 0 }}
+        >
           <ListItemText primary="Tax" />
           <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
             TODO
@@ -62,7 +72,10 @@ function Review({ order, line_items }) {
           }}
         />
 
-        <ListItem sx={{ py: 1, px: 0 }}>
+        <ListItem 
+          data-cy="order-summary-total"
+          sx={{ py: 1, px: 0 }}
+        >
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
             { money(order?.total) }

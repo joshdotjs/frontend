@@ -95,7 +95,6 @@ export default function CartDrawer() {
     closeCart();
     notify({message: 'sending cart to checkout...', variant: 'info', duration: 2000})();
 
-    console.clear();
     // console.log('sending to checkout...');
     // console.log('cart: ', cart);
 
@@ -128,13 +127,14 @@ export default function CartDrawer() {
       return;
     }
 
-    
     console.log('data: ', data);
     if (!data?.url) {
       const message = 'Error sending to stripe - update Stripe API key!';
       notify({message, variant: 'error', duration: 4000})();
       console.log(error);
       console.log(message);
+      if (data?.test_url)
+        window.location.href = data.test_url; // Bypass Stripe Checkout for testing (data.url is empty, and data_test_url is set)
       return;
     }
 

@@ -46,12 +46,12 @@ const Pages = () => {
       {/* <Route path="/"                 element={<AdminOrdersPage  />} /> */}
 
       <Route path="/admin/orders"     element={<AdminOrdersPage />} />
-      <Route path="/users"            element={<UsersPage />} />
+      <Route path="/admin/users"      element={<UsersPage />} />
     </>;
   } else {
     admin_routes = <>
       <Route path="/admin/orders"     element={<Navigate to="/" />} />
-      <Route path="/users"            element={<Navigate to="/" />} />
+      <Route path="/admin/users"      element={<Navigate to="/" />} />
     </>;
   }
 
