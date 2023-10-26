@@ -33,6 +33,7 @@ export default function MultipleSelectCheckmarks({ statuses, setStatuses }) {
       <FormControl sx={{ m: 1, width: 300 }}>
         <InputLabel id="orders-status-multiple-checkbox-label">Status</InputLabel>
         <Select
+          data-cy="admin-orders-status-dropdown"
           labelId="orders-status-multiple-checkbox-label"
           id="orders-status-multiple-checkbox"
           multiple
@@ -42,7 +43,11 @@ export default function MultipleSelectCheckmarks({ statuses, setStatuses }) {
           renderValue={(selected) => selected.join(', ')}
         >
           {all_statuses.map((name) => (
-            <MenuItem key={name} value={name}>
+            <MenuItem 
+              key={`status-dropdown-option-${name}`} 
+              data-cy={`status-dropdown-option-${name}`} 
+              value={name}
+            >
               <Checkbox checked={statuses_local.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
