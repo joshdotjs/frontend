@@ -1,4 +1,4 @@
-const statuses = [ // order to list them
+const all_statuses = [ // order to list them
   'Pending',
   'Preparing',
   'Ready',
@@ -59,7 +59,7 @@ const statusInt2Color = (int) => {
 // ==============================================
 
 export { 
-  statuses,
+  all_statuses,
   int2status, ints2statuses,
   status2int, statuses2ints,
   statusInt2Color,

@@ -53,7 +53,7 @@ export default function AdminOrdersPage () {
   const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
-  const [status, setStatus] = useState([1, 2, 3, 4]);
+  const [statuses, setStatuses] = useState([1, 2, 3, 4]);
   const [polling, setPolling] = useState(true);
 
   // ============================================
@@ -61,8 +61,8 @@ export default function AdminOrdersPage () {
   // -load page with all orders from today
   // -set up polling to update orders every N-seconds
   useEffect(() => { 
-    getFilteredOrders({ date, time_lo, time_hi, status }); 
-  }, [date, time_lo, time_hi, status]);
+    getFilteredOrders({ date, time_lo, time_hi, statuses }); 
+  }, [date, time_lo, time_hi, statuses]);
 
   useEffect(() => { enablePolling(); }, []);
 
@@ -98,12 +98,12 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
-  const getFilteredOrders = async ({ date, time_lo, time_hi, status }) => {
+  const getFilteredOrders = async ({ date, time_lo, time_hi, statuses }) => {
 
     const date_time_lo = formatDateTime(date, time_lo);
     const date_time_hi = formatDateTime(date, time_hi);
 
-    const body = { date_time_lo, date_time_hi, status };
+    const body = { date_time_lo, date_time_hi, status: statuses }; // NOTE: status on backend is an array (really should be called statusES)
     console.log('getFilteredOrders()  --  body: ', body);
 
     const promise = http({ 
@@ -127,6 +127,7 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
+  // NOTE: status here is a single status (not an array!)
   const updateStatus = async ({ id, status_int }) => {
     const promise = http({ 
       url: apiUrl('orders/update-status'),
@@ -139,7 +140,13 @@ export default function AdminOrdersPage () {
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
       return;
     }
-    getFilteredOrders({ date, time_lo, time_hi, status });
+
+    // NOTE: The value of status here does not change when we
+    //         update status_int, so the state variables below
+    //         should indeed have non stale values.
+    //       -statuses contains the statuses we are fitlering on.
+    //       -status_int is the value we are changing the current orders status to.
+    getFilteredOrders({ date, time_lo, time_hi, statuses });
   };
 
   // ============================================
@@ -151,7 +158,7 @@ export default function AdminOrdersPage () {
         sx={{ border: 'solid white 1px', borderTop: 'none', p: 4 }}
       >
         
-        <OrdersStatusSelect status={status} update={setStatus} />
+        <OrdersStatusSelect status={statuses} update={setStatuses} />
 
         <RealTimeCheckbox 
           dataCY="admin-orders-real-time-checkbox"
