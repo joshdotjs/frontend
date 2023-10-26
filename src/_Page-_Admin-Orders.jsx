@@ -158,7 +158,7 @@ export default function AdminOrdersPage () {
         sx={{ border: 'solid white 1px', borderTop: 'none', p: 4 }}
       >
         
-        <OrdersStatusSelect status={statuses} update={setStatuses} />
+        <OrdersStatusSelect statuses={statuses} setStatuses={setStatuses} />
 
         <RealTimeCheckbox 
           dataCY="admin-orders-real-time-checkbox"

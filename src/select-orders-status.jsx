@@ -16,12 +16,12 @@ import { all_statuses, ints2statuses, statuses2ints } from './util/status';
 // ==============================================
 // ==============================================
 
-export default function MultipleSelectCheckmarks({ status, update }) {
-  const [statuses_local, setStatuses_local] = React.useState(ints2statuses(status));
+export default function MultipleSelectCheckmarks({ statuses, setStatuses }) {
+  const [statuses_local, setStatuses_local] = React.useState(ints2statuses(statuses));
 
   const handleChange = (event) => {
     const value = event.target.value;
-    update( statuses2ints(value) );
+    setStatuses( statuses2ints(value) );
     setStatuses_local(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
