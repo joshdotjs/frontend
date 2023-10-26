@@ -3,7 +3,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function CheckboxLabels({ checked, setChecked, enablePolling, disablePolling }) {
+export default function CheckboxLabels({ dataCY, checked, setChecked, enablePolling, disablePolling }) {
 
   // const [checked, setChecked] = React.useState(true);
 
@@ -24,6 +24,7 @@ export default function CheckboxLabels({ checked, setChecked, enablePolling, dis
         sx={{ color: 'black' }} 
         control={
           <Checkbox 
+            data-cy={dataCY}
             checked={checked}
             onChange={handleChange}
           />

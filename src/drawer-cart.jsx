@@ -206,13 +206,14 @@ export default function CartDrawer() {
           {/* =============================== */}
 
           <CloseIcon 
+            data-cy="cart-drawer-close-button"
+            onClick={() => closeCart()}
             sx={{
               position: 'absolute',
               top: '1rem',
               left: '1rem',
               cursor: 'pointer',
             }}
-            onClick={() => closeCart()}
           />
 
           {/* =============================== */}

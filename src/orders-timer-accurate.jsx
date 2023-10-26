@@ -50,7 +50,7 @@ const toSec = (t) => zeroPad( ms2s(t) % 60 );
 // ==============================================
 // ==============================================
 
-function PreciseTimer({ created_at }) {
+function PreciseTimer({ created_at, order_id }) {
 
   // ============================================
 
@@ -105,6 +105,7 @@ function PreciseTimer({ created_at }) {
 
   return (
     <Box
+      data-cy={`admin-order-${order_id}-timer`}
       // sx={{
       //   background: 'lightblue',
       // }}

@@ -1,27 +1,23 @@
 // libs:
-import { useState, useEffect, useContext, Fragment } from 'react';
-import { Container, Typography, Paper, Box, Button  } from '@mui/material';
+import { useState, useEffect, Fragment } from 'react';
+import { Container, Typography, Box  } from '@mui/material';
 import Divider from '@mui/material/Divider';
 
 import dayjs from 'dayjs';
 
 // comps:
 import Layout from './_layout';
-import OrderProductsTable from './table-order-products';
 import OrdersStatusSelect from './select-orders-status';
 import OrdersTime from './time-orders';
 import OrdersDate from './date-orders';
 import RealTimeCheckbox from './checkbox-orders-real-time';
-import OrderTimer from './orders-timer';
-import AccurateOrderTimer from './orders-timer-accurate';
-// import Accordion from './accordion';
 import OrderAccordion from './accordion-order';
 
 // utils:
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
-import { int2status, statusInt2Color } from './util/status';
+import { sortDataById } from './util/sort';
 
 // hooks:
 import { useNotification } from './hooks/use-notification';
@@ -75,12 +71,17 @@ export default function AdminOrdersPage () {
   const enablePolling = () => {
     disablePolling(); // clear any existing polling
 
-    interval_id = setInterval(() => {
-      // console.clear();
-      console.log('polling for orders... ', dayjs().format('h:mm:ss A'));
+    const resetDateTimeToNow = () => {
       setTimeLo(dayjs().startOf('day'));  
       setTimeHi(dayjs());
       setDate(dayjs());
+    };
+    resetDateTimeToNow();
+
+    interval_id = setInterval(() => {
+      // console.clear();
+      console.log('polling for orders... ', dayjs().format('h:mm:ss A'));
+      resetDateTimeToNow();
     }, 30e3);
     // console.log('enablePolling() -- interval_id:  ', interval_id);
   };
@@ -112,12 +113,13 @@ export default function AdminOrdersPage () {
      });
     const [orders, error] = await asynch( promise );
     // console.log('orders: ', orders);
-
     if (error) {
       console.error(error);
       notify({message: 'Error getting orders...', variant: 'error', duration: 2000})();
       return;
     }
+
+    // const sorted_orders = sortDataById(orders);
 
     // console.log('orders: ', orders);
     setOrders(orders);
@@ -144,11 +146,19 @@ export default function AdminOrdersPage () {
 
   return (
     <Layout>
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none', p: 4 }}>
+      <Container 
+        data-cy="admin-orders"
+        sx={{ border: 'solid white 1px', borderTop: 'none', p: 4 }}
+      >
         
         <OrdersStatusSelect status={status} update={setStatus} />
 
-        <RealTimeCheckbox checked={polling} setChecked={setPolling} { ...{ enablePolling, disablePolling } } />
+        <RealTimeCheckbox 
+          dataCY="admin-orders-real-time-checkbox"
+          checked={polling} 
+          setChecked={setPolling} 
+          { ...{ enablePolling, disablePolling } } 
+        />
 
         <Box 
           sx={{ 
@@ -158,12 +168,29 @@ export default function AdminOrdersPage () {
             gap: '1rem',
             mb: '2rem',
           }}>
-          <OrdersDate date={date} update={setDate} disabled={polling} />
+          <OrdersDate 
+            dataCY="admin-orders-calendar"
+            date={date} 
+            update={setDate} 
+            disabled={polling}
+          />
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '1rem'}}>
-            <OrdersTime time={time_lo} update={setTimeLo} disabled={polling} />
+            <OrdersTime 
+              dataCY="admin-orders-time-lo"
+              time={time_lo} 
+              update={setTimeLo} 
+              disabled={polling}
+            />
+
             <Typography sx={{ color: 'black' }}> to </Typography>
-            <OrdersTime time={time_hi} update={setTimeHi} disabled={polling} />
+
+            <OrdersTime 
+              dataCY="admin-orders-time-hi"
+              time={time_hi} 
+              update={setTimeHi} 
+              disabled={polling}
+            />
           </Box>
         </Box>
 

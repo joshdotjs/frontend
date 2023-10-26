@@ -41,7 +41,9 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
   // ============================================
   
   return (
-    <Accordion>
+    <Accordion
+      data-cy={`admin-order-${order.id}`}
+    >
 
       {/* =================================== */}
 
@@ -62,54 +64,56 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
           }}
         >  
 
-            <Chip 
-              label={int2status(order?.status)}
-              color={statusInt2Color(order?.status)}
-              sx={{
-                mr: '1rem',
-              }}
-            />
+          <Chip 
+            data-cy={`admin-order-${order.id}-status-chip`}
+            label={int2status(order.status)}
+            color={statusInt2Color(order.status)}
+            sx={{
+              mr: '1rem',
+            }}
+          />
 
-            <Box
-              sx={{
-                display: 'flex'
+          <Box
+            sx={{
+              display: 'flex'
+            }}
+          >
+            <Typography 
+              sx={{ 
+                fontWeight: 'bold',
+                color: 'black',
+                mr: '8px',
+                display,
               }}
             >
-              <Typography 
-                sx={{ 
-                  fontWeight: 'bold',
-                  color: 'black',
-                  mr: '8px',
-                  display,
-                }}
-              >
-                Order:
-              </Typography>
-
-              <Typography 
-                sx={{ 
-                  color: 'black',
-                  // mr: '1rem',
-                }}
-              >
-                { truncateFront({ str: order?.uuid, len: 4 })}
-              </Typography>
-            </Box>
+              Order:
+            </Typography>
 
             <Typography 
-              variant='span' 
+              data-cy={`admin-order-${order.id}-uuid`}
               sx={{ 
-                color: 'black', 
-                mr: '1rem',
-                display
+                color: 'black',
+                // mr: '1rem',
               }}
             >
-              { dayjs(order.created_at).format('h:mm:ss a') }
+              { truncateFront({ str: order.uuid, len: 4 })}
             </Typography>
-            {/* <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography> */}
+          </Box>
 
-            <AccurateOrderTimer created_at={order.created_at} />
+          <Typography 
+            data-cy={`admin-order-${order.id}-time`}
+            variant='span' 
+            sx={{ 
+              color: 'black', 
+              mr: '1rem',
+              display
+            }}
+          >
+            { dayjs(order.created_at).format('h:mm:ss a') }
+          </Typography>
+          {/* <Typography sx={{ color: 'black' }}>{dayjs(order.created_at).format('ddd. MMM. D')}</Typography> */}
 
+          <AccurateOrderTimer created_at={order.created_at} order_id={order.id} />
 
         </Box>
 
@@ -126,11 +130,10 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
             mb: '1.25rem',
           }}
         >
-          <Button variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status_int: 2 })}>Preparing</Button>
-          <Button variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status_int: 3 })}>Ready</Button>
-          <Button variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status_int: 4 })}>Done</Button>
+          <Button data-cy={`admin-order-${order.id}--status-button--preparing`} variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status_int: 2 })}>Preparing</Button>
+          <Button data-cy={`admin-order-${order.id}--status-button--ready`    } variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status_int: 3 })}>Ready</Button>
+          <Button data-cy={`admin-order-${order.id}--status-button--done`     } variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status_int: 4 })}>Done</Button>
         </Stack>
-
 
         <OrderProductsTable { ...{ line_items, order } } />
       </AccordionDetails>

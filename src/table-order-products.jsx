@@ -7,9 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import  Typography from '@mui/material/Typography';
 
+// utils:
 import { money } from './util/money';
-import { Typography } from '@mui/material';
 
 // ==============================================
 // ==============================================
@@ -29,17 +30,37 @@ export default function BasicTable({ line_items, order }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {line_items.map((item) => (
+            {line_items.map((item, idx) => (
               <TableRow
-                key={`line-item-${item.order_id}-${item.product_id}`}
+                key={`admin-order-${order.id}--line-item-${idx + 1}`}
+                data-cy={`admin-order-${order.id}--line-item-${idx + 1}`}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
+                <TableCell 
+                  data-cy={`admin-order-${order.id}--line-item-${idx + 1}-product-name`}
+                  component="th" 
+                  scope="row"
+                >
                   {item.product_name}
                 </TableCell>
-                <TableCell align="right">${item.product_price / 100}</TableCell>
-                <TableCell align="right">{item.quantity}</TableCell>
-                <TableCell align="right">${item.product_price * item.quantity / 100}</TableCell>
+                <TableCell 
+                  data-cy={`admin-order-${order.id}--line-item-${idx + 1}-product-price`}
+                  align="right"
+                >
+                  { money( item.product_price )}
+                </TableCell>
+                <TableCell 
+                  data-cy={`admin-order-${order.id}--line-item-${idx + 1}-quantity`}
+                  align="right"
+                >
+                    { item.quantity }
+                </TableCell>
+                <TableCell 
+                  data-cy={`admin-order-${order.id}--line-item-${idx + 1}-cost`}
+                  align="right"
+                >
+                  { money( item.product_price * item.quantity ) }
+                </TableCell>
               </TableRow>
             ))}
 
@@ -59,12 +80,13 @@ export default function BasicTable({ line_items, order }) {
                   Total: 
                 </Typography>
                 <Typography
+                  data-cy={`admin-order-${order.id}-total`}
                   component={'span'}
                   sx={{
                     fontWeight: 'bold',
                   }}
                 >
-                  {money(order?.total)}
+                  { money(order?.total) }
                 </Typography>
               </TableCell>
             </TableRow>
