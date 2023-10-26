@@ -17,15 +17,12 @@ import { all_statuses, ints2statuses, statuses2ints } from './util/status';
 // ==============================================
 
 export default function MultipleSelectCheckmarks({ status, update }) {
-  const [personName, setPersonName] = React.useState(ints2statuses(status));
+  const [statuses_local, setStatuses_local] = React.useState(ints2statuses(status));
 
   const handleChange = (event) => {
     const value = event.target.value;
-    console.log('value: ', value);
-    console.log('statuses2Ints(value): ', statuses2ints(value));
     update( statuses2ints(value) );
-
-    setPersonName(
+    setStatuses_local(
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
@@ -39,14 +36,14 @@ export default function MultipleSelectCheckmarks({ status, update }) {
           labelId="orders-status-multiple-checkbox-label"
           id="orders-status-multiple-checkbox"
           multiple
-          value={personName}
+          value={statuses_local}
           onChange={handleChange}
           input={<OutlinedInput label="Status" />}
           renderValue={(selected) => selected.join(', ')}
         >
           {all_statuses.map((name) => (
             <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
+              <Checkbox checked={statuses_local.indexOf(name) > -1} />
               <ListItemText primary={name} />
             </MenuItem>
           ))}
