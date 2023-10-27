@@ -15,11 +15,11 @@ export default function LandingPage () {
   // ============================================
   
   return (
-    <div>
+    <div style={{ height: '100vh' }}>
       <CardMedia
         component="img"
-        // alt={product?.image_alt}
-        // height="140"
+        alt="background image"
+        height="100%"
         // sx={{ 
         //   width: img_size, 
         //   height: img_size, 
