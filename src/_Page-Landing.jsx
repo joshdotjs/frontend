@@ -1,5 +1,6 @@
 // libs:
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import CardMedia from '@mui/material/CardMedia';
@@ -30,10 +31,26 @@ export default function LandingPage () {
 
   const [show_map, setShowMap] = useState(false);
 
+  const main_ref = useRef(null);
+
+  useEffect(() => {
+    const { current } = main_ref;
+    gsap.to( current, {
+      opacity: 1,
+      delay: 0.5,
+    });
+  }, []);
+
   // ============================================
   
   return (
-    <div style={{ height: '100vh' }}>
+    <motion.div 
+      style={{ height: '100vh', background: 'black', opacity: 0 }}
+      // initial={{ opacity: 0 }}
+      // animate={{ opacity: 1 }}
+      // transition={{ duration: 0.5, delay: 0.2 }}
+      ref={main_ref}
+    >
       <CardMedia
         component="img"
         alt="background image"
@@ -55,15 +72,28 @@ export default function LandingPage () {
       >
         {/* <CircularProgress color="inherit" /> */}
 
-          <Box
-            sx={{
-              // marginTop: '-25vh',
+          <motion.div
+            style={{
               marginTop: '10vh',
               width: 'fit-content',
               margin: '0 auto',
-              mb: 4,
+              marginBottom: '2rem',
             }}
-          >        
+            initial={{
+              opacity: 0,
+              y: -300,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{ 
+              delay: 0.35,
+              type: "spring",
+              bounce: 0.5,
+            }}
+          >
+
             <Typography 
               variant="h2" 
               sx={{ 
@@ -107,7 +137,8 @@ export default function LandingPage () {
                 Map
               </Button>
             </ButtonGroup>
-          </Box>
+
+          </motion.div>
 
           <motion.div 
             id="motion-box"
@@ -154,6 +185,6 @@ export default function LandingPage () {
 
 
       </Backdrop>
-    </div>
+    </motion.div>
   );
 };
