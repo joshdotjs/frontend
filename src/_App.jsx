@@ -10,6 +10,7 @@ import ErrorPage from './_Page-Error';
 import UsersPage  from './_Page-Users';
 import AboutPage  from './_Page-About';
 import StorePage  from './_Page-Store';
+import LandingPage  from './_Page-Landing';
 import AdminOrdersPage from './_Page-_Admin-Orders';
 import CheckoutSuccessPage from './_Page-Checkout-Success';
 import AuthLoginPage from './_Page-_Auth-Login';
@@ -73,10 +74,11 @@ const Pages = () => {
     <Routes>
       { admin_routes }
       { user_routes } 
-      <Route path="/about"            element={<AboutPage  />} />
+      <Route path="/about"            element={<AboutPage           />} />
       <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
-      <Route path="/"                 element={<StorePage  />} />
-      <Route path="/*"                element={<StorePage />} />
+      <Route path="/store"            element={<StorePage           />} />
+      <Route path="/"                 element={<LandingPage         />} />
+      <Route path="/*"                element={<StorePage           />} />
       {/* <Route path="/*"                element={<ErrorPage />} /> */}
     </Routes>
   );
