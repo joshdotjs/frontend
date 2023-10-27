@@ -1,5 +1,6 @@
 // libs:
 import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import CardMedia from '@mui/material/CardMedia';
 import Backdrop from '@mui/material/Backdrop';
@@ -88,7 +89,13 @@ export default function LandingPage () {
                 alignItems: 'center',
               }}
             >
-              <Button>Order Online</Button>
+
+              <Link to='/store'>
+                <Button>
+                  Order Online
+                </Button>
+              </Link>
+
               <Button 
                 // variant="outlined" 
                 color='primary'
