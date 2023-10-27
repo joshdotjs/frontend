@@ -28,6 +28,8 @@ export default function LandingPage () {
   const [y, setY] = useState(0);
   const [rotate, setRotate] = useState(0);
 
+  const [show_map, setShowMap] = useState(false);
+
   // ============================================
   
   return (
@@ -100,54 +102,55 @@ export default function LandingPage () {
                 // variant="outlined" 
                 color='primary'
                 sx={{ flexGrow: 1 }}
+                onClick={() => setShowMap(prev => !prev)}
               >
                 Map
               </Button>
             </ButtonGroup>
           </Box>
 
-          {/* <motion.div 
+          <motion.div 
             id="motion-box"
             initial={{
               opacity: 0,
-              y: -300,
+              // y: -300,
             }}
             animate={{
-              opacity: 1,
-              x: -200,
-              y: 0,
-              rotation: rotate,
+              opacity: show_map ? 1 : 0,
+              // x: -200,
+              // y: 0,
+              // rotation: rotate,
             }}
             transition={{
               // duration: 0.5,
               type: 'spring',
               // bounce: 0.5,
             }}
-          >
-            motion div
-          </motion.div> */}
-
-
-          <Paper
-            sx={{
+            style={{
               flexGrow: 1,
               width: '100%',
               maxWidth: '800px',
               maxHeight: '500px',
             }}
           >
-            <CardMedia
-              component="iframe"
-              // alt={product?.image_alt}
-              // height="140"
-              sx={{ 
-                border: 0,
+            <Paper
+              sx={{
                 height: '100%',
-                borderRadius: '4px',
               }}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12886.374945019179!2d-96.00138906621952!3d36.15210398515654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6eb797eb36201%3A0x7a71b03ff10a53aa!2sDowntown%2C%20Tulsa%2C%20OK!5e0!3m2!1sen!2sus!4v1697320424728!5m2!1sen!2sus"
-            />
-          </Paper>
+            >
+              <CardMedia
+                component="iframe"
+                // alt={product?.image_alt}
+                // height="140"
+                sx={{ 
+                  border: 0,
+                  height: '100%',
+                  borderRadius: '4px',
+                }}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12886.374945019179!2d-96.00138906621952!3d36.15210398515654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6eb797eb36201%3A0x7a71b03ff10a53aa!2sDowntown%2C%20Tulsa%2C%20OK!5e0!3m2!1sen!2sus!4v1697320424728!5m2!1sen!2sus"
+              />
+            </Paper>
+          </motion.div>
 
 
       </Backdrop>
