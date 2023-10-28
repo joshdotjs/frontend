@@ -18,9 +18,7 @@ const box = {
 // ==============================================
 // ==============================================
 
-export default function SmoothShow({ always_visible, hidden }) {
-
-  const [show, setShow] = useState(false);
+export default function SmoothShow({ always_visible, hidden, show }) {
 
   return (
     <div
@@ -33,17 +31,11 @@ export default function SmoothShow({ always_visible, hidden }) {
       <AnimatePresence mode="popLayout">
         <motion.div
           layout
+          key='item-0'
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: "spring" }}
-          key='item-0'
-          onClick={() => {
-            setShow(prev => !prev);
-          }}
-          style={{
-            // border: 'solid green 5px',
-          }}
         >
           { always_visible }
         </motion.div>
@@ -51,11 +43,11 @@ export default function SmoothShow({ always_visible, hidden }) {
         {
           show && <motion.div
             layout
+            key='item-1'
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring" }}
-            key='item-1'
             style={{ 
               height: '50vh',
               outline: 'solid rgba(255, 255, 255, 0.5) 5px',

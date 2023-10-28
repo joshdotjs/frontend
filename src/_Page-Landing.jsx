@@ -69,10 +69,6 @@ export default function LandingPage () {
 
   // ============================================
 
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [rotate, setRotate] = useState(0);
-
   const [show_map, setShowMap] = useState(false);
 
   // ============================================
@@ -122,6 +118,7 @@ export default function LandingPage () {
 
         {/* <div style={{ marginTop: '-20vh'}}> */}
           <SmoothShow 
+            show={show_map}
             always_visible={
               <motion.div // title / sub-title / buttons
                 layout
