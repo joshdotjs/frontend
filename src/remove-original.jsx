@@ -18,31 +18,35 @@ function removeItem(arr, item) {
 export default function App() {
   const count = useRef(0);
   const [items, setItems] = useState([0]);
+  const [popLayout, setPopLayout] = useState(true);
 
   return (
     <div className="example">
-
-      {/* =================================== */}
-
       <div className="controls">
-        <button
+        <label className="enable">
+          <code>popLayout</code>
+          <input
+            type="checkbox"
+            checked={popLayout}
+            onChange={(e) => setPopLayout(e.currentTarget.checked)}
+          />
+        </label>
+        <motion.button
+          whileTap={{ scale: 0.95 }}
           onClick={() => {
             count.current++;
             setItems([...items, count.current]);
           }}
         >
           Add item
-        </button>
+        </motion.button>
       </div>
-
-      {/* =================================== */}
-
       <ul>
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode={popLayout ? "popLayout" : "sync"}>
           {items.map((id) => (
             <motion.li
               layout
-              initial={{ scale: 0.8, opacity: 0 }}
+              // initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: "spring" }}
@@ -56,9 +60,6 @@ export default function App() {
           ))}
         </AnimatePresence>
       </ul>
-
-      {/* =================================== */}
-
     </div>
   );
 }
