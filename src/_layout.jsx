@@ -57,9 +57,8 @@ export default function Layout({ children }) {
       >
         <div
           style={{
-            border: 'solid red 10px',
+            // border: 'solid red 10px',
             flexGrow: 1,
-            paddingTop: '100px'
           }}
         >
           { children }
