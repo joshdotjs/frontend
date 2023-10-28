@@ -25,9 +25,9 @@ export default function SmoothShow({ always_visible, hidden }) {
   return (
     <div
       style={{ 
-        // background: 'green',
         display: 'flex',
         flexDirection: 'column',
+        outline: 'dashed rgba(255, 0, 255, 0.5)'
       }}
     >
       <AnimatePresence mode="popLayout">
@@ -56,7 +56,10 @@ export default function SmoothShow({ always_visible, hidden }) {
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring" }}
             key='item-1'
-            
+            style={{ 
+              height: '50vh',
+              outline: 'solid rgba(255, 255, 255, 0.5) 5px',
+            }}
           >
             { hidden }
           </motion.div>

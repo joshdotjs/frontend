@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 // import { gsap } from 'gsap';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, NavLink } from 'react-router-dom';
-// import Box from '@mui/material/Box';
+import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 // import Backdrop from '@mui/material/Backdrop';
@@ -120,84 +120,93 @@ export default function LandingPage () {
 
         {/* ============================================= */}
 
-        <SmoothShow 
-          always_visible={
-            <motion.div // title / sub-title / buttons
-            layout
-            style={{ 
-              color: 'white',
-              // marginTop: '-20vh',
-              width: 'fit-content',
-              marginBottom: '2rem',
-            }}
-          >
-            <motion.div variants={child_variants}>
-              <Typography 
-                variant="h2" 
-                sx={{ fontSize: '1.3rem' }}>
-                  Tulsa, Oklahoma
-              </Typography>
-            </motion.div>
-            
-            <motion.div variants={child_variants}>
-              <Typography 
-                variant="h1" 
-                sx={{ mb: 1 }}
-              >
-                Food Truck
-              </Typography>
-            </motion.div>
-  
-            <motion.div variants={child_variants}>
-  
-              <ButtonGroup 
-                variant="contained" 
-                aria-label="outlined primary button group" 
-                sx={{ 
-                  display: 'flex',
-                  gap: 1,
-                  alignItems: 'center',
+        {/* <div style={{ marginTop: '-20vh'}}> */}
+          <SmoothShow 
+            always_visible={
+              <motion.div // title / sub-title / buttons
+                layout
+                style={{ 
+                  color: 'white',
+                  width: 'fit-content',
+                  marginBottom: '2rem',
                 }}
               >
-  
-                <Link to='/store'>
-                  <Button>
-                    Order Online
-                  </Button>
-                </Link>
-  
-                <Button 
-                  // variant="outlined" 
-                  color='primary'
-                  sx={{ flexGrow: 1 }}
-                  onClick={() => setShowMap(prev => !prev)}
-                >
-                  Map
-                </Button>
-              </ButtonGroup>
-            </motion.div>
-          </motion.div>
-          }
-          hidden={
-            <Paper
-              sx={{
-                height: '100%',
-              }}
-            >
-              <CardMedia
-                component="iframe"
-                // alt={product?.image_alt}
-                // height="140"
-                sx={{ 
-                  border: 0,
+                <motion.div variants={child_variants}>
+                  <Typography 
+                    variant="h2" 
+                    sx={{ fontSize: '1.3rem' }}>
+                      Tulsa, Oklahoma
+                  </Typography>
+                </motion.div>
+                
+                <motion.div variants={child_variants}>
+                  <Typography 
+                    variant="h1" 
+                    sx={{ mb: 1 }}
+                  >
+                    Food Truck
+                  </Typography>
+                </motion.div>
+      
+                <motion.div variants={child_variants}>
+      
+                  <ButtonGroup 
+                    variant="contained" 
+                    aria-label="outlined primary button group" 
+                    sx={{ 
+                      display: 'flex',
+                      gap: 1,
+                      alignItems: 'center',
+                    }}
+                  >
+      
+                    <Link to='/store'>
+                      <Button>
+                        Order Online
+                      </Button>
+                    </Link>
+      
+                    <Button 
+                      // variant="outlined" 
+                      color='primary'
+                      sx={{ flexGrow: 1 }}
+                      onClick={() => setShowMap(prev => !prev)}
+                    >
+                      Map
+                    </Button>
+                  </ButtonGroup>
+                </motion.div>
+              </motion.div>
+            }
+            hidden={
+              <Box
+                sx={{
+                  width: '100%',
+                  maxWidth: '800px',
                   height: '100%',
-                  borderRadius: '4px',
+                  marginBottom: '2rem',
                 }}
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12886.374945019179!2d-96.00138906621952!3d36.15210398515654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6eb797eb36201%3A0x7a71b03ff10a53aa!2sDowntown%2C%20Tulsa%2C%20OK!5e0!3m2!1sen!2sus!4v1697320424728!5m2!1sen!2sus"
-              />
-            </Paper> 
-          }
-        />
+              >
+                <Paper
+                  sx={{
+                    height: '100%',
+                  }}
+                >
+                  <CardMedia
+                    component="iframe"
+                    // height="140"
+                    sx={{ 
+                      border: 0,
+                      height: '100%',
+                      borderRadius: '4px',
+                    }}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12886.374945019179!2d-96.00138906621952!3d36.15210398515654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6eb797eb36201%3A0x7a71b03ff10a53aa!2sDowntown%2C%20Tulsa%2C%20OK!5e0!3m2!1sen!2sus!4v1697320424728!5m2!1sen!2sus"
+                  />
+                </Paper> 
+              </Box>
+            }
+          />
+        {/* </div> */}
 
         {/* ============================================= */}
         
