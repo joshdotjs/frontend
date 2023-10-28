@@ -10,7 +10,7 @@ export default function ErrorPage() {
   // ============================================
 
   return (
-    <Layout>
+    <Layout navbar={true} footer={true}>
       <div>ERROR</div>
       <div>ERROR</div>
       <div>ERROR</div>

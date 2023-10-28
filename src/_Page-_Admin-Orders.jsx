@@ -152,10 +152,15 @@ export default function AdminOrdersPage () {
   // ============================================
 
   return (
-    <Layout>
+    <Layout navbar={true} footer={true}>
       <Container 
         data-cy="admin-orders"
-        sx={{ border: 'solid white 1px', borderTop: 'none', p: 4 }}
+        sx={{ 
+          border: 'solid white 1px', 
+          borderTop: 'none', 
+          p: 4,
+          background: 'white'
+        }}
       >
         
         <OrdersStatusSelect statuses={statuses} setStatuses={setStatuses} />

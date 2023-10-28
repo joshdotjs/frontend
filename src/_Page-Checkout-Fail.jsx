@@ -13,7 +13,7 @@ export default function CheckoutFailPage () {
   // ============================================
 
   return (
-    <Layout>
+    <Layout navbar={true} footer={true}>
       <Container sx={{ border: 'solid white 1px', borderTop: 'none' }}>
         
         <Typography variant="h1"
