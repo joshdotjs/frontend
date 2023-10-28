@@ -56,7 +56,7 @@ const child_variants = {
 // ==============================================
 // ==============================================
 
-export default function LandingPage () {
+export default function Remove () {
 
   // ============================================
 
