@@ -15,8 +15,8 @@ const container_variants = {
   visible: {
     opacity: 1,
     transition: {
-      delay: 1.5,
-      duration: 1.5,
+      delay: 0,
+      duration: 0.5,
     },
   },
   exit: {
@@ -51,10 +51,19 @@ export default function Layout({ children }) {
         animate="visible"
         exit="exit"
         style={{ 
-          flexGrow: 1
+          flexGrow: 1,
+          display: 'flex', // to allow child flex-grow: 1
         }}
       >
-        { children }
+        <div
+          style={{
+            border: 'solid red 10px',
+            flexGrow: 1,
+            paddingTop: '100px'
+          }}
+        >
+          { children }
+        </div>
       </motion.main>
 
       <StickyFooter />

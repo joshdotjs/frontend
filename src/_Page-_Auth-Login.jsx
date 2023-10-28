@@ -100,14 +100,7 @@ export default function SignInSide() {
 
   return (
     <Layout>
-      <Grid 
-        container 
-        component="main" 
-        sx={{ 
-          height: '100%',
-          outline: 'solid orange 10px',
-        }}
-      >
+      <Grid container>
         <Grid
           item
           xs={false}

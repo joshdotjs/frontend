@@ -86,12 +86,11 @@ export default function StorePage () {
   
   return (
     <Layout>
+        <Container sx={{ border: 'solid white 1px' }}> 
+          <ProductsGrid { ...{ products, openModal } } />
+        </Container>
 
-      <Container sx={{ border: 'solid white 1px', borderTop: 'none' }}> 
-        <ProductsGrid { ...{ products, openModal } } />
-      </Container>
-
-      <ProductDetailsModal {... { open, setOpen, product } } />
+        <ProductDetailsModal {... { open, setOpen, product } } />
     </Layout>
   );
 };
