@@ -1,6 +1,7 @@
 // libs:
 import { useContext } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { SnackbarProvider } from 'notistack';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -28,6 +29,10 @@ import { AuthContext } from './context/auth-context';
 // ==============================================
 
 const Pages = () => {
+
+  // ============================================
+
+  const location = useLocation();
 
   // ============================================
 
@@ -71,16 +76,21 @@ const Pages = () => {
   // ============================================
 
   return (
-    <Routes>
-      { admin_routes }
-      { user_routes } 
-      <Route path="/about"            element={<AboutPage           />} />
-      <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
-      <Route path="/store"            element={<StorePage           />} />
-      <Route path="/"                 element={<LandingPage         />} />
-      <Route path="/*"                element={<StorePage           />} />
-      {/* <Route path="/*"                element={<ErrorPage />} /> */}
-    </Routes>
+    <AnimatePresence 
+      // exitBeforeEnter
+      mode="wait"
+    >
+      <Routes location={location} key={location.key}>
+        { admin_routes }
+        { user_routes } 
+        <Route path="/about"            element={<AboutPage           />} />
+        <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
+        <Route path="/store"            element={<StorePage           />} />
+        <Route path="/"                 element={<LandingPage         />} />
+        <Route path="/*"                element={<StorePage           />} />
+        {/* <Route path="/*"                element={<ErrorPage />} /> */}
+      </Routes>
+    </AnimatePresence>
   );
 };
 
@@ -97,9 +107,7 @@ export default function App() {
         <AuthContextProvider>
           <CartContextProvider>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              
               <Pages />
-              
             </LocalizationProvider>
           </CartContextProvider>
         </AuthContextProvider>
