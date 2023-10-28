@@ -41,9 +41,8 @@ a:hover {
 
 
 .box {
-  height: 100px;
-  width: 100px;
   background: lightblue;
   display: grid;
   place-items: center;
+  padding: 3rem;
 }
