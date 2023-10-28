@@ -1,9 +1,12 @@
+// libs:
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 
+// comps:
 import Navbar from './navbar';
-import StickyFooter from './footer-sticky';
+import StickyFooter from './footer';
 
 // ==============================================
 // ==============================================
@@ -33,6 +36,10 @@ const container_variants = {
 // ==============================================
 
 export default function Layout({ children }) {
+
+  const location = useLocation();
+  console.log('location: ', location);
+
   return (
     <Box
       sx={{
@@ -41,9 +48,15 @@ export default function Layout({ children }) {
         minHeight: '100vh',
       }}
     >
-      <CssBaseline />
+      <CssBaseline/>
 
-      <Navbar />
+      {
+        location.pathname !== '/' && <Navbar
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+      }
 
       <motion.main
         variants={ container_variants }
@@ -65,7 +78,15 @@ export default function Layout({ children }) {
         </div>
       </motion.main>
 
-      <StickyFooter />
+      {
+        location.pathname !== '/' && <StickyFooter
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+      }
+
+      
     </Box>
   );
 };

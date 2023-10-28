@@ -1,15 +1,18 @@
+// libs:
 import { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Button } from '@mui/material';
 
-
+// comps:
 import Layout from './_layout';
 import ProductsGrid from './grid-products';
 import ProductDetailsModal from './modal-product-details';
 
+// utils:
 import { http } from './util/http';
 import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 
+// hooks:
 import { useNotification } from './hooks/use-notification';
 
 // ==============================================
@@ -86,15 +89,15 @@ export default function StorePage () {
   
   return (
     <Layout>
-        <Container 
-          sx={{ 
-            paddingTop: '100px'
-          }}
-        > 
-          <ProductsGrid { ...{ products, openModal } } />
-        </Container>
+      <Container 
+        sx={{ 
+          paddingTop: '100px'
+        }}
+      > 
+        <ProductsGrid { ...{ products, openModal } } />
+      </Container>
 
-        <ProductDetailsModal {... { open, setOpen, product } } />
+      <ProductDetailsModal {... { open, setOpen, product } } />
     </Layout>
   );
 };
