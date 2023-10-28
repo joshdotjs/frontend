@@ -18,7 +18,7 @@ export default function SmoothShow({ always_visible, hidden, show }) {
         // outline: 'dashed rgba(255, 0, 255, 0.5)',
         width: '80vw',
         maxWidth: '800px',
-        marginTop: show ? '0vh' : '-30vh',
+        marginTop: show ? '-5vh' : '-30vh',
       }}
     >
       <AnimatePresence mode="popLayout">

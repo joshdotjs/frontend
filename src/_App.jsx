@@ -86,8 +86,9 @@ const Pages = () => {
         <Route path="/about"            element={<AboutPage           />} />
         <Route path="/checkout-success" element={<CheckoutSuccessPage />} />
         <Route path="/store"            element={<StorePage           />} />
-        <Route path="/"                 element={<LandingPage         />} />
-        <Route path="/*"                element={<StorePage           />} />
+        {/* <Route path="/"                 element={<LandingPage         init_map={false} />} /> */}
+        <Route path="/map"              element={<LandingPage         init_map={true} />} />
+        <Route path="/*"                element={<LandingPage         init_map={false}  />} />
         {/* <Route path="/*"                element={<ErrorPage />} /> */}
       </Routes>
     </AnimatePresence>

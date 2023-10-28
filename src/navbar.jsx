@@ -32,6 +32,7 @@ import favicon from '/favicon.svg';
 
 const pages = [
   { title: 'Store',    route: '/store',          logged_in: false, admin: false }, 
+  { title: 'Map',      route: '/map',            logged_in: false, admin: false }, 
   // { title: 'About',    route: '/about',          logged_in: false, admin: false },
   { title: 'Users',    route: '/admin/users',    logged_in: false, admin: true },
   { title: 'Orders',   route: '/admin/orders',   logged_in: false, admin: true },

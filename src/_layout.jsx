@@ -38,7 +38,6 @@ const container_variants = {
 export default function Layout({ children }) {
 
   const location = useLocation();
-  console.log('location: ', location);
 
   return (
     <Box

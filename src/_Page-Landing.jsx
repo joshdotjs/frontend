@@ -65,11 +65,16 @@ const child_variants = {
 // ==============================================
 // ==============================================
 
-export default function LandingPage () {
+export default function LandingPage ({ init_map }) {
 
   // ============================================
 
-  const [show_map, setShowMap] = useState(false);
+  const [show_map, setShowMap] = useState(init_map);
+
+  useEffect(() => {
+    // setShowMap(init_map);
+    console.log('init_map:', init_map);
+  }, []);
 
   // ============================================
   
