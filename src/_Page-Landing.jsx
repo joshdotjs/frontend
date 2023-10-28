@@ -129,7 +129,7 @@ export default function LandingPage ({ init_map }) {
               style={{ 
                 color: 'white',
                 width: 'fit-content',
-                marginBottom: '2rem',
+                marginBottom: '1.5rem',
               }}
             >
               <motion.div variants={child_variants}>
