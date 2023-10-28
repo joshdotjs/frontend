@@ -33,7 +33,7 @@ export default function StorePage () {
 
   // ============================================
 
-  // responsive lines in Clamp:
+  // responsive:
   const theme = useTheme();
   const lg = useMediaQuery(theme.breakpoints.up('lg'));
 

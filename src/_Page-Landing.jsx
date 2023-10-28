@@ -12,7 +12,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import CircularProgress from '@mui/material/CircularProgress';
-// import Remove from './remove--toggle';
+import Remove from './remove--toggle-simplified';
 
 // comps:
 import Layout from './_layout';
@@ -229,11 +229,15 @@ export default function LandingPage () {
               </Paper>
             </motion.div>
           }
+
+          {/* ========================================= */}
+
+          <Remove />
         </AnimatePresence>
 
         {/* ============================================= */}
 
-        {/* <Remove /> */}
+        
         
       </motion.div>
     </Layout>
