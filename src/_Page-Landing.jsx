@@ -91,6 +91,7 @@ export default function LandingPage () {
               delay: 0.35,
               type: "spring",
               bounce: 0.5,
+              stiffness: 100,
             }}
           >
 
