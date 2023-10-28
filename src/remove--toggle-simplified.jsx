@@ -49,7 +49,7 @@ export default function SmoothShow({ always_visible, hidden, show }) {
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring" }}
             style={{ 
-              height: '50vh',
+              height: '40vh',
               outline: 'solid rgba(255, 255, 255, 0.5) 5px',
             }}
           >
