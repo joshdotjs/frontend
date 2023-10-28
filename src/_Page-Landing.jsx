@@ -133,7 +133,7 @@ export default function LandingPage () {
                     variant="h2" 
                     sx={{ 
                       fontSize: '1.3rem',
-                      mb: 1,
+                      mb: 0.5,
                     }}>
                       Tulsa, Oklahoma
                   </Typography>
@@ -145,6 +145,7 @@ export default function LandingPage () {
                     sx={{ 
                       fontSize: '3.2rem',
                       mb: 1,
+                      mt: 0,
                     }}
                   >
                     Food Truck
