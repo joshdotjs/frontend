@@ -131,7 +131,10 @@ export default function LandingPage () {
                 <motion.div variants={child_variants}>
                   <Typography 
                     variant="h2" 
-                    sx={{ fontSize: '1.3rem' }}>
+                    sx={{ 
+                      fontSize: '1.3rem',
+                      mb: 1,
+                    }}>
                       Tulsa, Oklahoma
                   </Typography>
                 </motion.div>
@@ -139,7 +142,10 @@ export default function LandingPage () {
                 <motion.div variants={child_variants}>
                   <Typography 
                     variant="h1" 
-                    sx={{ mb: 1 }}
+                    sx={{ 
+                      fontSize: '3.5rem',
+                      mb: 1,
+                    }}
                   >
                     Food Truck
                   </Typography>
