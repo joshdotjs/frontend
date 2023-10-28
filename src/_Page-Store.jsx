@@ -13,7 +13,10 @@ import { apiUrl } from './util/url';
 import { asynch } from './util/async';
 
 // hooks:
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery'; // for responsive lines in Clamp
 import { useNotification } from './hooks/use-notification';
+
 
 // ==============================================
 // ==============================================
@@ -27,6 +30,15 @@ export default function StorePage () {
   const [products, setProducts] = useState([]);
 
   const [notify] = useNotification();
+
+  // ============================================
+
+  // responsive lines in Clamp:
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.up('lg'));
+
+  let pad = '0px';
+  if (lg) pad = '2rem';
 
   // ============================================
 
@@ -91,7 +103,7 @@ export default function StorePage () {
     <Layout>
       <Container 
         sx={{ 
-          paddingTop: '100px'
+          paddingTop: pad
         }}
       > 
         <ProductsGrid { ...{ products, openModal } } />
