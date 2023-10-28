@@ -116,105 +116,102 @@ export default function LandingPage () {
 
         {/* ============================================= */}
 
-        {/* <div style={{ marginTop: '-20vh'}}> */}
-          <SmoothShow 
-            show={show_map}
-            always_visible={
-              <motion.div // title / sub-title / buttons
-                layout
-                style={{ 
-                  color: 'white',
-                  width: 'fit-content',
-                  marginBottom: '2rem',
-                }}
-              >
-                <motion.div variants={child_variants}>
-                  <Typography 
-                    variant="h2" 
-                    sx={{ 
-                      fontSize: '1.3rem',
-                      mb: 0.5,
-                    }}>
-                      Tulsa, Oklahoma
-                  </Typography>
-                </motion.div>
-                
-                <motion.div variants={child_variants}>
-                  <Typography 
-                    variant="h1" 
-                    sx={{ 
-                      fontSize: '3.2rem',
-                      mb: 1,
-                      mt: 0,
-                    }}
-                  >
-                    Food Truck
-                  </Typography>
-                </motion.div>
-      
-                <motion.div variants={child_variants}>
-      
-                  <ButtonGroup 
-                    variant="contained" 
-                    aria-label="outlined primary button group" 
-                    sx={{ 
-                      display: 'flex',
-                      gap: 1,
-                      alignItems: 'center',
-                    }}
-                  >
-      
-                    <Link to='/store'>
-                      <Button>
-                        Order Online
-                      </Button>
-                    </Link>
-      
-                    <Button 
-                      // variant="outlined" 
-                      color='primary'
-                      sx={{ flexGrow: 1 }}
-                      onClick={() => setShowMap(prev => !prev)}
-                    >
-                      Map
-                    </Button>
-                  </ButtonGroup>
-                </motion.div>
+        <SmoothShow 
+          show={show_map}
+          always_visible={
+            <motion.div // title / sub-title / buttons
+              layout
+              style={{ 
+                color: 'white',
+                width: 'fit-content',
+                marginBottom: '2rem',
+              }}
+            >
+              <motion.div variants={child_variants}>
+                <Typography 
+                  variant="h2" 
+                  sx={{ 
+                    fontSize: '1.3rem',
+                    mb: 0.5,
+                  }}>
+                    Tulsa, Oklahoma
+                </Typography>
               </motion.div>
-            }
-            hidden={
-              <Box
-                sx={{
-                  width: '100%',
-                  maxWidth: '800px',
-                  height: '100%',
-                  marginBottom: '2rem',
-                }}
-              >
-                <Paper
-                  sx={{
-                    height: '100%',
-                    
+              
+              <motion.div variants={child_variants}>
+                <Typography 
+                  variant="h1" 
+                  sx={{ 
+                    fontSize: '3.2rem',
+                    mb: 1,
+                    mt: 0,
                   }}
                 >
-                  <CardMedia
-                    component="iframe"
-                    // height="140"
-                    sx={{ 
-                      border: 0,
-                      height: '100%',
-                      borderRadius: '4px',
-                    }}
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12886.374945019179!2d-96.00138906621952!3d36.15210398515654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6eb797eb36201%3A0x7a71b03ff10a53aa!2sDowntown%2C%20Tulsa%2C%20OK!5e0!3m2!1sen!2sus!4v1697320424728!5m2!1sen!2sus"
-                  />
-                </Paper> 
-              </Box>
-            }
-          />
-        {/* </div> */}
+                  Food Truck
+                </Typography>
+              </motion.div>
+    
+              <motion.div variants={child_variants}>
+    
+                <ButtonGroup 
+                  variant="contained" 
+                  aria-label="outlined primary button group" 
+                  sx={{ 
+                    display: 'flex',
+                    gap: 1,
+                    alignItems: 'center',
+                  }}
+                >
+    
+                  <Link to='/store'>
+                    <Button>
+                      Order Online
+                    </Button>
+                  </Link>
+    
+                  <Button 
+                    // variant="outlined" 
+                    color='primary'
+                    sx={{ flexGrow: 1 }}
+                    onClick={() => setShowMap(prev => !prev)}
+                  >
+                    Map
+                  </Button>
+                </ButtonGroup>
+              </motion.div>
+            </motion.div>
+          }
+          hidden={
+            <Box
+              sx={{
+                width: '100%',
+                maxWidth: '800px',
+                height: '100%',
+                marginBottom: '2rem',
+              }}
+            >
+              <Paper
+                sx={{
+                  height: '100%',
 
-        {/* ============================================= */}
-        
+                }}
+              >
+                <CardMedia
+                  component="iframe"
+                  // height="140"
+                  sx={{ 
+                    border: 0,
+                    height: '100%',
+                    borderRadius: '4px',
+                  }}
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12886.374945019179!2d-96.00138906621952!3d36.15210398515654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87b6eb797eb36201%3A0x7a71b03ff10a53aa!2sDowntown%2C%20Tulsa%2C%20OK!5e0!3m2!1sen!2sus!4v1697320424728!5m2!1sen!2sus"
+                />
+              </Paper> 
+            </Box>
+          }
+        />
+
+        {/* ============================================= */}        
         
       </motion.div>
     </Layout>
