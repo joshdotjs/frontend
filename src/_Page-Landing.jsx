@@ -143,7 +143,7 @@ export default function LandingPage () {
                   <Typography 
                     variant="h1" 
                     sx={{ 
-                      fontSize: '3.5rem',
+                      fontSize: '3.2rem',
                       mb: 1,
                     }}
                   >
