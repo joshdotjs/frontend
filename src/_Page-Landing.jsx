@@ -263,7 +263,7 @@ export default function LandingPage () {
       <div 
         style={{ 
           color: 'white',
-          marginTop: '10vh',
+          marginTop: '30vh',
           width: 'fit-content',
           marginBottom: '2rem',
         }}
