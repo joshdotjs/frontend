@@ -38,3 +38,11 @@ a.active {
 a:hover {
   /* color: lightgrey !important; */
 }
+
+
+.box {
+  background: lightblue;
+  display: grid;
+  place-items: center;
+  padding: 3rem;
+}
