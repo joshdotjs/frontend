@@ -4,17 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // ==============================================
 // ==============================================
-
-const box = {
-  border: 'solid red 10px',
-  display: 'grid',
-  placeItems: 'center',
-  height: 'fit-content',
-  width: '100px',
-};
-
-// ==============================================
-// ==============================================
 // ==============================================
 // ==============================================
 
@@ -29,7 +18,7 @@ export default function SmoothShow({ always_visible, hidden, show }) {
         // outline: 'dashed rgba(255, 0, 255, 0.5)',
         width: '80vw',
         maxWidth: '800px',
-        marginTop: '-25vh',
+        marginTop: show ? '10vh' : '-30vh',
       }}
     >
       <AnimatePresence mode="popLayout">
@@ -53,7 +42,7 @@ export default function SmoothShow({ always_visible, hidden, show }) {
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring" }}
             style={{ 
-              height: '40vh',
+              height: '60vh',
               width: '100%',
               // outline: 'solid rgba(255, 255, 255, 0.5) 15px',
             }}
