@@ -44,7 +44,7 @@ export default function Layout({ children, navbar, footer }) {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        minHeight: '100dvh',
       }}
     >
       <CssBaseline/>
