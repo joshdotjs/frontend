@@ -6,10 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 // ==============================================
 
 const box = {
-  background: 'red',
+  border: 'solid red 10px',
   display: 'grid',
   placeItems: 'center',
-  height: '100px',
+  height: 'fit-content',
   width: '100px',
 };
 
@@ -18,9 +18,9 @@ const box = {
 // ==============================================
 // ==============================================
 
-export default function SmoothShow({ top, bottom }) {
+export default function SmoothShow({ always_visible, hidden }) {
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <div
@@ -31,32 +31,36 @@ export default function SmoothShow({ top, bottom }) {
       }}
     >
       <AnimatePresence mode="popLayout">
-          {
-            show && <motion.li
-              layout
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring" }}
-              key='item-1'
-              style={box}
-            /> // show
-          }
+        <motion.div
+          layout
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          transition={{ type: "spring" }}
+          key='item-0'
+          onClick={() => {
+            setShow(prev => !prev);
+          }}
+          style={{
+            // border: 'solid green 5px',
+          }}
+        >
+          { always_visible }
+        </motion.div>
 
-          <motion.li
+        {
+          show && <motion.div
             layout
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring" }}
-            key='item-0'
-            onClick={() => {
-              setShow(prev => !prev);
-            }}
-            style={box}
+            key='item-1'
+            
           >
-            CLICK
-          </motion.li>
+            { hidden }
+          </motion.div>
+        }
 
       </AnimatePresence>
     </div>
