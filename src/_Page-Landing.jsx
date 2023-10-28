@@ -33,7 +33,7 @@ const container_variants = {
     opacity: 0, 
     x: '100vw',
     transition: {
-      staggerChildren: 0.5,
+      staggerChildren: 0.25,
     } 
   },
   visible: { // animate
@@ -45,7 +45,7 @@ const container_variants = {
       damping: 8,
       staggerChildren: 0.4,
       when: "beforeChildren",
-      delay: 0.5,
+      // delay: 0.25,
     }
   },
 };
@@ -69,11 +69,11 @@ export default function LandingPage ({ init_map }) {
 
   // ============================================
 
-  const [show_map, setShowMap] = useState(init_map);
+  const [show_map, setShowMap] = useState(false);
 
   useEffect(() => {
-    // setShowMap(init_map);
-    console.log('init_map:', init_map);
+    if (init_map) 
+      setTimeout(() => setShowMap(true), 2000);
   }, []);
 
   // ============================================
