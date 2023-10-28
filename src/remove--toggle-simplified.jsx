@@ -25,7 +25,10 @@ export default function SmoothShow({ always_visible, hidden, show }) {
       style={{ 
         display: 'flex',
         flexDirection: 'column',
-        outline: 'dashed rgba(255, 0, 255, 0.5)'
+        alignItems: 'center',
+        // outline: 'dashed rgba(255, 0, 255, 0.5)',
+        width: '80vw',
+        maxWidth: '800px',
       }}
     >
       <AnimatePresence mode="popLayout">
@@ -50,7 +53,8 @@ export default function SmoothShow({ always_visible, hidden, show }) {
             transition={{ type: "spring" }}
             style={{ 
               height: '40vh',
-              outline: 'solid rgba(255, 255, 255, 0.5) 5px',
+              width: '100%',
+              // outline: 'solid rgba(255, 255, 255, 0.5) 15px',
             }}
           >
             { hidden }

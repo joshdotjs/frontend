@@ -194,6 +194,7 @@ export default function LandingPage () {
                 <Paper
                   sx={{
                     height: '100%',
+                    
                   }}
                 >
                   <CardMedia
