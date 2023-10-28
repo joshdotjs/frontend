@@ -99,7 +99,7 @@ export default function SignInSide() {
   // ============================================
 
   return (
-    <Layout>
+    <Layout navbar={true} footer={true}>
       <Grid 
         container
         sx={{ height: '100%' }}

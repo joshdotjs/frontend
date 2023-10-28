@@ -79,7 +79,7 @@ export default function LandingPage ({ init_map }) {
   // ============================================
   
   return (
-    <Layout>
+    <Layout navbar={false} footer={false}>
       <motion.div
         layout
         style={{ 

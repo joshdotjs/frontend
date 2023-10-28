@@ -35,7 +35,7 @@ const container_variants = {
 // ==============================================
 // ==============================================
 
-export default function Layout({ children }) {
+export default function Layout({ children, navbar, footer }) {
 
   const location = useLocation();
 
@@ -50,7 +50,8 @@ export default function Layout({ children }) {
       <CssBaseline/>
 
       {
-        location.pathname !== '/' && <Navbar
+        // location.pathname !== '/' && <Navbar
+        navbar && <Navbar
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -78,7 +79,8 @@ export default function Layout({ children }) {
       </motion.main>
 
       {
-        location.pathname !== '/' && <StickyFooter
+        // location.pathname !== '/' && <StickyFooter
+        footer && <StickyFooter
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

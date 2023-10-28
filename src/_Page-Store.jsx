@@ -100,7 +100,7 @@ export default function StorePage () {
   // ============================================
   
   return (
-    <Layout>
+    <Layout navbar={true} footer={true}>
       <Container 
         sx={{ 
           paddingTop: pad
