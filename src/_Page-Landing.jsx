@@ -137,7 +137,7 @@ export default function LandingPage ({ init_map }) {
                   variant="h2" 
                   sx={{ 
                     fontSize: '1.3rem',
-                    mb: 0.5,
+                    mb: 0.25,
                   }}>
                     Tulsa, Oklahoma
                 </Typography>
