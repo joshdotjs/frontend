@@ -40,27 +40,6 @@ function Review({ order, line_items }) {
 
   // ============================================
 
-  const [searchParams] = useSearchParams();
-
-  // ============================================
-
-  useEffect(() => {
-    // socket.emit('chat message', 'from REACT!');
-
-    // socket.on(`chat message`, (msg) => {
-    //   console.log('message from Backend: ', msg);
-    // });
-
-    const uuid = searchParams.get('order_uuid');
-
-    socket.on(`chat message ${uuid}`, (msg) => {
-      console.log('UUID message from Backend: ', msg);
-    });
-
-  }, []);
-
-  // ============================================
-
   return (
     <>
       <List
@@ -192,15 +171,26 @@ export default function CheckoutSuccessPage() {
 
   const [order, setOrder] = useState({});
   const [line_items, setLineItems] = useState([]);
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(0); // 0: preparing, 1: ready, 2: picked up
 
   // ============================================
 
+  // Page Load:
   useEffect(() => {
     const uuid = searchParams.get('order_uuid');
     // console.log('order_uuid: ', order_uuid);
+
+    // get order on page load:
     getOrder(uuid);
+
+    // listen for the order status to change from backend:
+    socket.on(`message - ${uuid}`, (msg) => {
+      const status = msg;
+      console.log('status: ', status);
+      setActiveStep(status);
+    });
   }, []);
+
 
   // ============================================
 
