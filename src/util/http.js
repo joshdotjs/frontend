@@ -4,8 +4,8 @@ import { getLS } from './local-storage';
 
 const http = async ({ url, method='GET', body={} }) => {
 
-  let debug_str = `%cmaking REQUEST to ${url} \n- METHOD:  ${method} \n- BODY: ${JSON.stringify(body, null, 2)}`;
-  console.log(debug_str, 'color: orange');
+  // let debug_str = `%cmaking REQUEST to ${url} \n- METHOD:  ${method} \n- BODY: ${JSON.stringify(body, null, 2)}`;
+  // console.log(debug_str, 'color: orange');
   
   let config = { 
     method, 

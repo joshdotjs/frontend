@@ -87,7 +87,7 @@ export default function StorePage () {
       notify({message: 'Error getting users...', variant: 'error', duration: 2000})();
       return;
     }
-    console.log('products: ', products);
+    // console.log('products: ', products);
     setProducts(products);
   };
 
