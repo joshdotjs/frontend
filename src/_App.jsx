@@ -1,5 +1,5 @@
 // libs:
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SnackbarProvider } from 'notistack';
@@ -23,12 +23,22 @@ import AuthContextProvider from './context/auth-context';
 // context:
 import { AuthContext } from './context/auth-context';
 
+import { io } from 'socket.io-client';
+
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
 
 const Pages = () => {
+
+  // ============================================
+
+  // Web Sockets:
+  useEffect(() => {
+    const socket = io();
+    
+  }, []);
 
   // ============================================
 
