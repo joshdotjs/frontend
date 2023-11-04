@@ -114,6 +114,11 @@ const Pages = () => {
 
   useEffect(() => {
     socket.emit('chat message', 'from REACT!');
+
+    socket.on('chat message', (msg) => {
+      console.log('message from Backend: ', msg);
+    });
+
   }, []);
 
   // ============================================
