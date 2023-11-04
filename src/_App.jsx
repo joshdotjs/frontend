@@ -23,12 +23,19 @@ import AuthContextProvider from './context/auth-context';
 // context:
 import { AuthContext } from './context/auth-context';
 
+// web sockets:
+// import { socket } from './util/socket';
+
 // ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
 
 const Pages = () => {
+
+  // ============================================
+
+  // const [isConnected, setIsConnected] = useState(socket.connected);
 
   // ============================================
 

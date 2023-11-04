@@ -18,4 +18,11 @@ export default defineConfig({
     // Update the includeSource config for Vitest to grab the files under src/:
     includeSource: ['src/**/*.{js,ts}'], // In Source Testing: https://vitest.dev/guide/in-source.html
   },
+  optimizeDeps: { 
+    include: [
+      '@emotion/react', 
+      '@emotion/styled', 
+      '@mui/material/Tooltip'
+    ],
+  },
 })
