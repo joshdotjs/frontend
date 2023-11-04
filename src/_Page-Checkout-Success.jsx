@@ -30,10 +30,27 @@ import { asynch } from './util/async';
 import { truncateFront } from './util/string';
 import { money } from './util/money';
 
+// web sockets:
+import { socket } from './util/socket';
+
 // ==============================================
 // ==============================================
 
 function Review({ order, line_items }) {
+
+  // ============================================
+
+  useEffect(() => {
+    socket.emit('chat message', 'from REACT!');
+
+    socket.on('chat message', (msg) => {
+      console.log('message from Backend: ', msg);
+    });
+
+  }, []);
+
+  // ============================================
+
   return (
     <>
       <List
