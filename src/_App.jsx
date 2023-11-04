@@ -1,5 +1,5 @@
 // libs:
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { SnackbarProvider } from 'notistack';
@@ -24,7 +24,66 @@ import AuthContextProvider from './context/auth-context';
 import { AuthContext } from './context/auth-context';
 
 // web sockets:
-// import { socket } from './util/socket';
+import { socket } from './util/socket';
+
+// ==============================================
+// ==============================================
+
+function ConnectionState({ isConnected }) {
+  return <p>State: { '' + isConnected }</p>;
+}
+
+// ==============================================
+
+function Events({ events }) {
+  return (
+    <ul>
+    {
+      events.map((event, index) =>
+        <li key={ index }>{ event }</li>
+      )
+    }
+    </ul>
+  );
+}
+
+// ==============================================
+
+function ConnectionManager() {
+  const connect = () => socket.connect();
+  const disconnect = () => socket.disconnect();
+
+  return (
+    <>
+      <button onClick={ connect }>Connect</button>
+      <button onClick={ disconnect }>Disconnect</button>
+    </>
+  );
+}
+
+// ==============================================
+
+function MyForm() {
+  const [value, setValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  function onSubmit(event) {
+    event.preventDefault();
+    setIsLoading(true);
+
+    socket.timeout(5000).emit('create-something', value, () => {
+      setIsLoading(false);
+    });
+  }
+
+  return (
+    <form onSubmit={ onSubmit }>
+      <input onChange={ e => setValue(e.target.value) } />
+
+      <button type="submit" disabled={ isLoading }>Submit</button>
+    </form>
+  );
+}
 
 // ==============================================
 // ==============================================
@@ -36,6 +95,26 @@ const Pages = () => {
   // ============================================
 
   // const [isConnected, setIsConnected] = useState(socket.connected);
+
+  // useEffect(() => {
+  //   const onConnect = () => setIsConnected(true);
+  //   const onDisconnect = () => setIsConnected(false);
+  //   const onFooEvent = (value) => setFooEvents(previous => [...previous, value]);
+
+  //   socket.on('connect', onConnect);
+  //   socket.on('disconnect', onDisconnect);
+  //   socket.on('foo', onFooEvent);
+
+  //   return () => {
+  //     socket.off('connect', onConnect);
+  //     socket.off('disconnect', onDisconnect);
+  //     socket.off('foo', onFooEvent);
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    socket.emit('chat message', 'from REACT!');
+  }, []);
 
   // ============================================
 
@@ -87,6 +166,11 @@ const Pages = () => {
       // exitBeforeEnter
       mode="wait"
     >
+      {/* <ConnectionState isConnected={ isConnected } /> */}
+      {/* <Events events={ fooEvents } /> */}
+      {/* <ConnectionManager /> */}
+      {/* <MyForm /> */}
+
       <Routes location={location} key={location.key}>
         { admin_routes }
         { user_routes } 
