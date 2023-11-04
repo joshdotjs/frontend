@@ -186,7 +186,7 @@ export default function CheckoutSuccessPage() {
     // listen for the order status to change from backend:
     socket.on(`message - ${uuid}`, (msg) => {
       const status = msg;
-      console.log('status: ', status);
+      // console.log('status: ', status);
       setActiveStep(status);
     });
   }, []);
