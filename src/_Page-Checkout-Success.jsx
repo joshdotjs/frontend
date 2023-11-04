@@ -40,11 +40,21 @@ function Review({ order, line_items }) {
 
   // ============================================
 
-  useEffect(() => {
-    socket.emit('chat message', 'from REACT!');
+  const [searchParams] = useSearchParams();
 
-    socket.on('chat message', (msg) => {
-      console.log('message from Backend: ', msg);
+  // ============================================
+
+  useEffect(() => {
+    // socket.emit('chat message', 'from REACT!');
+
+    // socket.on(`chat message`, (msg) => {
+    //   console.log('message from Backend: ', msg);
+    // });
+
+    const uuid = searchParams.get('order_uuid');
+
+    socket.on(`chat message ${uuid}`, (msg) => {
+      console.log('UUID message from Backend: ', msg);
     });
 
   }, []);
@@ -195,7 +205,7 @@ export default function CheckoutSuccessPage() {
   // ============================================
 
   const getOrder = async (uuid) => {
-    console.log('getting order...');
+    // console.log('getting order...');
 
     const endpoint = `orders/${uuid}`;
     const URL = apiUrl(endpoint);
@@ -207,11 +217,11 @@ export default function CheckoutSuccessPage() {
       return;
     }
 
-    console.log('data: ', data);
+    // console.log('data: ', data);
     setLineItems(data?.line_items ?? []);
     setOrder(data?.order ?? {});
     setActiveStep(data?.order?.status ?? 0);
-    console.log('status: ', data?.order?.status - 2 ?? 0);
+    // console.log('status: ', data?.order?.status - 2 ?? 0);
   };
 
   // ============================================

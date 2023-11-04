@@ -130,9 +130,9 @@ export default function BasicAccordion({ order, line_items, updateStatus }) {
             mb: '1.25rem',
           }}
         >
-          <Button data-cy={`admin-order-${order.id}--status-button--preparing`} variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, status_int: 2 })}>Preparing</Button>
-          <Button data-cy={`admin-order-${order.id}--status-button--ready`    } variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, status_int: 3 })}>Ready</Button>
-          <Button data-cy={`admin-order-${order.id}--status-button--done`     } variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, status_int: 4 })}>Done</Button>
+          <Button data-cy={`admin-order-${order.id}--status-button--preparing`} variant="outlined" color="warning" onClick={() => updateStatus({ id: order.id, uuid: order.uuid, status_int: 2 })}>Preparing</Button>
+          <Button data-cy={`admin-order-${order.id}--status-button--ready`    } variant="outlined" color="info"    onClick={() => updateStatus({ id: order.id, uuid: order.uuid, status_int: 3 })}>Ready</Button>
+          <Button data-cy={`admin-order-${order.id}--status-button--done`     } variant="outlined" color="success" onClick={() => updateStatus({ id: order.id, uuid: order.uuid, status_int: 4 })}>Done</Button>
         </Stack>
 
         <OrderProductsTable { ...{ line_items, order } } />

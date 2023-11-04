@@ -128,11 +128,15 @@ export default function AdminOrdersPage () {
   // ============================================
 
   // NOTE: status here is a single status (not an array!)
-  const updateStatus = async ({ id, status_int }) => {
+  const updateStatus = async ({ id, uuid, status_int }) => {
     const promise = http({ 
       url: apiUrl('orders/update-status'),
       method: 'POST',
-      body: { id, status: status_int }
+      body: {
+         id, 
+         uuid, 
+         status: status_int
+        }, // body:
      });
     const [data, error] = await asynch( promise );
     if (error) {
