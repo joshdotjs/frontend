@@ -117,16 +117,16 @@ function Review({ order, line_items }) {
           }}
         >
           <Typography variant="h6" >
-            Pickup
+            Pickup Location:
           </Typography>
 
           <Box>
             <Typography variant="span" sx={{ fontWeight: 'bold', mr: '10px' }}>
-              Order Number:
+              {/* Order Number: */}
             </Typography>
 
             <Typography variant="span">
-              { truncateFront({ str: order?.uuid, len: 4 }) }
+              {/* { truncateFront({ str: order?.uuid, len: 4 }) } */}
               {/* { order?.uuid } */}
             </Typography>
           </Box>
@@ -253,7 +253,7 @@ export default function CheckoutSuccessPage() {
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
-            Order Summary
+            Order { truncateFront({ str: order?.uuid, len: 4 }) }
           </Typography>
           {/* TODO: Make this activeStep more robust (error state, pending state, etc.) */}
           <Stepper activeStep={activeStep - 2} sx={{ pt: 3, pb: 5 }}>
