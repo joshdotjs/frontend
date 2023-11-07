@@ -36,6 +36,13 @@ import { socket } from './util/socket';
 // ==============================================
 // ==============================================
 
+function ConnectionState({ isConnected }) {
+  return <p style={{ background: 'white' }}>State: { '' + isConnected }</p>;
+}
+
+// ==============================================
+// ==============================================
+
 function Review({ order, line_items }) {
 
   // ============================================
@@ -175,22 +182,45 @@ export default function CheckoutSuccessPage() {
 
   // ============================================
 
-  // Page Load:
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  //  const [fooEvents, setFooEvents] = useState([]);
+
+  // page load:
   useEffect(() => {
+    // - - - - - - - - - - - - - - - - - - - - - 
+
     const uuid = searchParams.get('order_uuid');
     // console.log('order_uuid: ', order_uuid);
 
     // get order on page load:
     getOrder(uuid);
 
-    // listen for the order status to change from backend:
-    socket.on(`message - ${uuid}`, (msg) => {
+    // - - - - - - - - - - - - - - - - - - - - - 
+
+    const onConnect = () => setIsConnected(true);
+    const onDisconnect = () => setIsConnected(false);
+    // const onFooEvent = (value) => setFooEvents(previous => [...previous, value]);
+    const onMessageEvent = (msg) => { // listen for the order status to change from backend:
       const status = msg;
       // console.log('status: ', status);
       setActiveStep(status);
-    });
-  }, []);
+    };
 
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+    // socket.on('foo', onFooEvent);
+    const socket_event_name = `message - ${uuid}`;
+    socket.on(socket_event_name, onMessageEvent);
+
+    return () => {
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+      // socket.off('foo', onFooEvent);
+      socket.off(socket_event_name, onMessageEvent);
+    };
+
+    // - - - - - - - - - - - - - - - - - - - - - 
+  }, []);
 
   // ============================================
 
@@ -218,6 +248,8 @@ export default function CheckoutSuccessPage() {
 
   return (
     <Layout navbar={true} footer={true}>
+      <ConnectionState isConnected={ isConnected } />
+
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
