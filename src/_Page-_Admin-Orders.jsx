@@ -25,6 +25,16 @@ import { useNotification } from './hooks/use-notification';
 // context:
 // import { AuthContext } from './context/auth-context';
 
+// web sockets:
+import { socket } from './util/socket';
+
+// ==============================================
+// ==============================================
+
+function ConnectionState({ isConnected }) {
+  return <p style={{ background: 'white' }}>State: { '' + isConnected }</p>;
+}
+
 // ==============================================
 // ==============================================
 
@@ -58,11 +68,55 @@ export default function AdminOrdersPage () {
 
   // ============================================
 
+  // trigger update of date/time and trigger update of orders via useEffect:
+  const resetDateTimeToNow = () => { 
+    setTimeLo(dayjs().startOf('day'));  
+    setTimeHi(dayjs());
+    setDate(dayjs());
+  };
+
+  // ============================================
+
+  const [isConnected, setIsConnected] = useState(socket.connected);
+
+  // // page load:
+  // useEffect(() => {
+
+  //   // - - - - - - - - - - - - - - - - - - - - - 
+
+  //   const onConnect = () => setIsConnected(true);
+  //   const onDisconnect = () => setIsConnected(false);
+  //   // const onFooEvent = (value) => setFooEvents(previous => [...previous, value]);
+  //   const onMessageEvent = (msg) => { // listen for the order status to change from backend:
+  //     console.log(msg);
+  //     setTimeout(() => resetDateTimeToNow(), 10);
+  //   };
+
+  //   socket.on('connect', onConnect);
+  //   socket.on('disconnect', onDisconnect);
+  //   // socket.on('foo', onFooEvent);
+  //   const socket_event_name = `message - admin orders`;
+  //   socket.on(socket_event_name, onMessageEvent);
+
+  //   return () => {
+  //     socket.off('connect', onConnect);
+  //     socket.off('disconnect', onDisconnect);
+  //     // socket.off('foo', onFooEvent);
+  //     socket.off(socket_event_name, onMessageEvent);
+  //   };
+
+  //   // - - - - - - - - - - - - - - - - - - - - - 
+  // }, []);
+
+  // ============================================
+
   // -load page with all orders from today
   // -set up polling to update orders every N-seconds
   useEffect(() => { 
     getFilteredOrders({ date, time_lo, time_hi, statuses }); 
   }, [date, time_lo, time_hi, statuses]);
+
+  // ============================================
 
   useEffect(() => { enablePolling(); }, []);
 
@@ -70,14 +124,7 @@ export default function AdminOrdersPage () {
 
   const enablePolling = () => {
     disablePolling(); // clear any existing polling
-
-    const resetDateTimeToNow = () => {
-      setTimeLo(dayjs().startOf('day'));  
-      setTimeHi(dayjs());
-      setDate(dayjs());
-    };
     resetDateTimeToNow();
-
     interval_id = setInterval(() => {
       // console.clear();
       console.log('polling for orders... ', dayjs().format('h:mm:ss A'));
