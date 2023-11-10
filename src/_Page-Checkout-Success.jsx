@@ -248,7 +248,7 @@ export default function CheckoutSuccessPage() {
 
   return (
     <Layout navbar={true} footer={true}>
-      <ConnectionState isConnected={ isConnected } />
+      {/* <ConnectionState isConnected={ isConnected } /> */}
 
       <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
