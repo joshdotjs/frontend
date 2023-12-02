@@ -60,7 +60,7 @@ export default function AdminOrdersPage () {
   const formatTime     = (date_time) => date_time.format('HH:mm:ssZ');
   const formatDateTime = (date, time) => `${formatDate(date)} ${formatTime(time)}`;
   
-  const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));  
+  const [time_lo, setTimeLo] = useState(dayjs().startOf('day'));
   const [time_hi, setTimeHi] = useState(dayjs());
   const [date, setDate] = useState(dayjs());
   const [statuses, setStatuses] = useState([1, 2, 3, 4]);

@@ -84,7 +84,7 @@ export default function StorePage () {
     const [products, error] = await asynch( promise );
     if (error) {
       console.error(error);
-      notify({message: 'Error getting users...', variant: 'error', duration: 2000})();
+      notify({message: 'Error getting products...', variant: 'error', duration: 2000})();
       return;
     }
     // console.log('products: ', products);
